@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/23 17:48:58 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/23 18:29:05 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ char	*get_prompt(void);
 void	ft_echo(char **args);
 void	ft_cd(char *path);
 void	ft_pwd(void);
-
+void	ft_env(char **envp);
 #endif

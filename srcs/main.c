@@ -6,17 +6,20 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/23 17:04:23 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/23 18:29:56 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char	*user_input;
 	char	**split_user_input;
 
+	if (argc != 1)
+		return (1);
+	(void) argv;
 	while (1)
 	{
 		user_input = readline(get_prompt());
@@ -34,6 +37,8 @@ int	main(void)
 				chdir(split_user_input[1]);
 			if (ft_strncmp(user_input, "\n", ft_strlen(user_input)))
 				add_history(user_input);
+			if (!ft_strncmp(user_input, "env", ft_strlen(user_input)))
+				ft_env(envp);
 			free(user_input);
 		}
 	}
