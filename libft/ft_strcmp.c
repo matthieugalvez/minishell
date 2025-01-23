@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_builtins.c                                     :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 18:12:39 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/23 18:39:23 by mmanuell         ###   ########.fr       */
+/*   Created: 2024/09/23 16:53:02 by mmanuell          #+#    #+#             */
+/*   Updated: 2025/01/23 16:36:25 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-void	ft_env(char **envp)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
-
-	i = 0;
-	while (envp[i])
+	unsigned char	*cp1;
+	unsigned char	*cp2;
+	
+	if (!s1 && !s2)
+		return(-1);
+	if (!s1 && s2)
+		return (*s2);
+	if (s1 && !s2)
+		return (*s1);
+	cp1 = (unsigned char *) s1;
+	cp2 = (unsigned char *) s2;
+	while (*cp1 && *cp2)
 	{
-		printf("%s\n", envp[i]);
-		i++;
+		if (*cp1 != *cp2)
+			return (*cp1 - *cp2);
+		cp1++;
+		cp2++;
 	}
+	return (*cp1 - *cp2);
 }
-
