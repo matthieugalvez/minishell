@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+         #
+#    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/23 16:47:51 by mgalvez          ###   ########.fr        #
+#    Updated: 2025/01/23 18:19:23 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ DIR_INCS = includes
 DIR_OBJS = .objs
 
 LST_SRCS =	main.c \
-			prompt.c
+			prompt.c \
+			builtins.c \
+			env_builtins.c
 
 LST_OBJS = $(LST_SRCS:.c=.o)
 LST_INCS = minishell.h
