@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/23 16:08:17 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/23 16:14:02 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <linux/limits.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_cmd
 {
@@ -33,5 +33,7 @@ typedef struct s_cmd
 	int		fd_in;
 	int		fd_out;
 }	t_cmd;
+
+char	*get_prompt();
 
 #endif

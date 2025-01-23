@@ -1,22 +1,8 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/16 11:37:54 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/06 14:18:57 by mgalvez          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-CC = cc
-
-CFLAGS = -Wall -Wextra -Werror
-
 NAME = libft.a
 
-SRC = ft_atoi.c \
+DIR_OBJS = .objs
+
+SRCS = ft_atoi.c \
 	  ft_atol.c \
 	  ft_bzero.c \
 	  ft_calloc.c \
@@ -78,6 +64,7 @@ SRC = ft_atoi.c \
 	  ft_strlen.c \
 	  ft_strmapi.c \
 	  ft_strncmp.c \
+	  ft_strcmp.c \
 	  ft_strnstr.c \
 	  ft_strrchr.c \
 	  ft_strrncmp.c \
@@ -89,17 +76,40 @@ SRC = ft_atoi.c \
 	  ft_tolower.c \
 	  ft_toupper.c
 
-OBJ = $(SRC:.c=.o)
+LST_OBJS = ${SRCS:.c=.o}
 
-all : $(NAME)
+OBJS = ${addprefix $(DIR_OBJS)/, ${LST_OBJS}}
+INCS = libft.h
 
-$(NAME) : $(OBJ)
-	ar rc $(NAME) $^
+CC = cc
 
-clean :
-	rm -rf $(OBJ)
+CFLAGS = -Wall -Werror -Wextra
 
-fclean : clean
-	rm -rf $(NAME)
+all: ${NAME}
 
-re : fclean all
+ERASE		=	\033[2K\r
+BLUE		=	\033[34m
+YELLOW		=	\033[33m
+GREEN		=	\033[32m
+END			=	\033[0m
+
+$(DIR_OBJS)/%.o: %.c $(INCS) Makefile
+	@ mkdir -p $(DIR_OBJS)
+	@ $(CC) $(FLAGS) -I ./ -c $< -o $@
+	@ printf "$(ERASE)$(BLUE) > Compilation :$(END) $<"
+
+${NAME}: ${OBJS}
+	@ ar -rsc ${NAME} ${OBJS}
+	@ printf "$(ERASE)$(GREEN)$@ made\n$(END)"
+
+clean:
+	@ rm -rdf ${DIR_OBJS}
+	@ printf "$(YELLOW)$(DIR_OBJS) removed$(END)\n"
+
+fclean:	clean
+	@ rm -rdf	$(NAME)
+	@ printf "$(YELLOW)$(NAME) removed$(END)\n"
+
+re:	fclean all
+
+.PHONY: all clean fclean re bonus
