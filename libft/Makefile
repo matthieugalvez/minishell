@@ -1,6 +1,16 @@
-NAME = libft.a
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/01/23 16:50:15 by mgalvez           #+#    #+#              #
+#    Updated: 2025/01/23 16:51:20 by mgalvez          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-DIR_OBJS = .objs
+NAME = libft.a
 
 SRCS = ft_atoi.c \
 	  ft_atol.c \
@@ -78,7 +88,10 @@ SRCS = ft_atoi.c \
 
 LST_OBJS = ${SRCS:.c=.o}
 
+DIR_OBJS = .objs
+
 OBJS = ${addprefix $(DIR_OBJS)/, ${LST_OBJS}}
+
 INCS = libft.h
 
 CC = cc

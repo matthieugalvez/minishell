@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/23 16:14:02 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:52:40 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ typedef struct s_cmd
 	int		fd_out;
 }	t_cmd;
 
-char	*get_prompt();
+char	*get_prompt(void);
 
 #endif
