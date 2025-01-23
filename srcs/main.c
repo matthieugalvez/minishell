@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/23 16:49:43 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/23 17:00:36 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@ int	main(int argc, char **argv)
 		if (user_input)
 		{
 			split_user_input = ft_split(user_input, ' ');
-			if (!ft_strcmp(user_input, "exit"))
+			if (!ft_strncmp(user_input, "exit", ft_strlen(user_input)))
 			{
 				free(user_input);
 				clear_history();
 				exit(EXIT_SUCCESS);
 			}
-			if (!ft_strcmp(split_user_input[0], "cd"))
+			if (!ft_strncmp(split_user_input[0], "cd",
+					ft_strlen(split_user_input[0])))
 				chdir(split_user_input[1]);
-			if (ft_strcmp(user_input, "\n"))
+			if (ft_strncmp(user_input, "\n", ft_strlen(user_input)))
 				add_history(user_input);
 			free(user_input);
 		}
