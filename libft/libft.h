@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:06:28 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/23 16:15:42 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:02:51 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,5 @@ int		ft_tabcpy(char **dest, char **src);
 int		ft_tablen(char **tab);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-int		ft_strcmp(const char *s1, const char *s2);
 
 #endif
