@@ -6,36 +6,11 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/24 11:38:06 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/24 12:48:51 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static int	parse_operator(t_cmd *cmd, char **line, int i)
-{
-	if (!ft_strncmp(line[i], "<<", ft_strlen(line[i])))
-	{
-		cmd->fd_in = ft_heredoc();
-		return (2);
-	}
-	else if (!ft_strncmp(line[i], "<", ft_strlen(line[i])))
-	{
-		cmd->fd_in = open(line[i + 1], O_RDONLY);
-		return (2);
-	}
-	else if (!ft_strncmp(line[i], ">>", ft_strlen(line[i])))
-	{
-		cmd->fd_out = open(line[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-		return (2);
-	}
-	else if (!ft_strncmp(line[i], ">", ft_strlen(line[i])))
-	{
-		cmd->fd_out = open(line[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		return (2);
-	}
-	return (0);
-}
 
 static int	parse_cmd(char **line, int cmd_len, int args_len)
 {
@@ -98,5 +73,6 @@ void	parse_line(char **line)
 		ft_putstr("Error\nFailed to initiate struct\n", 2);
 		exit (EXIT_FAILURE);
 	}
-	parse_line(&line[i]);
+	if (line[i])
+		parse_line(&line[i]);
 }
