@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/24 16:18:17 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:18:31 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int argc, char **argv, char **envp)
 	data = init_data(envp);
 	if (!data)
 		return (1);
+	get_title();
 	while (1)
 	{
 		user_input = readline(get_prompt());

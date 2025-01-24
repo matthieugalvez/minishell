@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:25 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/24 16:30:46 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/24 16:50:39 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*parse_var_name(char *arg)
 	len = 0;
 	while (*(arg + len) && *(arg + len) != '=')
 		len++;
-	if (*arg + len)
+	if (*(arg + len))
 		return (ft_substr(arg, 0, len));
 	else
 		return (NULL);

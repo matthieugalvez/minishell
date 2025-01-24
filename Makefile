@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/24 16:25:48 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/01/24 16:45:58 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,18 @@ DIR_SRCS = srcs
 DIR_INCS = includes
 DIR_OBJS = .objs
 
-LST_SRCS =	main.c \
-			prompt.c \
-			parsing.c \
-			parse_operator.c \
-			builtins.c env_builtins.c env_builtins_utils.c \
-			data.c \
-			heredoc.c \
-			exec.c
+BUILTINS_SRCS	= builtins.c env_builtins.c env_builtins_utils.c
+DATA_SRCS		= data.c
+EXEC_SRCS		= heredoc.c exec.c
+PARSING_SRCS	= parsing.c parse_operator.c
+VISUAL_SRCS		= prompt.c
+
+LST_SRCS	= 	$(addprefix builtins/, ${BUILTINS_SRCS}) \
+				$(addprefix data/, ${DATA_SRCS}) \
+				$(addprefix exec/, ${EXEC_SRCS}) \
+				$(addprefix parsing/, ${PARSING_SRCS}) \
+				$(addprefix visual/, ${VISUAL_SRCS}) \
+				main.c
 
 LST_OBJS = $(LST_SRCS:.c=.o)
 LST_INCS = minishell.h
@@ -44,6 +48,11 @@ END			=	\033[0m
 
 $(DIR_OBJS)/%.o: ${DIR_SRCS}/%.c $(INCS) Makefile libft/libft.a
 	@ mkdir -p $(DIR_OBJS)
+	@ mkdir -p $(DIR_OBJS)/builtins
+	@ mkdir -p $(DIR_OBJS)/data
+	@ mkdir -p $(DIR_OBJS)/exec
+	@ mkdir -p $(DIR_OBJS)/parsing
+	@ mkdir -p $(DIR_OBJS)/visual
 	@ $(CC) $(CFLAGS) -I $(DIR_INCS) -c $< -o $@
 	@ printf "$(ERASE)$(BLUE) > Compilation :$(END) $<"
 
