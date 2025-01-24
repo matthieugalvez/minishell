@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/23 18:36:18 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/24 12:25:03 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@
 # include <linux/limits.h>
 # include "../libft/libft.h"
 
+typedef struct s_data
+{
+	char	**envp;
+}	t_data;
+
 typedef struct s_cmd
 {
 	char	**args;
@@ -39,5 +44,5 @@ void	parse_line(char **line);
 void	ft_echo(char **args);
 void	ft_cd(char *path);
 void	ft_pwd(void);
-void	ft_env(char **envp);
+void	ft_env(t_data *data);
 #endif
