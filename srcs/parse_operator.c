@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:25:51 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/24 12:41:43 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/24 13:15:06 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,18 @@ static int	ft_outfile_truncate(t_cmd *cmd, char *outfile)
 
 static int	ft_heredoc(t_cmd *cmd, char *limiter)
 {
+	char	*name;
+
 	if (cmd->fd_in > 1)
 		close(cmd->fd_in);
-	cmd->fd_in = get_heredoc_fd(limiter);
+	name = ft_makerngname(12);
+	if (!name)
+	{
+		ft_putstr("Error\nCouldn't generate temp file name\n", 2);
+		return (-1);
+	}
+	cmd->fd_in = get_heredoc_fd(limiter, name);
+	free(name);
 	return (2);
 }
 

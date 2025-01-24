@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/24 12:50:55 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/24 13:05:55 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_cmd
 char	*get_prompt(void);
 void	parse_line(char **line);
 int		parse_operator(t_cmd *cmd, char **line, int i);
+int		get_heredoc_fd(char *limiter, char *name);
 void	ft_echo(char **args);
 void	ft_cd(char *path);
 void	ft_pwd(void);
