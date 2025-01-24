@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/24 16:45:58 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/01/24 18:09:49 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,13 +73,16 @@ clean:
 
 fclean:		clean
 	@ printf "$(YELLOW)$(NAME) removed$(END)\n"
-	@ rm -rf $(NAME) debug
+	@ rm -rf $(NAME) fsanitize g3
 	@ printf "libft : "
 	@ make fclean -C libft
 
 re:	fclean all
 
-debug : libft/libft.a
+fsanitize : libft/libft.a
 	$(CC) -fsanitize=address -g $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
 
-.PHONY: all clean fclean re libft
+g3 : libft/libft.a
+	$(CC) -g3 $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
+	
+.PHONY: all clean fclean re libft fsanitize g3

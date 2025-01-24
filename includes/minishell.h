@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/24 17:18:05 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:10:50 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_cmd
 
 void	get_title(void);
 char	*get_prompt(void);
-
 
 void	parse_line(char **line, t_data *data);
 int		parse_operator(t_cmd *cmd, char **line, int i);

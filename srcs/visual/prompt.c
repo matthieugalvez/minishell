@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:39:01 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/24 17:24:38 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:05:07 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	get_title(void)
 		while (line)
 		{
 			printf("%s", line);
+			free(line);
 			line = ft_getnextline(fd);
 		}
 		printf("\033[0m\n");
@@ -43,16 +44,23 @@ void	get_title(void)
 
 char	*get_prompt(void)
 {
-	char	*path;
-	char	*right;
+	char	*fullpath;
+	char	*reducepath;
+	char	*active_dir;
 	char	*prompt;
 	char	cwd[PATH_MAX];
 
 	getcwd(cwd, sizeof(cwd));
-	path = cwd + 6 + get_userlen(cwd + 6) + 1;
-	right = ft_strjoin(path, ": ");
-	prompt = ft_strjoin("~/", right);
-	prompt = ft_strjoin("\001\e[0;34m\002", prompt);
-	prompt = ft_strjoin(prompt, "\001\e[0m\002");
+	fullpath = ft_strdup(cwd + 6 + get_userlen(cwd + 6) + 1);
+	active_dir = ft_strdup(ft_strrchr(fullpath, '/') + 1);
+	reducepath = ft_substr(fullpath, 0,
+			ft_strlen(fullpath) - ft_strlen(active_dir));
+	reducepath = ft_strjoin_free2("~/", reducepath);
+	free(fullpath);
+	active_dir = ft_strjoin_free2("\001\e[36m\002", active_dir);
+	active_dir = ft_strjoin_free(active_dir, ": \001\e[0m\002");
+	prompt = ft_strjoin(reducepath, active_dir);
+	free(reducepath);
+	free(active_dir);
 	return (prompt);
 }

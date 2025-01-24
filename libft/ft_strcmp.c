@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 16:53:02 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/23 16:36:25 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:11:15 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	ft_strcmp(const char *s1, const char *s2)
 {
 	unsigned char	*cp1;
 	unsigned char	*cp2;
-	
+
 	if (!s1 && !s2)
-		return(-1);
+		return (-1);
 	if (!s1 && s2)
 		return (*s2);
 	if (s1 && !s2)
