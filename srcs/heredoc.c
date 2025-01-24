@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:55:55 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/24 13:14:54 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/24 14:28:28 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	get_heredoc_fd(char *limiter, char *name)
 	free(limiter);
 	close(fd);
 	if (!name)
-		return (-1);
+		exit (EXIT_FAILURE);
 	fd = open(name, O_RDONLY);
 	if (fd < 0)
 		perror("heredoc");
