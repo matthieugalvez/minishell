@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/24 15:27:18 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/24 15:45:43 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 typedef struct s_data
 {
 	char	**envp;
+	int		envp_len;
 }	t_data;
 
 typedef struct s_cmd
@@ -48,5 +49,17 @@ void	ft_exec(t_cmd *cmd, t_data *data);
 void	ft_echo(char **args);
 void	ft_cd(char *path);
 void	ft_pwd(void);
+
+//	DATA
+
+t_data	*init_data(char **envp);
+
+//	ENV
 void	ft_env(t_data *data);
+int		ft_export(t_data *data, char *arg);
+char	*parse_var_name(char *arg);
+int		get_env_size(char **data);
+int		get_env_index(char *env_var, t_data *data);
+char	**realloc_envp(char **old_envp, size_t new_size);
+
 #endif

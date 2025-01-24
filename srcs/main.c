@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/24 12:24:47 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:46:25 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,9 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 1)
 		return (1);
 	(void) argv;
-	data = malloc(sizeof(t_data));
+	data = init_data(envp);
 	if (!data)
-	{
-		perror("Malloc Error");
-		return (EXIT_FAILURE);
-	}
-	data->envp = envp;
+		return (1);
 	while (1)
 	{
 		user_input = readline(get_prompt());
@@ -47,6 +43,8 @@ int	main(int argc, char **argv, char **envp)
 				add_history(user_input);
 			if (!ft_strncmp(user_input, "env", ft_strlen(user_input)))
 				ft_env(data);
+			if (!ft_strncmp(split_user_input[0], "export", ft_strlen(user_input)))
+				ft_export(data, split_user_input[1]);
 			free(user_input);
 		}
 	}

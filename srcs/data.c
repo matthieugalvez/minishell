@@ -1,45 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_builtins.c                                     :+:      :+:    :+:   */
+/*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 18:12:39 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/24 15:30:31 by mmanuell         ###   ########.fr       */
+/*   Created: 2025/01/24 14:06:07 by mmanuell          #+#    #+#             */
+/*   Updated: 2025/01/24 15:35:55 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_export(t_data *data, char *arg)
+static int	init_envp(t_data *data, char **envp)
 {
-	int		i;
-	char	*var_name;
+	int	len;
 
-	var_name = parse_var_name(arg);
-	if (!var_name)
+	len = 0;
+	while (envp[len])
+		len ++;
+	data->envp_len = len;
+	data->envp = ft_calloc(data->envp_len + 1, sizeof (char *));
+	if (!data->envp)
 		return (1);
-	i = get_env_index(var_name, data);
-	if (i == data->envp_len)
-	{
-		data->envp = realloc_envp(data->envp, data->envp_len + 1);
-		if (!data->envp)
-			return (1);
-		data->envp_len += 1;
-	}
-	data->envp[i] = arg;
+	if (ft_tabcpy(data->envp, envp))
+		return (1);
 	return (0);
 }
 
-void	ft_env(t_data *data)
+t_data	*init_data(char **envp)
 {
-	int	i;
+	t_data	*data;
 
-	i = 0;
-	while (i < data->envp_len)
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (NULL);
+	if (init_envp(data, envp) == 1)
 	{
-		printf("%s\n", data->envp[i]);
-		i++;
+		free(data);
+		return (NULL);
 	}
+	return (data);
 }
