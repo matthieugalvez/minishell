@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/23 18:19:23 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/01/24 15:30:09 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ DIR_OBJS = .objs
 LST_SRCS =	main.c \
 			prompt.c \
 			builtins.c \
-			env_builtins.c
+			env_builtins.c env_builtins_utils.c \
+			data.c
 
 LST_OBJS = $(LST_SRCS:.c=.o)
 LST_INCS = minishell.h
@@ -60,13 +61,13 @@ clean:
 
 fclean:		clean
 	@ printf "$(YELLOW)$(NAME) removed$(END)\n"
-	@ rm -rf $(NAME) bonus
+	@ rm -rf $(NAME) debug
 	@ printf "libft : "
 	@ make fclean -C libft
 
 re:	fclean all
 
 debug : libft/libft.a
-	$(CC) -g3 $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
+	$(CC) -fsanitize=address -g $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
 
 .PHONY: all clean fclean re libft
