@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/24 16:22:58 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:28:02 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_data
 {
 	char	**envp;
 	int		envp_len;
+	int		exit_code;
 }	t_data;
 
 typedef struct s_cmd

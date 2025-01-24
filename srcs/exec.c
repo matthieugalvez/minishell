@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/24 15:42:29 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/24 16:32:27 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	ft_childprocess(t_cmd *cmd, t_data *data)
 {
+	(void) data;
+
 	if (cmd->fd_in < 0 || cmd->fd_out < 0)
 		exit (EXIT_FAILURE);
 	if (cmd->fd_in)
@@ -30,6 +32,8 @@ static void	ft_childprocess(t_cmd *cmd, t_data *data)
 
 void	ft_exec(t_cmd *cmd, t_data *data)
 {
+	(void) data;
+
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 	{
