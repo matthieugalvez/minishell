@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/24 12:25:03 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/24 12:50:55 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_cmd
 
 char	*get_prompt(void);
 void	parse_line(char **line);
+int		parse_operator(t_cmd *cmd, char **line, int i);
 void	ft_echo(char **args);
 void	ft_cd(char *path);
 void	ft_pwd(void);
