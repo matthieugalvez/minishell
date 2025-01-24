@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:12:39 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/24 15:30:31 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:15:55 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,30 @@ int	ft_export(t_data *data, char *arg)
 		data->envp_len += 1;
 	}
 	data->envp[i] = arg;
+	return (0);
+}
+
+int	ft_unset(t_data *data, char *arg)
+{
+	int		i;
+	char	*var_name;
+
+	var_name = ft_strjoin(arg, "=");
+	if (!var_name)
+		return (1);
+	i = get_env_index(var_name, data);
+	if (i == data->envp_len)
+		return (1);
+	free(data->envp[i]);
+	while (i < data->envp_len)
+	{
+		data->envp[i] = data->envp[i + 1];
+		i++;
+	}
+	data->envp = realloc_envp(data->envp, data->envp_len);
+	if (!data->envp)
+		return (1);
+	data->envp_len -= 1;
 	return (0);
 }
 

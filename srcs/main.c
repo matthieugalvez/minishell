@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/24 14:46:25 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:18:17 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	main(int argc, char **argv, char **envp)
 				ft_env(data);
 			if (!ft_strncmp(split_user_input[0], "export", ft_strlen(user_input)))
 				ft_export(data, split_user_input[1]);
+			if (!ft_strncmp(split_user_input[0], "unset", ft_strlen(user_input)))
+				ft_unset(data, split_user_input[1]);
 			free(user_input);
 		}
 	}

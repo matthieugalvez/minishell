@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/24 15:40:10 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:18:41 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_data	*init_data(char **envp);
 //	ENV
 void	ft_env(t_data *data);
 int		ft_export(t_data *data, char *arg);
+int		ft_unset(t_data *data, char *arg);
 char	*parse_var_name(char *arg);
 int		get_env_size(char **data);
 int		get_env_index(char *env_var, t_data *data);
