@@ -6,13 +6,14 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:36:13 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/27 16:57:53 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:05:16 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	exec_builtins(t_cmd *cmd, t_data *data) //return si la builtins a bien fonctionne
+//return si la builtins a bien fonctionne
+int	exec_builtins(t_cmd *cmd, t_data *data)
 {
 	if (!ft_strncmp(cmd->args[0], "cd", ft_strlen(cmd->args[0]))
 		&& cmd->argc <= 2)
@@ -37,7 +38,8 @@ int	exec_builtins(t_cmd *cmd, t_data *data) //return si la builtins a bien fonct
 	return (1);
 }
 
-int	try_exec_builtins(t_cmd *cmd)	//return si la builtins existe
+//return si la builtins existe
+int	try_exec_builtins(t_cmd *cmd)
 {
 	int	ret;
 
