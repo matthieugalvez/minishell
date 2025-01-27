@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:39:01 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/27 10:34:59 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 14:39:50 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ char	*get_prompt(void)
 
 	getcwd(cwd, sizeof(cwd));
 	fullpath = ft_strdup(cwd + 6 + get_userlen(cwd + 6) + 1);
-	active_dir = ft_strdup(ft_strrchr(fullpath, '/') + 1);
+	if (ft_strrchr(fullpath, '/'))
+		active_dir = ft_strdup(ft_strrchr(fullpath, '/') + 1);
+	else
+		active_dir = ft_strdup(fullpath);
 	reducepath = ft_substr(fullpath, 0,
 			ft_strlen(fullpath) - ft_strlen(active_dir));
 	reducepath = ft_strjoin_free2("~/", reducepath);

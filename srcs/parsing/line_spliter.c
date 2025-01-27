@@ -6,15 +6,15 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 13:37:26 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 13:42:49 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	operator_lenght(char const *s)
-{
-}
+// static int	operator_lenght(char const *s)
+// {
+// }
 
 static int	nextword_lenght(char const *s)
 {
@@ -31,8 +31,8 @@ static int	nextword_lenght(char const *s)
 			while (s[i] && s[i] != quote)
 				i++;
 		}
-		if (s[i] == '<' || s[i] == '>' || s[i] == '|')
-			return (operator_lenght(&s[i]));
+		// if (s[i] == '<' || s[i] == '>' || s[i] == '|')
+		// 	return (operator_lenght(&s[i]));
 		while (s[i] && (ft_isspace(s[i])
 				|| s[i] == '<' || s[i] == '>' || s[i] == '|'))
 			return (i);

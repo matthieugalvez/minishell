@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/27 13:15:32 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:05:44 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ int	main(int argc, char **argv, char **envp)
 				exit(EXIT_SUCCESS);
 			}
 			else if (ft_strncmp(user_input, "\n", ft_strlen(user_input)))
+			{
 				add_history(user_input);
-			parse_line(split_user_input, data);
+				parse_line(split_user_input, data);
+			}
 			free(user_input);
 		}
 	}
