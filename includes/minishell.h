@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 15:29:09 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 15:35:19 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**ft_line_spliter(char const *s);
 int		syntax_parsing(char **line, t_data *data);
 void	parse_builtin(char **line, t_data *data);
 void	parse_line(char **line, t_data *data);
-int		parse_operator(t_cmd *cmd, char **line, int i);
+int		get_redirect_fd(t_cmd *cmd, char **line, int i);
 int		get_heredoc_fd(char *limiter, char *name);
 char	*init_cmd_path(t_cmd *cmd, t_data *data);
 

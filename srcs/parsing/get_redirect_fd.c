@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_operator.c                                   :+:      :+:    :+:   */
+/*   get_redirect_fd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:25:51 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 10:34:37 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 15:35:08 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	ft_infile(t_cmd *cmd, char *infile)
 	return (2);
 }
 
-int	parse_operator(t_cmd *cmd, char **line, int i)
+int	get_redirect_fd(t_cmd *cmd, char **line, int i)
 {
 	if (!ft_strncmp(line[i], "<", ft_strlen(line[i])))
 		return (ft_infile(cmd, line[i + 1]));

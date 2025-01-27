@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 14:00:38 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:35:48 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len)
 	j = 0;
 	while (i < cmd_len)
 	{
-		i += parse_operator(cmd, line, i);
+		i += get_redirect_fd(cmd, line, i);
 		cmd->args[j] = ft_strdup(line[i]);
 		if (!cmd->args[j])
 		{
