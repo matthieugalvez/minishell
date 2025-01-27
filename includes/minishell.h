@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 14:10:29 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 15:20:43 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_exec(t_cmd *cmd, t_data *data);
 
 //	DATA
 
-t_data	*init_data(char **envp);
+void	init_data(t_data *data, char **envp);
 
 //	BUILTINS
 

@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/27 15:15:02 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 15:19:56 by mgalvez          ###   ########.fr       */
 /*   Updated: 2025/01/27 14:05:44 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -44,15 +44,13 @@ static void	tty_loop(t_data *data)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_data	*data;
+	t_data	data;
 
 	if (argc != 1)
 		return (1);
 	(void) argv;
-	data = init_data(envp);
-	if (!data)
-		return (1);
+	init_data(&data, envp);
 	get_title();
-	tty_loop(data);
+	tty_loop(&data);
 	return (0);
 }
