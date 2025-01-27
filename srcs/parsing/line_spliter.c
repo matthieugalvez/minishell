@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_spliter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 13:36:21 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 13:37:26 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,9 @@ static int	count_words(char const *s)
 {
 	int		i;
 	int		nb;
-	int		in_sep;
 
 	i = 0;
 	nb = 0;
-	in_sep = 1;
 	while (s[i])
 	{
 		while (s[i] && (ft_isspace(s[i])))

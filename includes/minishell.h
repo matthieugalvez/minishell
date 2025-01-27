@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 11:47:07 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 13:13:10 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_cmd
 	int		fd_in;
 	int		fd_out;
 	int		pid;
+	int		argc;
 }	t_cmd;
 
 //	VISUAL
@@ -58,18 +59,23 @@ char	*init_cmd_path(t_cmd *cmd, t_data *data);
 //EXEC
 
 void	ft_exec(t_cmd *cmd, t_data *data);
-void	ft_echo(char **args);
-void	ft_cd(char *path);
-void	ft_pwd(void);
 
 //	DATA
 
 t_data	*init_data(char **envp);
 
-//	ENV
-void	ft_env(t_data *data);
+//	BUILTINS
+
+int		try_exec_builtins(t_cmd *cmd);
+int		exec_builtins(t_data *data, t_cmd *cmd);
+int		ft_echo(char **args);
+int		ft_cd(char *path);
+int		ft_pwd(void);
+int		ft_env(t_data *data);
 int		ft_export(t_data *data, char *arg);
 int		ft_unset(t_data *data, char *arg);
+
+//	ENV
 char	*parse_var_name(char *arg);
 int		get_env_size(char **data);
 int		get_env_index(char *env_var, t_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 10:32:22 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 12:52:06 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_option(char *option)
 	return (0);
 }
 
-void	ft_echo(char **args)
+int	ft_echo(char **args)
 {
 	int	i;
 	int	n_option;
@@ -49,23 +49,30 @@ void	ft_echo(char **args)
 	}
 	if (!n_option)
 		printf("\n");
+	return (0);
 }
 
-void	ft_cd(char *path)
+int	ft_cd(char *path)
 {
 	if (chdir(path))
 	{
 		printf("cd: ");
 		perror(path);
+		return(1);
 	}
+	return (0);
 }
 
-void	ft_pwd(void)
+int	ft_pwd(void)
 {
 	char	buf[PATH_MAX + 1];
 
 	ft_bzero(buf, sizeof(buf));
 	if (!getcwd(buf, sizeof(buf)))
+	{
 		perror("pwd");
+		return (1);
+	}
 	printf("%s\n", buf);
+	return (0);
 }

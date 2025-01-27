@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:12:39 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/27 10:32:34 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 12:52:29 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_unset(t_data *data, char *arg)
 	return (0);
 }
 
-void	ft_env(t_data *data)
+int	ft_env(t_data *data)
 {
 	int	i;
 
@@ -66,4 +66,5 @@ void	ft_env(t_data *data)
 		printf("%s\n", data->envp[i]);
 		i++;
 	}
+	return (0);
 }
