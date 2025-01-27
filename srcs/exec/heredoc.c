@@ -6,11 +6,11 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:55:55 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/24 14:28:28 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 10:34:30 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 static char	*ft_writetemp(int fd, char *name, char *limiter)
 {

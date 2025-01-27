@@ -6,11 +6,11 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:06:07 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/24 16:08:07 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 10:32:47 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 static int	init_envp(t_data *data, char **envp)
 {

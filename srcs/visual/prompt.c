@@ -6,11 +6,11 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:39:01 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/24 18:05:07 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 10:34:59 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 static int	get_userlen(char *cwd)
 {
