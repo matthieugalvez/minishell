@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 13:54:48 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 15:28:15 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,3 +21,7 @@
 		else
 			printf("'\n");
 	}*/
+
+int	syntax_parsing(char **line, t_data *data)
+{
+}
