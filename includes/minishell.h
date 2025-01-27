@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 13:13:10 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:10:29 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <signal.h>
 # include <dirent.h>
 # include <string.h>
+# include <limits.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <sys/types.h>
