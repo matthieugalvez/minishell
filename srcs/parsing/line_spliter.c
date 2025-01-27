@@ -6,24 +6,17 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 12:30:03 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 13:36:21 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	ft_passsep(char const *s)
+static int	operator_lenght(char const *s)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] && (ft_isspace(s[i])
-			|| s[i] == '<' || s[i] == '>' || s[i] == '|'))
-		i++;
-	return (i);
 }
 
-static int	ft_nextwordlenght(char const *s)
+static int	nextword_lenght(char const *s)
 {
 	int		i;
 	char	quote;
@@ -38,6 +31,8 @@ static int	ft_nextwordlenght(char const *s)
 			while (s[i] && s[i] != quote)
 				i++;
 		}
+		if (s[i] == '<' || s[i] == '>' || s[i] == '|')
+			return (operator_lenght(&s[i]));
 		while (s[i] && (ft_isspace(s[i])
 				|| s[i] == '<' || s[i] == '>' || s[i] == '|'))
 			return (i);
@@ -46,7 +41,7 @@ static int	ft_nextwordlenght(char const *s)
 	return (i);
 }
 
-static char	**ft_maketab(char const *s, int words_nb, char **tab)
+static char	**make_tab(char const *s, int words_nb, char **tab)
 {
 	int	i;
 	int	j;
@@ -56,8 +51,9 @@ static char	**ft_maketab(char const *s, int words_nb, char **tab)
 	j = 0;
 	while (j < words_nb)
 	{
-		i += ft_passsep(&s[i]);
-		word_len = ft_nextwordlenght(&s[i]);
+		while (s[i] && (ft_isspace(s[i])))
+			i++;
+		word_len = nextword_lenght(&s[i]);
 		tab[j] = ft_calloc(sizeof(char), (word_len + 1));
 		if (!tab[j])
 		{
@@ -72,7 +68,7 @@ static char	**ft_maketab(char const *s, int words_nb, char **tab)
 	return (tab);
 }
 
-static int	ft_countwords(char const *s)
+static int	count_words(char const *s)
 {
 	int		i;
 	int		nb;
@@ -83,10 +79,11 @@ static int	ft_countwords(char const *s)
 	in_sep = 1;
 	while (s[i])
 	{
-		i += ft_passsep(&s[i]);
+		while (s[i] && (ft_isspace(s[i])))
+			i++;
 		if (s[i])
 			nb++;
-		i += ft_nextwordlenght(&s[i]);
+		i += nextword_lenght(&s[i]);
 	}
 	return (nb);
 }
@@ -96,9 +93,9 @@ char	**ft_line_spliter(char const *s)
 	int		words_nb;
 	char	**tab;
 
-	words_nb = ft_countwords(s);
+	words_nb = count_words(s);
 	tab = ft_calloc(sizeof(char *), (words_nb + 1));
 	if (!tab)
 		return (NULL);
-	return (ft_maketab(s, words_nb, tab));
+	return (make_tab(s, words_nb, tab));
 }

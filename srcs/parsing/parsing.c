@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 13:25:09 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 13:34:50 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	init_pipe(t_cmd *cmd, char *arg, int *i)
 	static int	pipe_fd[2] = {0};
 
 	cmd->fd_in = pipe_fd[0];
-	if (!ft_strncmp(arg, "|", ft_strlen(arg)))
+	if (arg && !ft_strncmp(arg, "|", 1))
 	{
 		pipe(&pipe_fd[0]);
 		*i += 1;
