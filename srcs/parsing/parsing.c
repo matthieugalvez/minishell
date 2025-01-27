@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 13:37:47 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 13:54:54 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,6 @@ static int	parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len)
 	while (i < cmd_len)
 	{
 		i += parse_operator(cmd, line, i);
-		if (!ft_strncmp(line[i], "<", 1) || !ft_strncmp(line[i], ">", 1))
-		{
-			ft_putstr("minishell: syntax error near unexpected token `", 2);
-			printf("%c", line[i][0]);
-			if (line[i][1] == line[i][0])
-				printf("%c'\n", line[i][1]);
-			else
-				printf("'\n");
-		}
 		cmd->args[j] = ft_strdup(line[i]);
 		if (!cmd->args[j])
 		{
@@ -65,18 +56,15 @@ static void	init_pipe(t_cmd *cmd, char *arg, int *i)
 		cmd->fd_out = 1;
 }
 
-static void	find_operator(char **line, int *i, int *cmd_len, int *args_len)
+static int	find_lens(char **line, int *i, int *cmd_len, int *args_len)
 {
 	*cmd_len += 1;
 	if (ft_strncmp(line[*i], "<", 1) && ft_strncmp(line[*i], ">", 1))
 		*args_len += 1;
 	else
-	{
-		if (ft_strlen(line[*i]) < 2 || (ft_strlen(line[*i]) == 2
-				&& (line[*i][2] == '<' || line[*i][2] == '>')))
 		*i += 1;
-	}
 	*i += 1;
+	return (0);
 }
 
 void	parse_line(char **line, t_data *data)
@@ -90,7 +78,7 @@ void	parse_line(char **line, t_data *data)
 	cmd_len = 0;
 	args_len = 0;
 	while (line[i] && ft_strncmp(line[i], "|", 1))
-		find_operator(line, &i, &cmd_len, &args_len);
+		find_lens(line, &i, &cmd_len, &args_len);
 	init_pipe(&cmd, line[i], &i);
 	if (parse_cmd(&cmd, line, cmd_len, args_len))
 	{

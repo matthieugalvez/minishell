@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 13:37:26 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 14:25:04 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 static int	operator_lenght(char const *s)
 {
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] == '<' || s[i] == '>' || s[i] == '|')
+		i++;
+	return (i);
 }
 
 static int	nextword_lenght(char const *s)
@@ -30,11 +36,15 @@ static int	nextword_lenght(char const *s)
 			i++;
 			while (s[i] && s[i] != quote)
 				i++;
+			if (!s[i])
+				return (INT_MIN);
+			i++;
 		}
+		if (!s[i])
+			return (i);
 		if (s[i] == '<' || s[i] == '>' || s[i] == '|')
 			return (operator_lenght(&s[i]));
-		while (s[i] && (ft_isspace(s[i])
-				|| s[i] == '<' || s[i] == '>' || s[i] == '|'))
+		if ((ft_isspace(s[i]) || s[i] == '<' || s[i] == '>' || s[i] == '|'))
 			return (i);
 		i++;
 	}
@@ -68,30 +78,27 @@ static char	**make_tab(char const *s, int words_nb, char **tab)
 	return (tab);
 }
 
-static int	count_words(char const *s)
+char	**ft_line_spliter(char const *s)
 {
 	int		i;
-	int		nb;
+	int		words_nb;
+	char	**tab;
 
 	i = 0;
-	nb = 0;
+	words_nb = 0;
 	while (s[i])
 	{
 		while (s[i] && (ft_isspace(s[i])))
 			i++;
 		if (s[i])
-			nb++;
+			words_nb++;
 		i += nextword_lenght(&s[i]);
+		if (i < 0)
+		{
+			ft_putstr("minishell: syntax error unclosed quote\n", 2);
+			return (NULL);
+		}
 	}
-	return (nb);
-}
-
-char	**ft_line_spliter(char const *s)
-{
-	int		words_nb;
-	char	**tab;
-
-	words_nb = count_words(s);
 	tab = ft_calloc(sizeof(char *), (words_nb + 1));
 	if (!tab)
 		return (NULL);
