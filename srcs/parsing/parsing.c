@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 12:44:14 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:28:37 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	init_pipe(t_cmd *cmd, char *arg, int *i)
 	if (!ft_strncmp(arg, "|", ft_strlen(arg)))
 	{
 		pipe(&pipe_fd[0]);
-		i += 1;
+		*i += 1;
 	}
 	else
 		ft_bzero(&pipe_fd, sizeof(int) * 2);
@@ -74,9 +74,9 @@ static void	find_operator(char **line, int *i, int *cmd_len, int *args_len)
 	{
 		if (ft_strlen(line[*i]) < 2 || (ft_strlen(line[*i]) == 2
 				&& (line[*i][2] == '<' || line[*i][2] == '>')))
-		i += 1;
+		*i += 1;
 	}
-	i += 1;
+	*i += 1;
 }
 
 void	parse_line(char **line, t_data *data)
@@ -89,7 +89,7 @@ void	parse_line(char **line, t_data *data)
 	i = 0;
 	cmd_len = 0;
 	args_len = 0;
-	while (line[i] && ft_strncmp(line[i], "|", ft_strlen(line[i])))
+	while (line[i] && ft_strncmp(line[i], "|", 1))
 		find_operator(line, &i, &cmd_len, &args_len);
 	init_pipe(&cmd, line[i], &i);
 	if (parse_cmd(&cmd, line, cmd_len, args_len))
