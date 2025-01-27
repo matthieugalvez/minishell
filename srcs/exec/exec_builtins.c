@@ -6,11 +6,11 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:36:13 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/27 13:13:02 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:59:32 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	exec_builtins(t_data *data, t_cmd *cmd) //return si la builtins a bien fonctionne
 {
