@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 14:12:57 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:39:08 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_cd(char *path)
 	{
 		printf("cd: ");
 		perror(path);
-		return(1);
+		return (1);
 	}
 	return (0);
 }
