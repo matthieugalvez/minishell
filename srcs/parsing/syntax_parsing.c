@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 16:34:28 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 16:59:43 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	parse_operator(char **line, int i)
 	return (0);
 }
 
-int	syntax_parsing(char **line, t_data *data)
+int	syntax_parsing(char **line)
 {
 	int	i;
 	int	parsing_case;

@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 16:39:08 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 16:56:44 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,11 @@ int	ft_pwd(void)
 	}
 	printf("%s\n", buf);
 	return (0);
+}
+
+void	ft_exit(int exit_code, t_cmd *cmd, t_data *data)
+{
+	ft_freetab(cmd->args);
+	ft_freetab(data->envp);
+	exit(exit_code);
 }

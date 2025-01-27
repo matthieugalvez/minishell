@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 14:29:08 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:45:38 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	redirect_std(t_cmd *cmd)
 static void	ft_parentprocess(t_cmd *cmd, t_data *data)
 {
 	if (try_exec_builtins(cmd) == 0)
-		exec_builtins(data, cmd);
+		exec_builtins(cmd, data);
 }
 
 static void	ft_childprocess(t_cmd *cmd, t_data *data)
