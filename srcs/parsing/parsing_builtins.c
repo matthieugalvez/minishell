@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:54 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/27 17:00:07 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:36:21 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,22 @@
 void	parse_builtin(char **line, t_data *data)
 {
 	t_cmd		cmd;
-	int			argc;
+	int			i;
+	int			cmd_len;
+	int			args_len;
 
-	argc = 0;
-	while (line[argc])
-		argc++;
-	cmd.args = line;
-	cmd.argc = argc;
+	i = 0;
+	cmd_len = 0;
+	args_len = 0;
+	cmd.fd_out = 1;
+	cmd.fd_in = 0;
+	while (line[i])
+		find_lens(line, &i, &cmd_len, &args_len);
+	if (parse_cmd(&cmd, line, cmd_len, args_len))
+	{
+		ft_putstr("Error\nFailed to initiate struct\n", 2);
+		exit (EXIT_FAILURE);
+	}
 	if (try_exec_builtins(&cmd) == 1)
 		exec_builtins(&cmd, data);
 }

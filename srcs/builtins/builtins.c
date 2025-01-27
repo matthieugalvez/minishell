@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 16:56:44 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:40:25 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,26 @@ static int	check_option(char *option)
 	return (0);
 }
 
-int	ft_echo(char **args)
+int	ft_echo(t_cmd *cmd)
 {
 	int	i;
 	int	n_option;
 
 	i = 1;
-	if (!ft_strncmp(args[i], "-n", 2))
-		n_option = check_option(args[i]);
-	else
-		n_option = 0;
-	while (args[i])
+	n_option = 0;
+	if (!ft_strncmp(cmd->args[i], "-n", 2))
 	{
-		printf("%s ", args[i]);
+		n_option = check_option(cmd->args[i]);
+		i++;
+	}
+	while (cmd->args[i])
+	{
+		ft_putstr(cmd->args[i], 1);
+		ft_putstr(" ", 1);
 		i++;
 	}
 	if (!n_option)
-		printf("\n");
+		ft_putstr("\n", 1);
 	return (0);
 }
 

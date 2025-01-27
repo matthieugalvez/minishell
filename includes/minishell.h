@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 16:57:39 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:58:23 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*get_prompt(void);
 
 // PARSING
 
+int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
+int		find_lens(char **line, int *i, int *cmd_len, int *args_len);
 char	**ft_line_spliter(char const *s);
 int		syntax_parsing(char **line);
 void	parse_builtin(char **line, t_data *data);
@@ -71,7 +73,7 @@ void	init_data(t_data *data, char **envp);
 
 int		try_exec_builtins(t_cmd *cmd);
 int		exec_builtins(t_cmd *cmd, t_data *data);
-int		ft_echo(char **args);
+int		ft_echo(t_cmd *cmd);
 int		ft_cd(char *path);
 int		ft_pwd(void);
 int		ft_env(t_data *data);
