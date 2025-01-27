@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 14:54:44 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:02:24 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static int	operator_lenght(char const *s)
 	int	i;
 
 	i = 0;
-	while (s[i] && (s[i] == '<' || s[i] == '>' || s[i] == '|'))
+	if (s[i] == '|')
+		return (i++);
+	while (s[i] && (s[i] == '<' || s[i] == '>'))
 		i++;
 	return (i);
 }
@@ -42,10 +44,10 @@ static int	nextword_lenght(char const *s)
 		}
 		if (!s[i])
 			return (i);
+		if (ft_isspace(s[i]))
+			return (i);
 		if (s[i] == '<' || s[i] == '>' || s[i] == '|')
 			return (operator_lenght(&s[i]));
-		if ((ft_isspace(s[i]) || s[i] == '<' || s[i] == '>' || s[i] == '|'))
-			return (i);
 		i++;
 	}
 	return (i);
