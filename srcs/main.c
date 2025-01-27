@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/24 18:44:12 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:48:05 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 		user_input = readline(get_prompt());
 		if (*user_input)
 		{
-			split_user_input = ft_split(user_input, ' ');
+			split_user_input = ft_line_spliter(user_input);
 			if (!ft_strncmp(user_input, "exit", ft_strlen(user_input)))
 			{
 				free(user_input);
