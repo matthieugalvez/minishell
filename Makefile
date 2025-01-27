@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
+#    By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/27 12:05:16 by mgalvez          ###   ########.fr        #
+#    Updated: 2025/01/27 13:12:34 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ DIR_OBJS = .objs
 
 BUILTINS_SRCS	= builtins.c env_builtins.c env_builtins_utils.c
 DATA_SRCS		= data.c
-EXEC_SRCS		= heredoc.c exec.c pathfinder.c
+EXEC_SRCS		= heredoc.c exec.c pathfinder.c exec_builtins.c
 PARSING_SRCS	= line_spliter.c parsing.c parse_operator.c
 VISUAL_SRCS		= prompt.c
 

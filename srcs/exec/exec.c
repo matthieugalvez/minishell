@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 11:05:42 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 13:13:19 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,16 @@ static void	ft_childprocess(t_cmd *cmd, t_data *data)
 	char	*cmd_path;
 
 	redirect_std(cmd);
-	cmd_path = init_cmd_path(cmd, data);
+	if (try_exec_builtins(cmd) == 0)
+	{
+		exec_builtins(data, cmd);
+		cmd_path = NULL;
+	}
+	else
+	{
+		cmd_path = init_cmd_path(cmd, data);
+	}
+	printf("Path = %s\n", cmd_path);
 }
 
 void	ft_exec(t_cmd *cmd, t_data *data)
