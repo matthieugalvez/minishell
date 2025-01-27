@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 14:25:04 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 14:54:44 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	operator_lenght(char const *s)
 	int	i;
 
 	i = 0;
-	while (s[i] && s[i] == '<' || s[i] == '>' || s[i] == '|')
+	while (s[i] && (s[i] == '<' || s[i] == '>' || s[i] == '|'))
 		i++;
 	return (i);
 }
