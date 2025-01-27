@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 12:27:18 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 12:30:03 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	ft_passsep(char const *s)
 	int	i;
 
 	i = 0;
-	while (s[i] && (ft_isspace(s[i]) || s[i] == '<' || s[i] == '>'))
+	while (s[i] && (ft_isspace(s[i])
+			|| s[i] == '<' || s[i] == '>' || s[i] == '|'))
 		i++;
 	return (i);
 }
@@ -37,7 +38,8 @@ static int	ft_nextwordlenght(char const *s)
 			while (s[i] && s[i] != quote)
 				i++;
 		}
-		if (s[i] && (ft_isspace(s[i]) || s[i] == '<' || s[i] == '>'))
+		while (s[i] && (ft_isspace(s[i])
+				|| s[i] == '<' || s[i] == '>' || s[i] == '|'))
 			return (i);
 		i++;
 	}
