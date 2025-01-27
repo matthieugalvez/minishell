@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 11:43:59 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/27 12:27:18 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_passsep(char const *s)
 	int	i;
 
 	i = 0;
-	while (s[i] && (!ft_isspace(s[i]) || s[i] == '<' || s[i] == '>'))
+	while (s[i] && (ft_isspace(s[i]) || s[i] == '<' || s[i] == '>'))
 		i++;
 	return (i);
 }
@@ -30,14 +30,14 @@ static int	ft_nextwordlenght(char const *s)
 	i = 0;
 	while (s[i])
 	{
-		while (s[i] == '\'' || s[i] == '\"')
+		while (s[i] && (s[i] == '\'' || s[i] == '\"'))
 		{
 			quote = s[i];
 			i++;
-			while (s[i] != quote)
+			while (s[i] && s[i] != quote)
 				i++;
 		}
-		if (!ft_isspace(s[i]) || s[i] == '<' || s[i] == '>')
+		if (s[i] && (ft_isspace(s[i]) || s[i] == '<' || s[i] == '>'))
 			return (i);
 		i++;
 	}
@@ -81,10 +81,10 @@ static int	ft_countwords(char const *s)
 	in_sep = 1;
 	while (s[i])
 	{
-		ft_passsep(&s[i]);
+		i += ft_passsep(&s[i]);
 		if (s[i])
 			nb++;
-		i = ft_nextwordlenght(&s[i]);
+		i += ft_nextwordlenght(&s[i]);
 	}
 	return (nb);
 }
