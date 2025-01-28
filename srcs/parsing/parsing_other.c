@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 12:16:25 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/28 12:30:37 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	init_pipe(t_cmd *cmd, char *arg, int *i)
 {
 	static int	pipe_fd[2] = {0};
 
+	if (cmd->fd_in)
+		close(cmd->fd_in);
 	cmd->fd_in = pipe_fd[0];
 	if (arg && !ft_strncmp(arg, "|", 1))
 	{
@@ -24,6 +26,7 @@ static void	init_pipe(t_cmd *cmd, char *arg, int *i)
 	}
 	else
 		ft_bzero(&pipe_fd, sizeof(int) * 2);
+	cmd->to_close_fd = pipe_fd[0];
 	if (pipe_fd[1])
 		cmd->fd_out = pipe_fd[1];
 	else
@@ -52,5 +55,7 @@ void	parse_line(char **line, t_data *data)
 	ft_exec(&cmd, data);
 	if (line[i])
 		parse_line(&line[i], data);
+	else if (cmd.fd_in)
+		close (cmd.fd_in);
 	waitpid(cmd.pid, &status, 0);
 }

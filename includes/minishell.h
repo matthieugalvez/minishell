@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 12:18:32 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/28 12:29:33 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_cmd
 	char	**args;
 	int		fd_in;
 	int		fd_out;
+	int		to_close_fd;
 	int		pid;
 	int		argc;
 }	t_cmd;

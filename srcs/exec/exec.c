@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 12:12:13 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/28 12:31:06 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	ft_childprocess(t_cmd *cmd, t_data *data)
 {
 	char	*cmd_path;
 
+	if (cmd->to_close_fd)
+		close(cmd->to_close_fd);
 	redirect_std(cmd);
 	if (try_exec_builtins(cmd) == 1)
 	{
@@ -59,4 +61,10 @@ void	ft_exec(t_cmd *cmd, t_data *data)
 	}
 	else if (!cmd->pid)
 		ft_childprocess(cmd, data);
+	else
+	{
+		free(cmd->args);
+		if (cmd->fd_out != 1)
+			close(cmd->fd_out);
+	}
 }
