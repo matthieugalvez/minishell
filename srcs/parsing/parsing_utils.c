@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:44:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/28 14:07:15 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/28 16:36:08 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,21 @@ int	parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len)
 	cmd->args[j] = 0;
 	cmd->argc = j;
 	return (0);
+}
+
+int	ft_isvalidinput(char *input)
+{
+	int	result;
+
+	result = 1;
+	while (*input)
+	{
+		if (!ft_isspace(*input))
+		{
+			if (*input != '!' && *input != ':')
+				result = 0;
+		}
+		input ++;
+	}
+	return (result);
 }

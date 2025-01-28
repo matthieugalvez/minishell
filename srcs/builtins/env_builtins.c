@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:12:39 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/28 16:00:23 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:49:23 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	ft_export(t_data *data, t_cmd *cmd)
 	int		cmdi;
 	char	*var_name;
 
-	cmdi = 1;
-	while (cmdi < cmd->argc)
+	cmdi = 0;
+	while (++cmdi < cmd->argc)
 	{
 		var_name = parse_var_name(cmd->args[cmdi]);
 		if (var_name)
@@ -34,7 +34,6 @@ int	ft_export(t_data *data, t_cmd *cmd)
 			}
 			data->envp[i] = cmd->args[cmdi];
 		}
-		cmdi ++;
 	}
 	return (0);
 }
@@ -66,7 +65,7 @@ int	ft_unset(t_data *data, t_cmd *cmd)
 	return (0);
 }
 
-int	ft_env(t_cmd *cmd, t_data *data)
+int	ft_env(t_cmd *cmd, t_data *data, char *prefix)
 {
 	int	i;
 
@@ -75,6 +74,8 @@ int	ft_env(t_cmd *cmd, t_data *data)
 	i = 0;
 	while (i < data->envp_len)
 	{
+		if (prefix)
+			ft_putstr(prefix, cmd->fd_out);
 		ft_putstr(data->envp[i], cmd->fd_out);
 		ft_putstr("\n", cmd->fd_out);
 		i++;

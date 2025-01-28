@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinder.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:04:15 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 11:05:47 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/28 16:38:13 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*init_cmd_path(t_cmd *cmd, t_data *data)
 		cmd_path = cmd->args[0];
 		if (access(cmd_path, X_OK) != 0)
 		{
-			ft_putstr("pipex: ", 2);
+			ft_putstr("minishell: ", 2);
 			perror(cmd->args[0]);
 			return (NULL);
 		}
@@ -78,7 +78,7 @@ char	*init_cmd_path(t_cmd *cmd, t_data *data)
 		cmd_path = ft_findpath(data, cmd->args[0]);
 		if (!cmd_path)
 		{
-			ft_putstr("pipex: ", 2);
+			ft_putstr("minishell: ", 2);
 			ft_putstr(cmd->args[0], 2);
 			ft_putstr(": command not found\n", 2);
 		}

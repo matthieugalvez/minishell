@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/28 12:18:15 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/28 16:36:18 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	tty_loop(t_data *data)
 	while (1)
 	{
 		user_input = readline(get_prompt());
-		if (*user_input)
+		if (*user_input && ft_isvalidinput(user_input) == 0)
 		{
 			split_user_input = ft_line_spliter(user_input);
 			if (!split_user_input)
@@ -36,8 +36,8 @@ static void	tty_loop(t_data *data)
 				parse_builtin(split_user_input, data);
 			else if (parsing_case == 1)
 				parse_line(split_user_input, data);
-			free(user_input);
 		}
+		free(user_input);
 	}
 }
 

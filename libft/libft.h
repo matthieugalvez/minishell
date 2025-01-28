@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:06:28 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/24 17:49:30 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 16:18:29 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isint(char *str);
 int		ft_isspace(int c);
+int		ft_isspacestr(char *str);
 int		ft_isprint(int c);
 char	*ft_itoa(int n);
 void	ft_lstadd_back(t_list **lst, t_list *elem);

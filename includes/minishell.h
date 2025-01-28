@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 15:07:42 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:09:15 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*get_prompt(void);
 
 // PARSING
 
+int		ft_isvalidinput(char *input);
 int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
 int		find_lens(char **line, int *i, int *cmd_len, int *args_len);
 char	**ft_line_spliter(char const *s);
@@ -73,7 +74,7 @@ int		exec_builtins(t_cmd *cmd, t_data *data);
 int		ft_echo(t_cmd *cmd);
 int		ft_cd(t_cmd *cmd);
 int		ft_pwd(t_cmd *cmd);
-int		ft_env(t_cmd *cmd, t_data *data);
+int		ft_env(t_cmd *cmd, t_data *data, char *prefix);
 int		ft_export(t_data *data, t_cmd *cmd);
 int		ft_unset(t_data *data, t_cmd *cmd);
 int		ft_exit(int exit_code, t_cmd *cmd, t_data *data);

@@ -6,16 +6,19 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 15:24:31 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:58:29 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	check_option(char *option)
+static int	is_flag(char *option)
 {
 	int	i;
 
+	i = 0;
+	if (option[i] != '-')
+		return (0);
 	i = 1;
 	while (option[i])
 	{
@@ -25,10 +28,7 @@ static int	check_option(char *option)
 			break ;
 	}
 	if (!option[i])
-	{
-		i++;
 		return (1);
-	}
 	return (0);
 }
 
@@ -36,23 +36,25 @@ int	ft_echo(t_cmd *cmd)
 {
 	int	i;
 	int	n_option;
+	int	print_flag;
 
 	i = 1;
 	n_option = 0;
+	print_flag = 0;
 	if (cmd->argc > 1)
 	{
-		if (!ft_strncmp(cmd->args[i], "-n", 2))
+		n_option = is_flag(cmd->args[i]);
+		i += is_flag(cmd->args[i]) - 1;
+		while (++i < cmd->argc)
 		{
-			n_option = check_option(cmd->args[i]);
-			i++;
+			if (!is_flag(cmd->args[i]) || print_flag)
+			{
+				ft_putstr(cmd->args[i], cmd->fd_out);
+				if (i < cmd->argc - 1)
+					ft_putstr(" ", cmd->fd_out);
+				print_flag = 1;
+			}
 		}
-		while (i < cmd->argc - 1)
-		{
-			ft_putstr(cmd->args[i], cmd->fd_out);
-			ft_putstr(" ", cmd->fd_out);
-			i++;
-		}
-		ft_putstr(cmd->args[i], cmd->fd_out);
 	}
 	if (!n_option)
 		ft_putstr("\n", cmd->fd_out);
