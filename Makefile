@@ -6,7 +6,7 @@
 #    By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/27 17:46:58 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/01/28 12:18:56 by mgalvez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,12 @@ DIR_INCS = includes
 DIR_OBJS = .objs
 
 BUILTINS_SRCS	= builtins.c env_builtins.c env_builtins_utils.c
-DATA_SRCS		= data.c
 EXEC_SRCS		= heredoc.c exec.c pathfinder.c exec_builtins.c
-PARSING_SRCS	= line_spliter.c syntax_parsing.c parsing.c get_redirect_fd.c parsing_builtins.c \
+PARSING_SRCS	= line_spliter.c syntax_parsing.c parsing_builtins.c parsing_other.c get_redirect_fd.c \
 				  parsing_utils.c
 VISUAL_SRCS		= prompt.c
 
 LST_SRCS	= 	$(addprefix builtins/, ${BUILTINS_SRCS}) \
-				$(addprefix data/, ${DATA_SRCS}) \
 				$(addprefix exec/, ${EXEC_SRCS}) \
 				$(addprefix parsing/, ${PARSING_SRCS}) \
 				$(addprefix visual/, ${VISUAL_SRCS}) \

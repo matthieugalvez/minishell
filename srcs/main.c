@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/27 19:46:21 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:18:15 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,27 @@ static void	tty_loop(t_data *data)
 				parse_line(split_user_input, data);
 			free(user_input);
 		}
+	}
+}
+
+static void	init_data(t_data *data, char **envp)
+{
+	int	len;
+
+	len = 0;
+	while (envp[len])
+		len ++;
+	data->envp_len = len;
+	data->envp = ft_calloc(data->envp_len + 1, sizeof (char *));
+	if (!data->envp)
+	{
+		ft_putstr("Error\nFailed to init data struct\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	if (ft_tabcpy(data->envp, envp))
+	{
+		ft_putstr("Error\nFailed to init data struct\n", 2);
+		exit(EXIT_FAILURE);
 	}
 }
 

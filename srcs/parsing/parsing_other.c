@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_other.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 11:13:25 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:16:25 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	init_pipe(t_cmd *cmd, char *arg, int *i)
 void	parse_line(char **line, t_data *data)
 {
 	t_cmd		cmd;
+	int			status;
 	int			i;
 	int			cmd_len;
 	int			args_len;
@@ -51,4 +52,5 @@ void	parse_line(char **line, t_data *data)
 	ft_exec(&cmd, data);
 	if (line[i])
 		parse_line(&line[i], data);
+	waitpid(cmd.pid, &status, 0);
 }

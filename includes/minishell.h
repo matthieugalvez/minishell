@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 11:57:28 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:30:11 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,6 @@ char	*init_cmd_path(t_cmd *cmd, t_data *data);
 //EXEC
 
 void	ft_exec(t_cmd *cmd, t_data *data);
-
-//	DATA
-
-void	init_data(t_data *data, char **envp);
 
 //	BUILTINS
 
