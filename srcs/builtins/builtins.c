@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 11:20:00 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:23:07 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	check_option(char *option)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (option[i])
 	{
 		if (option[i] == 'n')
@@ -44,12 +44,13 @@ int	ft_echo(t_cmd *cmd)
 		n_option = check_option(cmd->args[i]);
 		i++;
 	}
-	while (cmd->args[i])
+	while (i < cmd->argc - 1)
 	{
 		ft_putstr(cmd->args[i], cmd->fd_out);
 		ft_putstr(" ", cmd->fd_out);
 		i++;
 	}
+	ft_putstr(cmd->args[i], cmd->fd_out);
 	if (!n_option)
 		ft_putstr("\n", cmd->fd_out);
 	return (0);
@@ -66,7 +67,7 @@ int	ft_cd(char *path)
 	return (0);
 }
 
-int	ft_pwd(void)
+int	ft_pwd(t_cmd *cmd)
 {
 	char	buf[PATH_MAX + 1];
 
@@ -76,7 +77,8 @@ int	ft_pwd(void)
 		perror("pwd");
 		return (1);
 	}
-	printf("%s\n", buf);
+	ft_putstr(buf, cmd->fd_out);
+	ft_putstr("\n", cmd->fd_out);
 	return (0);
 }
 

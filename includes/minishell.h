@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 18:58:23 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:57:28 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int		try_exec_builtins(t_cmd *cmd);
 int		exec_builtins(t_cmd *cmd, t_data *data);
 int		ft_echo(t_cmd *cmd);
 int		ft_cd(char *path);
-int		ft_pwd(void);
-int		ft_env(t_data *data);
+int		ft_pwd(t_cmd *cmd);
+int		ft_env(t_cmd *cmd, t_data *data);
 int		ft_export(t_data *data, char *arg);
 int		ft_unset(t_data *data, char *arg);
 void	ft_exit(int exit_code, t_cmd *cmd, t_data *data);
