@@ -5,3 +5,5 @@
 *.cswp
 .vscode
 minishell
+fsanitize
+g3
