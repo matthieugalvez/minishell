@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:44:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/27 19:43:56 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:19:49 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len)
 		j++;
 		i++;
 	}
+	cmd->args[j] = 0;
 	cmd->argc = j;
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 19:40:25 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:20:00 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int	ft_echo(t_cmd *cmd)
 	}
 	while (cmd->args[i])
 	{
-		ft_putstr(cmd->args[i], 1);
-		ft_putstr(" ", 1);
+		ft_putstr(cmd->args[i], cmd->fd_out);
+		ft_putstr(" ", cmd->fd_out);
 		i++;
 	}
 	if (!n_option)
-		ft_putstr("\n", 1);
+		ft_putstr("\n", cmd->fd_out);
 	return (0);
 }
 
