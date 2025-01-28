@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 16:59:43 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:04:50 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,19 @@ static int	check_builtin(char *arg)
 	if (!ft_strncmp(arg, "exit", 5))
 		return (0);
 	return (1);
+}
+
+static void	non_operator_case(char **line, int *parsing_case,
+		int *cmd_parsed, int *i)
+{
+	if (*parsing_case == 0 && *cmd_parsed == 0)
+	{
+		*cmd_parsed = 1;
+		*parsing_case = check_builtin(line[*i]);
+	}
+	while (line[*i]
+		&& line[*i][0] != '<' && line[*i][0] != '>' && line[*i][0] != '|')
+		*i += 1;
 }
 
 static int	write_errstr(char *token)
@@ -70,9 +83,11 @@ int	syntax_parsing(char **line)
 {
 	int	i;
 	int	parsing_case;
+	int	cmd_parsed;
 
 	i = 0;
 	parsing_case = 0;
+	cmd_parsed = 0;
 	while (line[i])
 	{
 		if (line[i][0] == '|')
@@ -84,13 +99,7 @@ int	syntax_parsing(char **line)
 			i++;
 		}
 		else
-		{
-			if (parsing_case == 0)
-				parsing_case = check_builtin(line[i]);
-			while (line[i]
-				&& line[i][0] != '<' && line[i][0] != '>' && line[i][0] != '|')
-			i++;
-		}
+			non_operator_case(line, &parsing_case, &cmd_parsed, &i);
 	}
 	return (parsing_case);
 }
