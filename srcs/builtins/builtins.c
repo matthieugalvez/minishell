@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 13:58:31 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 14:09:58 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	ft_echo(t_cmd *cmd)
 
 int	ft_cd(t_cmd *cmd)
 {
-	printf("argc : %d\n", cmd->argc);
 	if (cmd->argc > 2)
 	{
 		ft_putstr("minishell: cd: too many arguments\n", 2);
