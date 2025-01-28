@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 16:02:24 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/28 14:00:08 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,43 @@ static int	operator_lenght(char const *s)
 	return (i);
 }
 
-static int	nextword_lenght(char const *s)
+static int	passquote(char const *s)
 {
 	int		i;
 	char	quote;
 
 	i = 0;
+	while (s[i] && (s[i] == '\'' || s[i] == '\"'))
+	{
+		quote = s[i];
+		i++;
+		while (s[i] && s[i] != quote)
+			i++;
+		if (!s[i])
+			return (INT_MIN);
+		i++;
+	}
+	return (i);
+}
+
+static int	nextword_lenght(char const *s)
+{
+	int		i;
+	int		in_word;
+
+	i = 0;
+	in_word = 0;
 	while (s[i])
 	{
-		while (s[i] && (s[i] == '\'' || s[i] == '\"'))
-		{
-			quote = s[i];
-			i++;
-			while (s[i] && s[i] != quote)
-				i++;
-			if (!s[i])
-				return (INT_MIN);
-			i++;
-		}
-		if (!s[i])
+		i += passquote(&s[i]);
+		if (i < 0)
 			return (i);
-		if (ft_isspace(s[i]))
-			return (i);
-		if (s[i] == '<' || s[i] == '>' || s[i] == '|')
+		if (s[i] && (s[i] == '<' || s[i] == '>' || s[i] == '|') && in_word == 0)
 			return (operator_lenght(&s[i]));
+		else if (!s[i] || ft_isspace(s[i])
+			|| s[i] == '<' || s[i] == '>' || s[i] == '|')
+			return (i);
+		in_word = 1;
 		i++;
 	}
 	return (i);
