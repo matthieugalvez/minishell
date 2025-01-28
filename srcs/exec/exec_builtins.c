@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:36:13 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/28 10:48:14 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:59:44 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	exec_builtins(t_cmd *cmd, t_data *data)
 		return (ft_cd(cmd->args[1]));
 	if (!ft_strncmp(cmd->args[0], "env", ft_strlen(cmd->args[0]))
 		&& cmd->argc == 1)
-		return (ft_env(data));
+		return (ft_env(cmd, data));
 	if (!ft_strncmp(cmd->args[0], "export", ft_strlen(cmd->args[0]))
 		&& cmd->argc == 2)
 		return (ft_export(data, cmd->args[1]));
@@ -29,7 +29,7 @@ int	exec_builtins(t_cmd *cmd, t_data *data)
 		return (ft_unset(data, cmd->args[1]));
 	if (!ft_strncmp(cmd->args[0], "pwd", ft_strlen(cmd->args[0]))
 		&& cmd->argc == 1)
-		return (ft_pwd());
+		return (ft_pwd(cmd));
 	if (!ft_strncmp(cmd->args[0], "echo", ft_strlen(cmd->args[0]))
 		&& cmd->argc >= 1)
 		return (ft_echo(cmd));
