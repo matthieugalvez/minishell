@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:36:13 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/27 17:05:16 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/28 10:48:14 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	exec_builtins(t_cmd *cmd, t_data *data)
 		return (ft_pwd());
 	if (!ft_strncmp(cmd->args[0], "echo", ft_strlen(cmd->args[0]))
 		&& cmd->argc >= 1)
-		return (ft_echo(cmd->args));
+		return (ft_echo(cmd));
 	if (!ft_strncmp(cmd->args[0], "exit", ft_strlen(cmd->args[0])))
 		ft_exit(0, cmd, data);
 	return (1);
@@ -58,9 +58,5 @@ int	try_exec_builtins(t_cmd *cmd)
 		ret = (cmd->argc >= 2);
 	if (!ft_strncmp(cmd->args[0], "exit", ft_strlen(cmd->args[0])))
 		ret = (cmd->argc == 1);
-	if (ret == 0)
-		printf("%s : Wrong number of arguments\n", cmd->args[0]);
-	if (ret == -1)
-		printf("Unknown Builtin : %s \n", cmd->args[0]);
 	return (ret);
 }

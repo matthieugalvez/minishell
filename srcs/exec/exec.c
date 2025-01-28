@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 16:45:38 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 10:46:05 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,19 @@ static void	redirect_std(t_cmd *cmd)
 	}
 }
 
-static void	ft_parentprocess(t_cmd *cmd, t_data *data)
-{
-	if (try_exec_builtins(cmd) == 0)
-		exec_builtins(cmd, data);
-}
-
 static void	ft_childprocess(t_cmd *cmd, t_data *data)
 {
 	char	*cmd_path;
 
+	redirect_std(cmd);
 	if (try_exec_builtins(cmd) == 1)
+		exec_builtins(cmd, data);
+	else
 	{
-		redirect_std(cmd);
 		cmd_path = init_cmd_path(cmd, data);
-		printf("Path = %s\n", cmd_path);
-		exit(EXIT_FAILURE);
+		ft_putstr("Path = ", 2);
+		ft_putstr(cmd_path, 2);
+		ft_putstr(" \n", 2);
 	}
 	exit(EXIT_FAILURE);
 }
@@ -58,6 +55,4 @@ void	ft_exec(t_cmd *cmd, t_data *data)
 	}
 	else if (!cmd->pid)
 		ft_childprocess(cmd, data);
-	else
-		ft_parentprocess(cmd, data);
 }

@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 11:04:50 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/28 11:06:12 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	syntax_parsing(char **line)
 		{
 			if (parse_operator(line, i))
 				return (-1);
-			i++;
+			i ++;
 		}
 		else
 			non_operator_case(line, &parsing_case, &cmd_parsed, &i);
