@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:12:39 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/28 14:45:53 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 16:00:23 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,7 @@ int	ft_env(t_cmd *cmd, t_data *data)
 	int	i;
 
 	if (cmd->argc > 1)
-	{
-		ft_putstr("minishell: env: too many arguments\n", 2);
 		return (1);
-	}
 	i = 0;
 	while (i < data->envp_len)
 	{

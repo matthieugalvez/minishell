@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 14:09:58 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:24:31 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,21 @@ int	ft_echo(t_cmd *cmd)
 
 	i = 1;
 	n_option = 0;
-	if (!ft_strncmp(cmd->args[i], "-n", 2))
+	if (cmd->argc > 1)
 	{
-		n_option = check_option(cmd->args[i]);
-		i++;
-	}
-	while (i < cmd->argc - 1)
-	{
+		if (!ft_strncmp(cmd->args[i], "-n", 2))
+		{
+			n_option = check_option(cmd->args[i]);
+			i++;
+		}
+		while (i < cmd->argc - 1)
+		{
+			ft_putstr(cmd->args[i], cmd->fd_out);
+			ft_putstr(" ", cmd->fd_out);
+			i++;
+		}
 		ft_putstr(cmd->args[i], cmd->fd_out);
-		ft_putstr(" ", cmd->fd_out);
-		i++;
 	}
-	ft_putstr(cmd->args[i], cmd->fd_out);
 	if (!n_option)
 		ft_putstr("\n", cmd->fd_out);
 	return (0);
@@ -87,9 +90,23 @@ int	ft_pwd(t_cmd *cmd)
 	return (0);
 }
 
-void	ft_exit(int exit_code, t_cmd *cmd, t_data *data)
+int	ft_exit(int exit_code, t_cmd *cmd, t_data *data)
 {
-	ft_freetab(cmd->args);
-	ft_freetab(data->envp);
-	exit(exit_code);
+	ft_putstr("exit\n", 2);
+	if (cmd->argc > 1)
+	{
+		if (ft_isint(cmd->args[1]))
+		{
+			ft_putstr("minishell: exit: ", 2);
+			ft_putstr(cmd->args[1], 2);
+			ft_putstr(": numeric argument required\n", 2);
+		}
+		else if (cmd->argc > 2)
+		{
+			ft_putstr("minishell: exit: too many arguments\n", 2);
+			return (1);
+		}
+	}
+	ft_kill(exit_code, cmd, data);
+	return (0);
 }
