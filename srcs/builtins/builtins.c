@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 12:23:07 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:58:31 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,18 @@ int	ft_echo(t_cmd *cmd)
 	return (0);
 }
 
-int	ft_cd(char *path)
+int	ft_cd(t_cmd *cmd)
 {
-	if (chdir(path))
+	printf("argc : %d\n", cmd->argc);
+	if (cmd->argc > 2)
 	{
-		printf("cd: ");
-		perror(path);
+		ft_putstr("minishell: cd: too many arguments\n", 2);
+		return (1);
+	}
+	if (chdir(cmd->args[1]))
+	{
+		ft_putstr("minishell: cd: ", 2);
+		perror(cmd->args[1]);
 		return (1);
 	}
 	return (0);

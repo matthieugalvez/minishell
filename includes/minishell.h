@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 12:36:02 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/28 13:57:00 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_exec(t_cmd *cmd, t_data *data);
 int		try_exec_builtins(t_cmd *cmd);
 int		exec_builtins(t_cmd *cmd, t_data *data);
 int		ft_echo(t_cmd *cmd);
-int		ft_cd(char *path);
+int		ft_cd(t_cmd *cmd);
 int		ft_pwd(t_cmd *cmd);
 int		ft_env(t_cmd *cmd, t_data *data);
 int		ft_export(t_data *data, char *arg);

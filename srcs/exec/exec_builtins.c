@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:36:13 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/28 11:59:44 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:59:15 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 //return si la builtins a bien fonctionne
 int	exec_builtins(t_cmd *cmd, t_data *data)
 {
-	if (!ft_strncmp(cmd->args[0], "cd", ft_strlen(cmd->args[0]))
-		&& cmd->argc <= 2)
-		return (ft_cd(cmd->args[1]));
+	if (!ft_strncmp(cmd->args[0], "cd", ft_strlen(cmd->args[0])))
+		return (ft_cd(cmd));
 	if (!ft_strncmp(cmd->args[0], "env", ft_strlen(cmd->args[0]))
 		&& cmd->argc == 1)
 		return (ft_env(cmd, data));
