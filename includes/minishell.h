@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 10:56:11 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 11:55:09 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,14 @@ char	*get_prompt(void);
 // PARSING
 
 int		ft_isvalidinput(char *input);
-int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
-int		find_lens(char **line, int *i, int *cmd_len, int *args_len);
 char	**ft_line_spliter(char const *s);
+size_t	ft_quoteless_strlcpy(char *dst, const char *src, size_t siz);
 int		syntax_parsing(char **line);
 int		ft_isbuiltin(char *arg);
 void	parse_builtin(char **line, t_data *data);
 void	parse_line(char **line, t_data *data);
+int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
+int		find_lens(char **line, int *i, int *cmd_len, int *args_len);
 int		get_redirect_fd(t_cmd *cmd, char **line, int i);
 int		get_heredoc_fd(char *limiter, char *name);
 char	*init_cmd_path(t_cmd *cmd, t_data *data);

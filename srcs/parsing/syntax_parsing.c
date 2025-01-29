@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 11:00:21 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 12:13:40 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	check_dir(char *str)
 	int	i;
 
 	i = 0;
+	if (!str[i])
+		return (0);
 	while (str[i])
 	{
 		if (str[i] != '/' && str[i] != '.')

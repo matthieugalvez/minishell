@@ -6,30 +6,11 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:44:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/29 10:56:00 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 13:12:23 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	ft_isbuiltin(char *arg)
-{
-	if (!ft_strncmp(arg, "echo", 5))
-		return (0);
-	if (!ft_strncmp(arg, "cd", 3))
-		return (0);
-	if (!ft_strncmp(arg, "pwd", 4))
-		return (0);
-	if (!ft_strncmp(arg, "export", 7))
-		return (0);
-	if (!ft_strncmp(arg, "unset", 6))
-		return (0);
-	if (!ft_strncmp(arg, "env", 4))
-		return (0);
-	if (!ft_strncmp(arg, "exit", 5))
-		return (0);
-	return (1);
-}
 
 int	find_lens(char **line, int *i, int *cmd_len, int *args_len)
 {
@@ -71,10 +52,53 @@ int	parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len)
 	return (0);
 }
 
+int	ft_isbuiltin(char *arg)
+{
+	if (!ft_strncmp(arg, "echo", 5))
+		return (0);
+	if (!ft_strncmp(arg, "cd", 3))
+		return (0);
+	if (!ft_strncmp(arg, "pwd", 4))
+		return (0);
+	if (!ft_strncmp(arg, "export", 7))
+		return (0);
+	if (!ft_strncmp(arg, "unset", 6))
+		return (0);
+	if (!ft_strncmp(arg, "env", 4))
+		return (0);
+	if (!ft_strncmp(arg, "exit", 5))
+		return (0);
+	return (1);
+}
+
+size_t	ft_quoteless_strlcpy(char *dst, const char *src, size_t siz)
+{
+	size_t	i;
+	size_t	j;
+
+	if (siz == 0)
+		return (ft_strlen(src));
+	i = 0;
+	j = 0;
+	while (src[i] && j < siz - 1)
+	{
+		if (src[i] != '\'' && src[i] != '\"')
+		{
+			dst[j] = src[i];
+			j++;
+		}
+		i++;
+	}
+	dst[j] = '\0';
+	return (ft_strlen(src));
+}
+
 int	ft_isvalidinput(char *input)
 {
 	int	result;
 
+	if (input[0] == '\n')
+		return (1);
 	result = 1;
 	while (*input)
 	{
