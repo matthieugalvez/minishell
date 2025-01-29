@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:55:42 by mgalvez           #+#    #+#             */
-/*   Updated: 2024/11/29 10:36:14 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 12:10:10 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ static int	ft_othercases(char *c)
 	return (2);
 }
 
-static int	ft_format_arg(char c, va_list arg)
+static int	ft_format_arg(char c, va_list arg, int fd)
 {
 	int	siz;
 
 	if (c == '%')
-		siz = ft_putchar('%', 1);
+		siz = ft_putchar('%', fd);
 	else if (c == 'c')
-		siz = ft_putchar(va_arg(arg, int), 1);
+		siz = ft_putchar(va_arg(arg, int), fd);
 	else if (c == 's')
-		siz = ft_putstr_errnull(va_arg(arg, char *), 1);
+		siz = ft_putstr_errnull(va_arg(arg, char *), fd);
 	else if (c == 'p')
 		siz = ft_putaddress(va_arg(arg, void *));
 	else if (c == 'x')
@@ -41,7 +41,7 @@ static int	ft_format_arg(char c, va_list arg)
 	else if (c == 'X')
 		siz = ft_putunsint(va_arg(arg, unsigned int), "0123456789ABCDEF");
 	else if (c == 'd' || c == 'i')
-		siz = ft_putnbr(va_arg(arg, int), "0123456789", 1);
+		siz = ft_putnbr(va_arg(arg, int), "0123456789", fd);
 	else if (c == 'u')
 		siz = ft_putunsint(va_arg(arg, unsigned int), "0123456789");
 	else
@@ -65,11 +65,40 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			siz += ft_format_arg(format[i], ptr);
+			siz += ft_format_arg(format[i], ptr, 1);
 		}
 		else
 		{
 			ft_putchar(format[i], 1);
+			siz++;
+		}
+		i++;
+	}
+	va_end(ptr);
+	return (siz);
+}
+
+int	ft_printf_fd(int fd, const char *format, ...)
+{
+	va_list	ptr;
+	int		i;
+	int		siz;
+
+	i = 0;
+	siz = 0;
+	if (!format)
+		return (-1);
+	va_start(ptr, format);
+	while (format[i])
+	{
+		if (format[i] == '%')
+		{
+			i++;
+			siz += ft_format_arg(format[i], ptr, fd);
+		}
+		else
+		{
+			ft_putchar(format[i], fd);
 			siz++;
 		}
 		i++;

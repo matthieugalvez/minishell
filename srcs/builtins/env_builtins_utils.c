@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:25 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/27 10:32:41 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 11:39:07 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,42 @@ int	get_env_index(char *env_var, t_data *data)
 		i++;
 	}
 	return (i);
+}
+
+int	add_env_var(t_data *data, t_cmd *cmd, char *var_name, int cmdi)
+{
+	int	i;
+
+	i = get_env_index(var_name, data);
+	if (i == data->envp_len)
+	{
+		data->envp = realloc_envp(data->envp, data->envp_len + 1);
+		if (!data->envp)
+			return (-1);
+		data->envp_len += 1;
+	}
+	data->envp[i] = cmd->args[cmdi];
+	return (0);
+}
+
+int	remove_env_var(t_data *data, t_cmd *cmd, int cmdi)
+{
+	char	*var_name;
+	int		i;
+
+	var_name = ft_strjoin(cmd->args[cmdi], "=");
+	if (!var_name)
+		return (-1);
+	i = get_env_index(var_name, data) - 1;
+	if (i < data->envp_len - 1)
+	{
+		free(data->envp[i + 1]);
+		while (++i < data->envp_len)
+			data->envp[i] = data->envp[i + 1];
+		data->envp = realloc_envp(data->envp, data->envp_len);
+		if (!data->envp)
+			return (-1);
+		data->envp_len -= 1;
+	}
+	return (0);
 }

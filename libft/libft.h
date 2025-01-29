@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:06:28 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 09:41:42 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 12:06:47 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	*ft_memset(void *s, int c, size_t n);
 int		ft_min(int n1, int n2);
 int		ft_nbrlen(int nb);
 int		ft_printf(const char *format, ...);
+int		ft_printf_fd(int fd, const char *format, ...);
 void	ft_pull(int *tab, int len);
 void	ft_push(int *tab, int len);
 int		ft_putaddress(void *address);
