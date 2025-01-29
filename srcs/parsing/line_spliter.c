@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 09:53:42 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 14:10:36 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,29 @@ static int	operator_lenght(char const *s)
 	return (i);
 }
 
-static int	passquote(char const *s)
+static int	passquote(char const *s, int *quote_len)
 {
 	int		i;
 	char	quote;
 
 	i = 0;
+	*quote_len = 0;
 	while (s[i] && (s[i] == '\'' || s[i] == '\"'))
 	{
+		*quote_len += 1;
 		quote = s[i];
 		i++;
 		while (s[i] && s[i] != quote)
 			i++;
 		if (!s[i])
-			return (INT_MIN);
+			return (i);
+		*quote_len += 1;
 		i++;
 	}
 	return (i);
 }
 
-static int	nextword_lenght(char const *s)
+static int	nextword_lenght(char const *s, int *quote_len)
 {
 	int		i;
 	int		in_word;
@@ -52,8 +55,8 @@ static int	nextword_lenght(char const *s)
 	in_word = 0;
 	while (s[i])
 	{
-		i += passquote(&s[i]);
-		if (i < 0)
+		i += passquote(&s[i], quote_len);
+		if (*quote_len % 2 != 0)
 			return (i);
 		if (s[i] && ft_isoperator(s[i]) && in_word == 0)
 			return (operator_lenght(&s[i]));
@@ -70,6 +73,7 @@ static char	**make_tab(char const *s, int words_nb, char **tab)
 	int	i;
 	int	j;
 	int	word_len;
+	int	quote_len;
 
 	i = 0;
 	j = 0;
@@ -77,7 +81,7 @@ static char	**make_tab(char const *s, int words_nb, char **tab)
 	{
 		while (s[i] && (ft_isspace(s[i])))
 			i++;
-		word_len = nextword_lenght(&s[i]);
+		word_len = nextword_lenght(&s[i], &quote_len);
 		tab[j] = ft_calloc(sizeof(char), (word_len + 1));
 		if (!tab[j])
 		{
@@ -97,6 +101,7 @@ char	**ft_line_spliter(char const *s)
 	int		i;
 	int		words_nb;
 	char	**tab;
+	int		quote_len;
 
 	i = 0;
 	words_nb = 0;
@@ -106,11 +111,12 @@ char	**ft_line_spliter(char const *s)
 			i++;
 		if (s[i])
 			words_nb++;
-		i += nextword_lenght(&s[i]);
-		if (i < 0)
+		i += nextword_lenght(&s[i], &quote_len);
+		if (quote_len % 2 != 0)
 		{
 			ft_putstr("minishell: syntax error unclosed quote\n", 2);
-			return (NULL);
+			tab = ft_calloc(sizeof(char *), 1);
+			return (tab);
 		}
 	}
 	tab = ft_calloc(sizeof(char *), (words_nb + 1));
