@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/29 15:37:40 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 16:23:51 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	parse_input(char **input, t_data *data)
 	int		parsing_case;
 
 	parsing_case = syntax_parsing(input);
-//	input = ft_expand(input); //fonction qui gere les expand
+	ft_expand(input, data); //fonction qui gere les expand
 	if (!input)
 	{
 		clear_history();

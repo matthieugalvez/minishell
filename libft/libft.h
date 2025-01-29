@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:06:28 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 12:06:47 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:19:57 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int		ft_putendl(char *s, int fd);
 int		ft_putnbr(int n, char *base, int fd);
 int		ft_putlng(unsigned long nbr, char *base, int fd);
 int		ft_putstr(char *s, int fd);
+void	ft_print_str_tab(char **tab, int fd);
 int		ft_putstr_errnull(char *s, int fd);
 int		ft_putunsint(unsigned int nbr, char *base);
 char	**ft_split(char const *s, char c);

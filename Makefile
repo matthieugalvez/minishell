@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/29 14:42:14 by mgalvez          ###   ########.fr        #
+#    Updated: 2025/01/29 16:24:22 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ DIR_OBJS = .objs
 BUILTINS_SRCS	= builtins.c env_builtins.c env_builtins_utils.c
 EXEC_SRCS		= heredoc.c exec.c pathfinder.c exec_builtins.c
 PARSING_SRCS	= line_spliter.c syntax_parsing.c unquote_strings.c \
-				  parsing_builtins.c parsing_other.c get_redirect_fd.c parsing_utils.c
+				  parsing_builtins.c parsing_other.c get_redirect_fd.c parsing_utils.c \
+				  expand.c
 VISUAL_SRCS		= prompt.c
 
 LST_SRCS	= 	$(addprefix builtins/, ${BUILTINS_SRCS}) \

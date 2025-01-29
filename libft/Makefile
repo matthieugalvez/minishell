@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:50:15 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/29 09:41:53 by mgalvez          ###   ########.fr        #
+#    Updated: 2025/01/29 16:20:13 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,8 @@ SRCS = ft_atoi.c \
 	  ft_tabcpy.c \
 	  ft_tablen.c \
 	  ft_tolower.c \
-	  ft_toupper.c
+	  ft_toupper.c \
+	  ft_print_str_tab.c
 
 LST_OBJS = ${SRCS:.c=.o}
 

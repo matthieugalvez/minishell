@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_print_str_tab.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 16:54:01 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 19:11:53 by mmanuell         ###   ########.fr       */
+/*   Created: 2025/01/29 16:17:04 by mmanuell          #+#    #+#             */
+/*   Updated: 2025/01/29 16:30:51 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	ft_print_str_tab(char **tab, int fd)
 {
-	char	*dst;
-	size_t	i;
+	int	i;
 
-	i = ft_strlen(s1) + ft_strlen(s2);
-	if (i == 0)
-		i++;
-	dst = malloc(sizeof(char) * (i + 1));
-	if (!dst)
-		return (NULL);
-	if (!s1 && !s2)
-		dst = " ";
-	else if (!s1)
-		ft_strlcpy(dst, s2, i + 1);
-	else if (!s2)
-		ft_strlcpy(dst, s1, i + 1);
-	else
+	i = 0;
+	while (tab[i])
 	{
-		ft_strlcpy(dst, s1, i + 1);
-		ft_strlcat(dst, s2, i + 1);
+		ft_printf_fd(fd, "%d : %s\n", i, tab[i]);
+		i ++;
 	}
-	return (dst);
+	ft_printf_fd(fd, "\n");
 }
