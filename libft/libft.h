@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:06:28 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 16:18:29 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/29 09:41:42 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isint(char *str);
+int		ft_isoperator(char c);
 int		ft_isspace(int c);
 int		ft_isspacestr(char *str);
 int		ft_isprint(int c);

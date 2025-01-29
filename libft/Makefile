@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:50:15 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/23 17:02:45 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/01/29 09:41:53 by mgalvez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = ft_atoi.c \
 	  ft_isascii.c \
 	  ft_isdigit.c \
 	  ft_isint.c \
+	  ft_isoperator.c \
 	  ft_isprint.c \
 	  ft_isspace.c \
 	  ft_itoa.c \

@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 14:08:22 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 09:53:42 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 static int	operator_lenght(char const *s)
 {
-	int	i;
+	int		i;
+	char	operator;
 
 	i = 0;
-	if (s[i] == '|')
-	{
-		i++;
-		return (i);
-	}
-	while (s[i] && (s[i] == '<' || s[i] == '>'))
+	operator = s[i];
+	while (s[i] && (s[i] == operator))
 		i++;
 	return (i);
 }
@@ -58,10 +55,9 @@ static int	nextword_lenght(char const *s)
 		i += passquote(&s[i]);
 		if (i < 0)
 			return (i);
-		if (s[i] && (s[i] == '<' || s[i] == '>' || s[i] == '|') && in_word == 0)
+		if (s[i] && ft_isoperator(s[i]) && in_word == 0)
 			return (operator_lenght(&s[i]));
-		else if (!s[i] || ft_isspace(s[i])
-			|| s[i] == '<' || s[i] == '>' || s[i] == '|')
+		else if (!s[i] || ft_isspace(s[i]) || ft_isoperator(s[i]))
 			return (i);
 		in_word = 1;
 		i++;
