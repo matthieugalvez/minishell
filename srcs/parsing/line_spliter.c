@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 13:19:44 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 14:10:36 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ static char	**make_tab(char const *s, int words_nb, char **tab)
 		while (s[i] && (ft_isspace(s[i])))
 			i++;
 		word_len = nextword_lenght(&s[i], &quote_len);
-		tab[j] = ft_calloc(sizeof(char), (word_len + 1 - quote_len));
+		tab[j] = ft_calloc(sizeof(char), (word_len + 1));
 		if (!tab[j])
 		{
 			ft_freetab(tab);
 			return (NULL);
 		}
-		ft_quoteless_strlcpy(tab[j], &s[i], word_len + 1 - quote_len);
+		ft_strlcpy(tab[j], &s[i], word_len + 1);
 		j++;
 		i += word_len;
 	}

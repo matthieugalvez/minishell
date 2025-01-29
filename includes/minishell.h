@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 11:55:09 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 15:27:53 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ char	*get_prompt(void);
 
 int		ft_isvalidinput(char *input);
 char	**ft_line_spliter(char const *s);
-size_t	ft_quoteless_strlcpy(char *dst, const char *src, size_t siz);
 int		syntax_parsing(char **line);
+void	ft_unquote(char **input);
 int		ft_isbuiltin(char *arg);
 void	parse_builtin(char **line, t_data *data);
 void	parse_line(char **line, t_data *data);

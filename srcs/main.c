@@ -6,15 +6,39 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/29 13:16:30 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 15:37:40 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	tty_loop(t_data *data)
+static void	parse_input(char **input, t_data *data)
 {
 	int		parsing_case;
+
+	parsing_case = syntax_parsing(input);
+//	input = ft_expand(input); //fonction qui gere les expand
+	if (!input)
+	{
+		clear_history();
+		exit (EXIT_FAILURE);
+	}
+	ft_unquote(input);
+	if (!input)
+	{
+		clear_history();
+		exit (EXIT_FAILURE);
+	}
+	if (parsing_case == -1 || !input[0])
+		ft_freetab(input);
+	else if (parsing_case == 0)
+		parse_builtin(input, data);
+	else if (parsing_case == 1)
+		parse_line(input, data);
+}
+
+static void	tty_loop(t_data *data)
+{
 	char	*user_input;
 	char	**split_user_input;
 
@@ -29,13 +53,7 @@ static void	tty_loop(t_data *data)
 			clear_history();
 			exit (EXIT_FAILURE);
 		}
-		parsing_case = syntax_parsing(split_user_input);
-		if (parsing_case == -1 || !split_user_input[0])
-			ft_freetab(split_user_input);
-		else if (parsing_case == 0)
-			parse_builtin(split_user_input, data);
-		else if (parsing_case == 1)
-			parse_line(split_user_input, data);
+		parse_input(split_user_input, data);
 	}
 	tty_loop(data);
 }

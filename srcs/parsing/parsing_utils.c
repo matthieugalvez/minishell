@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:44:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/29 13:12:23 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 14:30:28 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,43 +71,22 @@ int	ft_isbuiltin(char *arg)
 	return (1);
 }
 
-size_t	ft_quoteless_strlcpy(char *dst, const char *src, size_t siz)
-{
-	size_t	i;
-	size_t	j;
-
-	if (siz == 0)
-		return (ft_strlen(src));
-	i = 0;
-	j = 0;
-	while (src[i] && j < siz - 1)
-	{
-		if (src[i] != '\'' && src[i] != '\"')
-		{
-			dst[j] = src[i];
-			j++;
-		}
-		i++;
-	}
-	dst[j] = '\0';
-	return (ft_strlen(src));
-}
-
 int	ft_isvalidinput(char *input)
 {
-	int	result;
-
 	if (input[0] == '\n')
+	{
+		free (input);
 		return (1);
-	result = 1;
+	}
 	while (*input)
 	{
 		if (!ft_isspace(*input))
 		{
 			if (*input != '!' && *input != ':')
-				result = 0;
+				return (0);
 		}
 		input ++;
 	}
-	return (result);
+	free (input);
+	return (1);
 }
