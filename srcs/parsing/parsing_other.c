@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 14:07:25 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 16:57:19 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	parse_line(char **line, t_data *data)
 		ft_putstr("Error\nFailed to initiate struct\n", 2);
 		exit (EXIT_FAILURE);
 	}
+	unquote_args(&cmd, data);
 	ft_exec(&cmd, data);
 	if (line[i])
 		parse_line(&line[i], data);

@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 15:47:15 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:55:58 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,13 @@ char	*get_prompt(void);
 int		ft_isvalidinput(char *input);
 char	**ft_line_spliter(char const *s);
 int		syntax_parsing(char **line);
-void	ft_unquote(char **input);
 int		ft_isbuiltin(char *arg);
 void	parse_builtin(char **line, t_data *data);
 void	parse_line(char **line, t_data *data);
-int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
 int		find_lens(char **line, int *i, int *cmd_len, int *args_len);
+int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
+void	unquote_args(t_cmd *cmd, t_data *data);
+void	ft_unquote(char **input);
 int		get_redirect_fd(t_cmd *cmd, char **line, int i);
 int		get_heredoc_fd(char *limiter, char *name);
 char	*init_cmd_path(t_cmd *cmd, t_data *data);
