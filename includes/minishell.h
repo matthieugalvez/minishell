@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 18:09:15 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/29 10:56:11 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
 int		find_lens(char **line, int *i, int *cmd_len, int *args_len);
 char	**ft_line_spliter(char const *s);
 int		syntax_parsing(char **line);
+int		ft_isbuiltin(char *arg);
 void	parse_builtin(char **line, t_data *data);
 void	parse_line(char **line, t_data *data);
 int		get_redirect_fd(t_cmd *cmd, char **line, int i);

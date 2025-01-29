@@ -6,41 +6,46 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 10:29:12 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/29 11:00:21 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	check_builtin(char *arg)
+static int	check_dir(char *str)
 {
-	if (!ft_strncmp(arg, "echo", 5))
-		return (0);
-	if (!ft_strncmp(arg, "cd", 3))
-		return (0);
-	if (!ft_strncmp(arg, "pwd", 4))
-		return (0);
-	if (!ft_strncmp(arg, "export", 7))
-		return (0);
-	if (!ft_strncmp(arg, "unset", 6))
-		return (0);
-	if (!ft_strncmp(arg, "env", 4))
-		return (0);
-	if (!ft_strncmp(arg, "exit", 5))
-		return (0);
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '/' && str[i] != '.')
+			return (0);
+		i++;
+	}
 	return (1);
 }
 
-static void	non_operator_case(char **line, int *parsing_case,
+static int	non_operator_case(char **line, int *parsing_case,
 		int *cmd_parsed, int *i)
 {
 	if (*parsing_case == 0 && *cmd_parsed == 0)
 	{
 		*cmd_parsed = 1;
-		*parsing_case = check_builtin(line[*i]);
+		*parsing_case = ft_isbuiltin(line[*i]);
 	}
 	while (line[*i] && !ft_isoperator(line[*i][0]))
+	{
+		if (check_dir(line[*i]))
+		{
+			ft_putstr("minishell: ", 2);
+			ft_putstr(line[*i], 2);
+			ft_putstr(": Is a directory\n", 2);
+			return (1);
+		}
 		*i += 1;
+	}
+	return (0);
 }
 
 static int	write_errstr(char *token)
@@ -90,7 +95,10 @@ int	syntax_parsing(char **line)
 			i ++;
 		}
 		else
-			non_operator_case(line, &parsing_case, &cmd_parsed, &i);
+		{
+			if (non_operator_case(line, &parsing_case, &cmd_parsed, &i))
+				return (-1);
+		}
 	}
 	return (parsing_case);
 }
