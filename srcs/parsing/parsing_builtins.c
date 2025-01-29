@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:54 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/29 14:23:40 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:57:30 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	parse_builtin(char **line, t_data *data)
 		ft_putstr("Error\nFailed to initiate struct\n", 2);
 		exit (EXIT_FAILURE);
 	}
+	unquote_args(&cmd, data);
 	exec_builtins(&cmd, data);
 }
