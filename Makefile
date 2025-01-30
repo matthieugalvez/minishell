@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/30 15:11:48 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/01/30 18:07:07 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ LIBS = -Llibft -lft -lreadline
 DIR_SRCS = srcs
 DIR_INCS = includes
 DIR_OBJS = .objs
+DIR_LIBFT = libft
 
 BUILTINS_SRCS	= builtins.c env_builtins.c env_builtins_utils.c
 EXEC_SRCS		= heredoc.c exec.c pathfinder.c exec_builtins.c
@@ -65,27 +66,27 @@ $(NAME):	$(OBJS)
 	@ $(CC) $(CFLAGS) $(OBJS) ${LIBS} -o $@
 	@ printf "$(ERASE)$(GREEN)$@ made\n$(END)"
 
-libft/libft.a :
-	@ make -C libft
+libft :
+	@ make -C $(DIR_LIBFT)
 
 clean:
 	@ printf "$(YELLOW)$(DIR_OBJS) removed$(END)\n"
 	@ rm -rdf $(DIR_OBJS)
 	@ printf "libft : "
-	@ make clean -C libft
+	@ make clean -C $(DIR_LIBFT)
 
 fclean:		clean
 	@ printf "$(YELLOW)$(NAME) removed$(END)\n"
 	@ rm -rf $(NAME) fsanitize g3
 	@ printf "libft : "
-	@ make fclean -C libft
+	@ make fclean -C $(DIR_LIBFT)
 
 re:	fclean all
 
-fsanitize : libft/libft.a
+fsanitize : libft
 	$(CC) -fsanitize=address -g $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
 
-g3 : libft/libft.a
+g3 : libft
 	$(CC) -g3 $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
 	
 .PHONY: all clean fclean re libft fsanitize g3

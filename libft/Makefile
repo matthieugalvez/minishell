@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:50:15 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/29 16:20:13 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/01/30 14:11:52 by mgalvez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS = ft_atoi.c \
 	  ft_calloc.c \
 	  ft_checkrepeatingnbrs.c \
 	  ft_checksortednmbrs.c \
+	  ft_cut_tabline.c \
 	  ft_freetab.c \
 	  ft_getbiggest.c \
 	  ft_getmult.c \

@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 12:13:40 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/30 16:07:49 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ static int	non_operator_case(char **line, int *parsing_case,
 	{
 		if (check_dir(line[*i]))
 		{
-			ft_putstr("minishell: ", 2);
-			ft_putstr(line[*i], 2);
-			ft_putstr(": Is a directory\n", 2);
+			ft_printf_fd(2, "minishell: %s: Is a directory\n", line[*i]);
 			return (1);
 		}
 		*i += 1;
@@ -50,18 +48,38 @@ static int	non_operator_case(char **line, int *parsing_case,
 	return (0);
 }
 
-static int	write_errstr(char *token)
+static int	check_multiple_operator(char *line)
 {
-	ft_putstr("minishell: syntax error near unexpected token `", 2);
-	ft_putstr(token, 2);
-	ft_putstr("'\n", 2);
-	return (1);
+	int		i;
+	char	operator;
+	char	token[2];
+
+	i = 0;
+	operator = line[i];
+	while (line[i])
+	{
+		if (line[i] != operator)
+		{
+			token[0] = line[i];
+			if (line[i + 1] == line[i])
+				token[1] = line[i + 1];
+			else
+				token[1] = 0;
+			ft_printf_fd(2,
+				"minishell: syntax error near unexpected token `%s'\n", token);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
 
 static int	parse_operator(char **line, int i)
 {
 	char	operator[2];
 
+	if (check_multiple_operator(line[i]))
+		return (1);
 	operator[0] = line[i][0];
 	if (ft_strlen(line[i]) > 2
 		|| (ft_strlen(line[i]) > 1 && line[i][1] != operator[0])
@@ -70,10 +88,16 @@ static int	parse_operator(char **line, int i)
 		|| (line[i + 1] && ft_isoperator(line[i + 1][0])))
 	{
 		operator[1] = line[i][1];
-		return (write_errstr(&operator[0]));
+		ft_printf_fd(2,
+			"minishell: syntax error near unexpected token `%s'\n", operator);
+		return (1);
 	}
 	else if (!line[i + 1] || ft_isoperator(line[i + 1][0]))
-		return (write_errstr("newline"));
+	{
+		ft_printf_fd(2,
+			"minishell: syntax error near unexpected token `newline'\n");
+		return (1);
+	}
 	return (0);
 }
 
