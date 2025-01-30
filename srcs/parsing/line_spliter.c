@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:18:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 14:10:36 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/30 16:00:55 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 static int	operator_lenght(char const *s)
 {
 	int		i;
-	char	operator;
 
 	i = 0;
-	operator = s[i];
-	while (s[i] && (s[i] == operator))
+	while (s[i] && (ft_isoperator(s[i])))
 		i++;
 	return (i);
 }
