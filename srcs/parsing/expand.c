@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:55:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/30 18:06:43 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:12:30 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,13 @@ void	ft_expand(char **input, t_data *data)
 		found_expand = ft_strchr(input[i], '$');
 		if (found_expand && *(found_expand + 1))
 			input[i] = parse_expand(input[i], data);
-//		if (!ft_strncmp(input[i], " ", ft_strlen(input[i])))
-//			ft_cut_tabline(input, i);
 		i ++;
+	}
+	i = 0;
+	while (input[i])
+	{
+		if (!ft_strncmp(input[i], " ", ft_strlen(input[i])))
+			ft_cut_tabline(input, i);
+		i++;
 	}
 }
