@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:27:06 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 15:42:20 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/30 11:54:43 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	get_newlen(char const *s)
 		if (s[i] == '\'' || s[i] == '\"')
 		{
 			quote_len++;
-			i += pass_quote(s);
+			i += pass_quote(&s[i]);
 			if (!s[i])
 				return (i - quote_len);
 			quote_len++;
