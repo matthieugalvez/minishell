@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:55:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/30 11:19:36 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/30 15:03:27 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,7 @@ static char	*parse_expand(char *input, t_data *data)
 			expand = ft_strjoin_free(expand, rpart);
 	}
 	else
-	{
 		expand = ft_strjoin(lpart, rpart);
-	}
 	free(rpart);
 	free(lpart);
 	free(input);
@@ -112,6 +110,8 @@ void	ft_expand(char **input, t_data *data)
 	{
 		if (ft_strchr(input[i], '$'))
 			input[i] = parse_expand(input[i], data);
+//		if (!ft_strncmp(input[i], " ", ft_strlen(input[i])))
+//			ft_cut_tabline(input, i);
 		i ++;
 	}
 }
