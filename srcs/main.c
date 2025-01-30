@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/30 11:32:31 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/30 12:01:30 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,21 @@ static void	parse_input(char **input, t_data *data)
 
 static int	ft_isvalidinput(char *input)
 {
-	if (input[0] == '\n')
+	int	i;
+
+	i = 0;
+	if (input[i] == '\n')
 	{
-		free (input);
+		free(input);
 		return (1);
 	}
-	while (*input)
+	while (input[i])
 	{
-		if (!ft_isspace(*input))
-		{
-			if (*input != '!' && *input != ':')
-				return (0);
-		}
-		input ++;
+		if (!ft_isspace(input[i]) && input[i] != '!' && input[i] != ':')
+			return (0);
+		i++;
 	}
-	free (input);
+	free(input);
 	return (1);
 }
 
