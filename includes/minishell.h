@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 19:14:29 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:33:06 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,15 @@ char	*get_prompt(void);
 
 // PARSING
 
-int		ft_isvalidinput(char *input);
 char	**ft_line_spliter(char const *s);
 int		syntax_parsing(char **line);
 int		ft_isbuiltin(char *arg);
-void	parse_builtin(char **line, t_data *data);
-void	parse_line(char **line, t_data *data);
+void	ft_expand(char **input, t_data *data);
+
+//TOKENIZATION
+
+void	tokenize_builtin(char **line, t_data *data);
+void	tokenize_other(char **line, t_data *data);
 int		find_lens(char **line, int *i, int *cmd_len, int *args_len);
 int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
 void	unquote_args(t_cmd *cmd, t_data *data);
@@ -65,7 +68,6 @@ void	ft_unquote(char **input);
 int		get_redirect_fd(t_cmd *cmd, char **line, int i);
 int		get_heredoc_fd(char *limiter, char *name);
 char	*init_cmd_path(t_cmd *cmd, t_data *data);
-void	ft_expand(char **input, t_data *data);
 
 //EXEC
 
@@ -90,5 +92,8 @@ int		get_env_index(char *env_var, t_data *data);
 char	**realloc_envp(char **old_envp, size_t new_size);
 int		add_env_var(t_data *data, t_cmd *cmd, char *var_name, int cmdi);
 int		remove_env_var(t_data *data, t_cmd *cmd, int cmdi);
+
+//	TEST - A SUPPRIMER !!
+void	print_linetab(char *str, char **input);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/29 16:24:22 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/01/30 11:45:36 by mgalvez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,16 +22,18 @@ DIR_OBJS = .objs
 
 BUILTINS_SRCS	= builtins.c env_builtins.c env_builtins_utils.c
 EXEC_SRCS		= heredoc.c exec.c pathfinder.c exec_builtins.c
-PARSING_SRCS	= line_spliter.c syntax_parsing.c unquote_strings.c \
-				  parsing_builtins.c parsing_other.c get_redirect_fd.c parsing_utils.c \
-				  expand.c
+PARSING_SRCS	= line_spliter.c syntax_parsing.c expand.c parsing_utils.c
+TOKENIZE_SRCS	= tokenize_builtin.c tokenize_other.c unquote_strings.c \
+				  get_redirect_fd.c tokenization_utils.c
 VISUAL_SRCS		= prompt.c
 
 LST_SRCS	= 	$(addprefix builtins/, ${BUILTINS_SRCS}) \
 				$(addprefix exec/, ${EXEC_SRCS}) \
 				$(addprefix parsing/, ${PARSING_SRCS}) \
+				$(addprefix tokenization/, ${TOKENIZE_SRCS}) \
 				$(addprefix visual/, ${VISUAL_SRCS}) \
-				main.c
+				main.c \
+				print_linetab.c ##A SUPPRIMER !!
 
 LST_OBJS = $(LST_SRCS:.c=.o)
 LST_INCS = minishell.h
@@ -52,6 +54,7 @@ $(DIR_OBJS)/%.o: ${DIR_SRCS}/%.c $(INCS) Makefile libft/libft.a
 	@ mkdir -p $(DIR_OBJS)/data
 	@ mkdir -p $(DIR_OBJS)/exec
 	@ mkdir -p $(DIR_OBJS)/parsing
+	@ mkdir -p $(DIR_OBJS)/tokenization
 	@ mkdir -p $(DIR_OBJS)/visual
 	@ $(CC) $(CFLAGS) -I $(DIR_INCS) -c $< -o $@
 	@ printf "$(ERASE)$(BLUE) > Compilation :$(END) $<"

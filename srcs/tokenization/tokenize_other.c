@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_other.c                                    :+:      :+:    :+:   */
+/*   tokenize_other.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 16:57:19 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/30 11:32:07 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	init_pipe(t_cmd *cmd, char *arg, int *i)
 		cmd->fd_out = 1;
 }
 
-void	parse_line(char **line, t_data *data)
+void	tokenize_other(char **line, t_data *data)
 {
 	t_cmd		cmd;
 	int			status;
@@ -53,9 +53,10 @@ void	parse_line(char **line, t_data *data)
 		exit (EXIT_FAILURE);
 	}
 	unquote_args(&cmd, data);
+	print_linetab("After unquote", cmd.args);
 	ft_exec(&cmd, data);
 	if (line[i])
-		parse_line(&line[i], data);
+		tokenize_other(&line[i], data);
 	else if (cmd.fd_in)
 		close (cmd.fd_in);
 	waitpid(cmd.pid, &status, 0);

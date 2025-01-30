@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_builtins.c                                 :+:      :+:    :+:   */
+/*   tokenize_builtin.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:54 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/29 16:57:30 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/30 11:47:13 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	parse_builtin(char **line, t_data *data)
+void	tokenize_builtin(char **line, t_data *data)
 {
 	t_cmd		cmd;
 	int			i;
@@ -32,5 +32,6 @@ void	parse_builtin(char **line, t_data *data)
 		exit (EXIT_FAILURE);
 	}
 	unquote_args(&cmd, data);
+	print_linetab("After unquote", cmd.args);
 	exec_builtins(&cmd, data);
 }

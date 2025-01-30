@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/29 19:15:02 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:32:31 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,33 @@ static void	parse_input(char **input, t_data *data)
 		clear_history();
 		exit (EXIT_FAILURE);
 	}
+	print_linetab("After expands", input);
 	if (parsing_case == -1 || !input[0])
 		ft_freetab(input);
 	else if (parsing_case == 0)
-		parse_builtin(input, data);
+		tokenize_builtin(input, data);
 	else if (parsing_case == 1)
-		parse_line(input, data);
+		tokenize_other(input, data);
+}
+
+static int	ft_isvalidinput(char *input)
+{
+	if (input[0] == '\n')
+	{
+		free (input);
+		return (1);
+	}
+	while (*input)
+	{
+		if (!ft_isspace(*input))
+		{
+			if (*input != '!' && *input != ':')
+				return (0);
+		}
+		input ++;
+	}
+	free (input);
+	return (1);
 }
 
 static void	tty_loop(t_data *data)
@@ -47,6 +68,7 @@ static void	tty_loop(t_data *data)
 			clear_history();
 			exit (EXIT_FAILURE);
 		}
+		print_linetab("After split", split_user_input);
 		parse_input(split_user_input, data);
 	}
 	tty_loop(data);
