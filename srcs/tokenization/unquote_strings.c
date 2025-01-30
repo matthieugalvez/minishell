@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:27:06 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/30 11:54:43 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/30 13:57:02 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int	write_until_quote(char *src, char *dst, size_t *j)
 		i++;
 		*j += 1;
 	}
+	if (src[i])
+		i++;
 	return (i);
 }
 
@@ -82,8 +84,7 @@ static int	get_newlen(char const *s)
 				return (i - quote_len);
 			quote_len++;
 		}
-		else
-			i++;
+		i++;
 	}
 	return (i - quote_len);
 }
