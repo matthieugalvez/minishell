@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/30 11:33:06 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/30 16:48:54 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	**ft_line_spliter(char const *s);
 int		syntax_parsing(char **line);
 int		ft_isbuiltin(char *arg);
 void	ft_expand(char **input, t_data *data);
+int		parse_expand_quotes(char **input);
 
 //TOKENIZATION
 
@@ -92,6 +93,7 @@ int		get_env_index(char *env_var, t_data *data);
 char	**realloc_envp(char **old_envp, size_t new_size);
 int		add_env_var(t_data *data, t_cmd *cmd, char *var_name, int cmdi);
 int		remove_env_var(t_data *data, t_cmd *cmd, int cmdi);
+char	*get_env_value(char *env_value, t_data *data);
 
 //	TEST - A SUPPRIMER !!
 void	print_linetab(char *str, char **input);

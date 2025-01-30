@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/30 11:45:36 by mgalvez          ###   ########.fr        #
+#    Updated: 2025/01/30 15:11:48 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ DIR_OBJS = .objs
 
 BUILTINS_SRCS	= builtins.c env_builtins.c env_builtins_utils.c
 EXEC_SRCS		= heredoc.c exec.c pathfinder.c exec_builtins.c
-PARSING_SRCS	= line_spliter.c syntax_parsing.c expand.c parsing_utils.c
+PARSING_SRCS	= line_spliter.c syntax_parsing.c expand.c expand_utils.c parsing_utils.c
 TOKENIZE_SRCS	= tokenize_builtin.c tokenize_other.c unquote_strings.c \
 				  get_redirect_fd.c tokenization_utils.c
 VISUAL_SRCS		= prompt.c
