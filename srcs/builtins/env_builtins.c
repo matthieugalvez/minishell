@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:12:39 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/31 14:50:46 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:19:25 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	is_valid_env_var(char *arg)
 	if (*arg && (!ft_isalpha(*arg) && *arg != '_'))
 	{
 		ft_printf_fd(2,
-			"minishell: export: '%s': not a valid identifier\n", arg);
+			"minishell: export: `%s': not a valid identifier\n", arg);
 		return (1);
 	}
 	while (arg[i])
@@ -30,7 +30,7 @@ static int	is_valid_env_var(char *arg)
 			if (arg[i] == '=')
 				break ;
 			ft_printf_fd(2,
-				"minishell: export: '%s': not a valid identifier\n", arg);
+				"minishell: export: `%s': not a valid identifier\n", arg);
 			return (1);
 		}
 		i ++;
