@@ -6,12 +6,11 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:58:26 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/31 12:38:09 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/31 12:39:22 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <readline/readline.h>
 
 static void	sig_handler(int signal)
 {
