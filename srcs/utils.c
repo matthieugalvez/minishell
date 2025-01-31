@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:29:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/31 11:42:34 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/31 14:38:19 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ int	exec_builtins(t_cmd *cmd, t_data *data)
 	if (!ft_strncmp(cmd->args[0], "echo", 5))
 		return (ft_echo(cmd));
 	if (!ft_strncmp(cmd->args[0], "exit", 5))
-		return (ft_exit(0, cmd, data));
+		return (ft_exit(cmd, data));
 	return (2);
 }
 
-void	ft_kill(int exit_code, t_cmd *cmd, t_data *data)
+void	ft_kill(t_cmd *cmd, t_data *data)
 {
 	if (cmd)
 		ft_freetab(cmd->args);
 	if (data)
 		ft_freetab(data->envp);
-	exit(exit_code);
+	exit(data->exit_code);
 }

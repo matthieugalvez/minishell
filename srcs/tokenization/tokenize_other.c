@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/31 11:45:45 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/31 15:26:26 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,15 @@ void	tokenize_other(char **line, t_data *data)
 	i = 0;
 	cmd_len = 0;
 	args_len = 0;
+	ft_bzero(&cmd, sizeof(cmd));
 	while (line[i] && ft_strncmp(line[i], "|", 1))
 		find_lens(line, &i, &cmd_len, &args_len);
 	init_pipe(&cmd, line[i], &i);
 	if (parse_cmd(&cmd, line, cmd_len, args_len))
 	{
 		ft_putstr("Error\nFailed to initiate struct\n", 2);
-		exit (EXIT_FAILURE);
+		data->exit_code = 1;
+		ft_exit(NULL, data);
 	}
 	unquote_args(&cmd, data);
 	print_linetab("After unquote", cmd.args);
@@ -60,4 +62,5 @@ void	tokenize_other(char **line, t_data *data)
 	else if (cmd.fd_in)
 		close (cmd.fd_in);
 	waitpid(cmd.pid, &status, 0);
+	data->exit_code = WEXITSTATUS(status);
 }

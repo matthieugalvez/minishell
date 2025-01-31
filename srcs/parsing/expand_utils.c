@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:55:46 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/30 18:04:25 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:04:03 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,26 @@
 char	*get_env_value(char *env_value, t_data *data)
 {
 	int		i;
-	char	*to_find;
 	int		len;
 
 	i = 0;
-	to_find = ft_strjoin_free(env_value, "=");
-	len = ft_strlen(to_find + 1);
+	if (env_value[1] == '?')
+	{
+		free(env_value);
+		return (ft_itoa(data->exit_code));
+	}
+	env_value = ft_strjoin_free(env_value, "=");
+	len = ft_strlen(&env_value[1]);
 	while (data->envp[i])
 	{
-		if (!ft_strncmp(to_find + 1, data->envp[i], ft_strlen(to_find + 1)))
+		if (!ft_strncmp(&env_value[1], data->envp[i], ft_strlen(&env_value[1])))
 		{
-			free(to_find);
-			return (ft_substr(data->envp[i],
-					len,
-					ft_strlen(data->envp[i])
-					- ft_strlen(to_find + 1)));
+			free(env_value);
+			return (ft_substr(data->envp[i], len,
+					ft_strlen(data->envp[i]) - len));
 		}
 		i++;
 	}
-	free(to_find);
+	free(env_value);
 	return (NULL);
 }

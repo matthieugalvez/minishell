@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/31 11:59:57 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/31 14:37:46 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,28 +58,31 @@ static void	tty_loop(t_data *data)
 	char	**split_user_input;
 
 	user_input = readline(get_prompt());
-	if (!user_input)
-		ft_kill(0, NULL, data);
-	if (user_input && ft_isvalidinput(user_input) == 0)
+	while (user_input)
 	{
-		add_history(user_input);
-		split_user_input = ft_line_spliter(user_input);
-		free(user_input);
-		if (!split_user_input)
+		if (ft_isvalidinput(user_input) == 0)
 		{
-			clear_history();
-			exit (EXIT_FAILURE);
+			add_history(user_input);
+			split_user_input = ft_line_spliter(user_input);
+			free(user_input);
+			if (!split_user_input)
+			{
+				clear_history();
+				exit (EXIT_FAILURE);
+			}
+			print_linetab("After split", split_user_input);
+			parse_input(split_user_input, data);
 		}
-		print_linetab("After split", split_user_input);
-		parse_input(split_user_input, data);
+		user_input = readline(get_prompt());
 	}
-	tty_loop(data);
+	ft_exit(NULL, data);
 }
 
 static void	init_data(t_data *data, char **envp)
 {
 	int	len;
 
+	data->exit_code = 0;
 	len = 0;
 	while (envp[len])
 		len ++;

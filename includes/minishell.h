@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/31 11:59:30 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/31 14:34:00 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_data
 {
 	char		**envp;
 	int			envp_len;
-	sigset_t	*sigset;
 	int			exit_code;
 }	t_data;
 
@@ -48,7 +47,7 @@ typedef struct s_cmd
 
 // GENERAL
 
-void	ft_kill(int exit_code, t_cmd *cmd, t_data *data);
+void	ft_kill(t_cmd *cmd, t_data *data);
 int		exec_builtins(t_cmd *cmd, t_data *data);
 
 //	VISUAL
@@ -92,7 +91,7 @@ int		ft_pwd(t_cmd *cmd);
 int		ft_env(t_cmd *cmd, t_data *data, char *prefix);
 int		ft_export(t_data *data, t_cmd *cmd);
 int		ft_unset(t_data *data, t_cmd *cmd);
-int		ft_exit(int exit_code, t_cmd *cmd, t_data *data);
+int		ft_exit(t_cmd *cmd, t_data *data);
 
 //	ENV
 char	*parse_var_name(char *arg);

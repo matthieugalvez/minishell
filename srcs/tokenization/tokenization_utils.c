@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:44:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/31 11:42:37 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/31 15:30:46 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	unquote_args(t_cmd *cmd, t_data *data)
 
 	ft_unquote(cmd->args);
 	if (!cmd->args)
-		ft_exit(1, cmd, data);
+	{
+		data->exit_code = 1;
+		ft_exit(cmd, data);
+	}
 	i = 0;
 	while (cmd->args[i])
 	{
@@ -27,7 +30,10 @@ void	unquote_args(t_cmd *cmd, t_data *data)
 			free(cmd->args[i]);
 			cmd->args[i] = ft_calloc(sizeof(char), 2);
 			if (!cmd->args[i])
-				ft_exit(1, cmd, data);
+			{
+				data->exit_code = 1;
+				ft_exit(cmd, data);
+			}
 			cmd->args[i] = " ";
 		}
 		i++;
@@ -39,7 +45,7 @@ int	parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len)
 	int		i;
 	int		j;
 
-	cmd->args = ft_calloc(args_len, sizeof(char *) + 1);
+	cmd->args = ft_calloc(sizeof(char *), args_len + 1);
 	if (!cmd->args)
 		return (1);
 	i = 0;

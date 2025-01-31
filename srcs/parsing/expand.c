@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:55:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/30 18:12:30 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:04:57 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static char	*get_expand_mpart(char *input, char *lpart)
 	out = NULL;
 	while (input[i])
 	{
+		if (input[i] == '?' && i > 0 && input[i - 1] == '$')
+			len++;
 		if (!ft_isalnum(input[i]) && input[i] != '_')
 			break ;
 		i++;

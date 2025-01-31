@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:12:39 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/29 15:13:10 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:50:46 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ int	ft_export(t_data *data, t_cmd *cmd)
 			if (var_name)
 			{
 				if (add_env_var(data, cmd, var_name, cmdi) == -1)
-					ft_kill(EXIT_FAILURE, cmd, data);
+				{
+					data->exit_code = 1;
+					ft_kill(cmd, data);
+				}
 			}
 		}
 	}
@@ -82,8 +85,13 @@ int	ft_unset(t_data *data, t_cmd *cmd)
 	while (++cmdi < cmd->argc)
 	{
 		if (!is_valid_env_arg(cmd->args[cmdi], "unset"))
+		{
 			if (remove_env_var(data, cmd, cmdi) == -1)
-				ft_kill(EXIT_FAILURE, cmd, data);
+			{
+				data->exit_code = 1;
+				ft_kill(cmd, data);
+			}
+		}
 	}
 	return (0);
 }

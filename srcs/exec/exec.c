@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/31 11:35:27 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/31 14:37:23 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,18 @@ static void	ft_childprocess(t_cmd *cmd, t_data *data)
 	if (cmd->to_close_fd)
 		close(cmd->to_close_fd);
 	if (exec_builtins(cmd, data) == 0)
-		ft_kill(EXIT_SUCCESS, cmd, data);
+		ft_kill(cmd, data);
 	redirect_std(cmd);
 	cmd_path = init_cmd_path(cmd, data);
 	if (!cmd_path)
-		ft_kill(127, cmd, data);
+	{
+		data->exit_code = 127;
+		ft_kill(cmd, data);
+	}
 	execve(cmd_path, cmd->args, data->envp);
 	perror("minishell: execve");
-	ft_kill(EXIT_FAILURE, cmd, data);
+	data->exit_code = 1;
+	ft_kill(cmd, data);
 }
 
 void	ft_exec(t_cmd *cmd, t_data *data)
