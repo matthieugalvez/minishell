@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/29 14:24:25 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/31 11:35:27 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,6 @@ static void	ft_childprocess(t_cmd *cmd, t_data *data)
 	execve(cmd_path, cmd->args, data->envp);
 	perror("minishell: execve");
 	ft_kill(EXIT_FAILURE, cmd, data);
-}
-
-void	ft_kill(int exit_code, t_cmd *cmd, t_data *data)
-{
-	ft_freetab(cmd->args);
-	ft_freetab(data->envp);
-	exit(exit_code);
 }
 
 void	ft_exec(t_cmd *cmd, t_data *data)

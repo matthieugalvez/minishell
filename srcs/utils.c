@@ -1,21 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_builtins.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 12:36:13 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/29 15:47:23 by mmanuell         ###   ########.fr       */
+/*   Created: 2025/01/31 11:29:07 by mgalvez           #+#    #+#             */
+/*   Updated: 2025/01/31 11:42:34 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
-// return (-1)	: malloc error
-// return (1)	: arg error
-// return (0)	: tout va bien
-// return (2)	: pas une builtin
 int	exec_builtins(t_cmd *cmd, t_data *data)
 {
 	if (!ft_strncmp(cmd->args[0], "cd", 3))
@@ -33,4 +29,13 @@ int	exec_builtins(t_cmd *cmd, t_data *data)
 	if (!ft_strncmp(cmd->args[0], "exit", 5))
 		return (ft_exit(0, cmd, data));
 	return (2);
+}
+
+void	ft_kill(int exit_code, t_cmd *cmd, t_data *data)
+{
+	if (cmd)
+		ft_freetab(cmd->args);
+	if (data)
+		ft_freetab(data->envp);
+	exit(exit_code);
 }

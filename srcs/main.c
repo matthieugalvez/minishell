@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/30 12:01:30 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/31 11:38:29 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ static void	tty_loop(t_data *data)
 	char	**split_user_input;
 
 	user_input = readline(get_prompt());
-	if (*user_input && ft_isvalidinput(user_input) == 0)
+	if (!user_input)
+		ft_kill(0, NULL, data);
+	if (user_input && ft_isvalidinput(user_input) == 0)
 	{
 		add_history(user_input);
 		split_user_input = ft_line_spliter(user_input);
@@ -104,6 +106,8 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	init_data(&data, envp);
 	get_title();
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	tty_loop(&data);
 	return (0);
 }

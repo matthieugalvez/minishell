@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/30 16:48:54 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/01/31 11:42:17 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@
 
 typedef struct s_data
 {
-	char	**envp;
-	int		envp_len;
-	int		exit_code;
+	char		**envp;
+	int			envp_len;
+	sigset_t	*sigset;
+	int			exit_code;
 }	t_data;
 
 typedef struct s_cmd
@@ -44,6 +45,11 @@ typedef struct s_cmd
 	int		pid;
 	int		argc;
 }	t_cmd;
+
+// GENERAL
+
+void	ft_kill(int exit_code, t_cmd *cmd, t_data *data);
+int		exec_builtins(t_cmd *cmd, t_data *data);
 
 //	VISUAL
 
@@ -67,17 +73,15 @@ int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
 void	unquote_args(t_cmd *cmd, t_data *data);
 void	ft_unquote(char **input);
 int		get_redirect_fd(t_cmd *cmd, char **line, int i);
-int		get_heredoc_fd(char *limiter, char *name);
-char	*init_cmd_path(t_cmd *cmd, t_data *data);
 
 //EXEC
 
 void	ft_exec(t_cmd *cmd, t_data *data);
-void	ft_kill(int exit_code, t_cmd *cmd, t_data *data);
+int		get_heredoc_fd(char *limiter, char *name);
+char	*init_cmd_path(t_cmd *cmd, t_data *data);
 
 //	BUILTINS
 
-int		exec_builtins(t_cmd *cmd, t_data *data);
 int		ft_echo(t_cmd *cmd);
 int		ft_cd(t_cmd *cmd);
 int		ft_pwd(t_cmd *cmd);
