@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/01/31 11:33:36 by mgalvez          ###   ########.fr        #
+#    Updated: 2025/01/31 12:10:57 by mgalvez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ DIR_LIBFT = libft
 BUILTINS_SRCS	= builtins.c env_builtins.c env_builtins_utils.c
 EXEC_SRCS		= exec.c heredoc.c pathfinder.c
 PARSING_SRCS	= line_spliter.c syntax_parsing.c expand.c expand_utils.c parsing_utils.c
+SIGNAL_SRCS		= signal_handler.c
 TOKENIZE_SRCS	= tokenize_builtin.c tokenize_other.c unquote_strings.c \
 				  get_redirect_fd.c tokenization_utils.c
 VISUAL_SRCS		= prompt.c
@@ -31,6 +32,7 @@ VISUAL_SRCS		= prompt.c
 LST_SRCS	= 	$(addprefix builtins/, ${BUILTINS_SRCS}) \
 				$(addprefix exec/, ${EXEC_SRCS}) \
 				$(addprefix parsing/, ${PARSING_SRCS}) \
+				$(addprefix signal/, ${SIGNAL_SRCS}) \
 				$(addprefix tokenization/, ${TOKENIZE_SRCS}) \
 				$(addprefix visual/, ${VISUAL_SRCS}) \
 				main.c \
@@ -56,6 +58,7 @@ $(DIR_OBJS)/%.o: ${DIR_SRCS}/%.c $(INCS) Makefile libft/libft.a
 	@ mkdir -p $(DIR_OBJS)/data
 	@ mkdir -p $(DIR_OBJS)/exec
 	@ mkdir -p $(DIR_OBJS)/parsing
+	@ mkdir -p $(DIR_OBJS)/signal
 	@ mkdir -p $(DIR_OBJS)/tokenization
 	@ mkdir -p $(DIR_OBJS)/visual
 	@ $(CC) $(CFLAGS) -I $(DIR_INCS) -c $< -o $@

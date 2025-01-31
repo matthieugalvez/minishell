@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/31 11:42:17 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/01/31 11:59:30 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ int		exec_builtins(t_cmd *cmd, t_data *data);
 
 void	get_title(void);
 char	*get_prompt(void);
+
+//SIGNAL
+
+void	signal_handler_init(void);
 
 // PARSING
 
