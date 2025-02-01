@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/31 14:34:20 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/01 16:52:29 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ int	ft_pwd(t_cmd *cmd)
 		perror("pwd");
 		return (1);
 	}
-	ft_putstr(buf, cmd->fd_out);
-	ft_putstr("\n", cmd->fd_out);
+	ft_printf_fd(cmd->fd_out, "%s\n", &buf[0]);
 	return (0);
 }
 

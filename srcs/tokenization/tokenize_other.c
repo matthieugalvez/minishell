@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/31 15:26:26 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/01 16:21:52 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ static void	init_pipe(t_cmd *cmd, char *arg, int *i)
 		cmd->fd_out = 1;
 }
 
-void	tokenize_other(char **line, t_data *data)
+void	tokenize_other(char **line, t_data *data, int cmd_index)
 {
 	t_cmd		cmd;
-	int			status;
 	int			i;
 	int			cmd_len;
 	int			args_len;
@@ -57,10 +56,9 @@ void	tokenize_other(char **line, t_data *data)
 	unquote_args(&cmd, data);
 	print_linetab("After unquote", cmd.args);
 	ft_exec(&cmd, data);
+	data->pid_tab[cmd_index] = cmd.pid;
 	if (line[i])
-		tokenize_other(&line[i], data);
+		tokenize_other(&line[i], data, cmd_index + 1);
 	else if (cmd.fd_in)
 		close (cmd.fd_in);
-	waitpid(cmd.pid, &status, 0);
-	data->exit_code = WEXITSTATUS(status);
 }

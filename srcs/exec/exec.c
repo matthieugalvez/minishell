@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/31 14:37:23 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/01 16:54:40 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,18 @@ static void	ft_childprocess(t_cmd *cmd, t_data *data)
 {
 	char	*cmd_path;
 
+	signal_handler_child();
 	if (cmd->to_close_fd)
 		close(cmd->to_close_fd);
-	if (exec_builtins(cmd, data) == 0)
+	data->exit_code = exec_builtins(cmd, data);
+	if (data->exit_code != 2)
+	{
+		close(cmd->fd_in);
+		close(cmd->fd_out);
 		ft_kill(cmd, data);
+	}
+	else
+		data->exit_code = 0;
 	redirect_std(cmd);
 	cmd_path = init_cmd_path(cmd, data);
 	if (!cmd_path)

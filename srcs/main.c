@@ -6,30 +6,35 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/31 14:37:46 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/01 16:27:19 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	parse_input(char **input, t_data *data)
+static void	get_splited_line(char *user_input, t_data *data)
 {
-	int		parsing_case;
+	char	**split_user_input;
 
-	parsing_case = syntax_parsing(input);
-	ft_expand(input, data);
-	if (!input)
+	add_history(user_input);
+	split_user_input = ft_line_spliter(user_input);
+	free(user_input);
+	if (!split_user_input)
 	{
+		data->exit_code = 1;
 		clear_history();
-		exit (EXIT_FAILURE);
+		ft_kill(NULL, data);
 	}
-	print_linetab("After expands", input);
-	if (parsing_case == -1 || !input[0])
-		ft_freetab(input);
-	else if (parsing_case == 0)
-		tokenize_builtin(input, data);
-	else if (parsing_case == 1)
-		tokenize_other(input, data);
+	print_linetab("After split", split_user_input);
+	ft_expand(split_user_input, data);
+	if (!split_user_input)
+	{
+		data->exit_code = 1;
+		clear_history();
+		ft_kill(NULL, data);
+	}
+	print_linetab("After expands", split_user_input);
+	init_tokenization(split_user_input, data);
 }
 
 static int	ft_isvalidinput(char *input)
@@ -55,24 +60,12 @@ static int	ft_isvalidinput(char *input)
 static void	tty_loop(t_data *data)
 {
 	char	*user_input;
-	char	**split_user_input;
 
 	user_input = readline(get_prompt());
 	while (user_input)
 	{
 		if (ft_isvalidinput(user_input) == 0)
-		{
-			add_history(user_input);
-			split_user_input = ft_line_spliter(user_input);
-			free(user_input);
-			if (!split_user_input)
-			{
-				clear_history();
-				exit (EXIT_FAILURE);
-			}
-			print_linetab("After split", split_user_input);
-			parse_input(split_user_input, data);
-		}
+			get_splited_line(user_input, data);
 		user_input = readline(get_prompt());
 	}
 	ft_exit(NULL, data);

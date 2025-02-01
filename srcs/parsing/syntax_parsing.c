@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/30 16:07:49 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/01 16:08:55 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	syntax_parsing(char **line)
 	while (line[i])
 	{
 		if (line[i][0] == '|')
-			parsing_case = 1;
+			parsing_case++;
 		if (ft_isoperator(line[i][0]))
 		{
 			if (parse_operator(line, i))

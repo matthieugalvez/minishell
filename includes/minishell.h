@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/31 14:34:00 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/01 16:24:56 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,18 @@ typedef struct s_data
 	char		**envp;
 	int			envp_len;
 	int			exit_code;
+	int			*pid_tab;
+	int			pid_tab_len;
 }	t_data;
 
 typedef struct s_cmd
 {
-	char	**args;
-	int		fd_in;
-	int		fd_out;
-	int		to_close_fd;
-	int		pid;
-	int		argc;
+	char			**args;
+	int				fd_in;
+	int				fd_out;
+	int				to_close_fd;
+	int				pid;
+	int				argc;
 }	t_cmd;
 
 // GENERAL
@@ -58,10 +60,12 @@ char	*get_prompt(void);
 //SIGNAL
 
 void	signal_handler_init(void);
+void	signal_handler_child(void);
 
 // PARSING
 
 char	**ft_line_spliter(char const *s);
+void	init_tokenization(char **input, t_data *data);
 int		syntax_parsing(char **line);
 int		ft_isbuiltin(char *arg);
 void	ft_expand(char **input, t_data *data);
@@ -70,7 +74,7 @@ int		parse_expand_quotes(char **input);
 //TOKENIZATION
 
 void	tokenize_builtin(char **line, t_data *data);
-void	tokenize_other(char **line, t_data *data);
+void	tokenize_other(char **line, t_data *data, int cmd_index);
 int		find_lens(char **line, int *i, int *cmd_len, int *args_len);
 int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
 void	unquote_args(t_cmd *cmd, t_data *data);
