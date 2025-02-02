@@ -6,35 +6,11 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:55:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/31 16:04:57 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/02 17:49:08 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static char	*get_expand_lpart(char *input)
-{
-	int		expand_index;
-	int		double_quote;
-
-	double_quote = -1;
-	expand_index = 0;
-	while (input[expand_index])
-	{
-		if (input[expand_index] == '\"')
-			double_quote *= -1;
-		if (input[expand_index] == '\'' && double_quote == -1)
-		{
-			expand_index++;
-			while (input[expand_index] && input[expand_index] != '\'')
-				expand_index++;
-		}
-		if (input[expand_index] == '$')
-			return (ft_substr(input, 0, expand_index));
-		expand_index++;
-	}
-	return (NULL);
-}
 
 static char	*get_expand_rpart(char *input, char *lpart, char *mpart)
 {
@@ -72,20 +48,41 @@ static char	*get_expand_mpart(char *input, char *lpart)
 		i++;
 		len++;
 	}
-	if (len)
-		out = ft_substr(input, start, len);
+	out = ft_substr(input, start, len);
 	if (!out)
 		return (NULL);
 	return (out);
 }
 
-static char	*parse_expand(char *input, t_data *data)
+static char	*get_expand_lpart(char *input, int expand_index)
+{
+	int		double_quote;
+
+	double_quote = -1;
+	while (input[expand_index])
+	{
+		if (input[expand_index] == '\"')
+			double_quote *= -1;
+		if (input[expand_index] == '\'' && double_quote == -1)
+		{
+			expand_index++;
+			while (input[expand_index] && input[expand_index] != '\'')
+				expand_index++;
+		}
+		if (input[expand_index] == '$')
+			return (ft_substr(input, 0, expand_index));
+		expand_index++;
+	}
+	return (NULL);
+}
+
+static char	*parse_expand(char *input, t_data *data, int expand_index)
 {
 	char	*expand;
 	char	*lpart;
 	char	*rpart;
 
-	lpart = get_expand_lpart(input);
+	lpart = get_expand_lpart(input, expand_index);
 	if (!lpart)
 		return (input);
 	expand = get_expand_mpart(input, lpart);
@@ -95,6 +92,7 @@ static char	*parse_expand(char *input, t_data *data)
 	{
 		if (lpart)
 			expand = ft_strjoin_free2(lpart, expand);
+		expand_index = ft_strlen(expand) + 1;
 		if (rpart)
 			expand = ft_strjoin_free(expand, rpart);
 	}
@@ -103,8 +101,8 @@ static char	*parse_expand(char *input, t_data *data)
 	free(rpart);
 	free(lpart);
 	free(input);
-	if (expand && ft_strchr(expand, '$'))
-		return (parse_expand(expand, data));
+	if (expand && expand[expand_index] && ft_strchr(&expand[expand_index], '$'))
+		return (parse_expand(expand, data, 1));
 	return (expand);
 }
 
@@ -118,8 +116,8 @@ void	ft_expand(char **input, t_data *data)
 	while (input[i])
 	{
 		found_expand = ft_strchr(input[i], '$');
-		if (found_expand && *(found_expand + 1))
-			input[i] = parse_expand(input[i], data);
+		if (found_expand)
+			input[i] = parse_expand(input[i], data, 0);
 		i ++;
 	}
 	i = 0;

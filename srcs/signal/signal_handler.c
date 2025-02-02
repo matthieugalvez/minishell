@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:58:26 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/02 15:28:46 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/02 17:55:52 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ static void	child_sig_handler(int signal)
 void	signal_handler_child(void)
 {
 	struct sigaction	sigquit_sigaction;
+	struct sigaction	sigint_sigaction;
 
 	ft_bzero(&sigquit_sigaction, sizeof(sigquit_sigaction));
+	ft_bzero(&sigint_sigaction, sizeof(sigint_sigaction));
 	sigquit_sigaction.sa_handler = &child_sig_handler;
+	sigint_sigaction.sa_handler = SIG_DFL;
 	sigaction(SIGQUIT, &sigquit_sigaction, NULL);
+	sigaction(SIGINT, &sigint_sigaction, NULL);
 }
 
 static void	sig_handler(int signal)
