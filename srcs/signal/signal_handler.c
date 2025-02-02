@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:58:26 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/01 14:20:27 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/02 15:28:46 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void	signal_handler_child(void)
 static void	sig_handler(int signal)
 {
 	(void)signal;
-	rl_replace_line("\n", 0);
+	ft_printf("\n");
 	rl_on_new_line();
+	rl_replace_line("", 0);
 	rl_redisplay();
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/01 16:27:19 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/02 16:22:01 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	get_splited_line(char *user_input, t_data *data)
 	if (!split_user_input)
 	{
 		data->exit_code = 1;
-		clear_history();
 		ft_kill(NULL, data);
 	}
 	print_linetab("After split", split_user_input);
@@ -30,7 +29,6 @@ static void	get_splited_line(char *user_input, t_data *data)
 	if (!split_user_input)
 	{
 		data->exit_code = 1;
-		clear_history();
 		ft_kill(NULL, data);
 	}
 	print_linetab("After expands", split_user_input);
@@ -60,15 +58,25 @@ static int	ft_isvalidinput(char *input)
 static void	tty_loop(t_data *data)
 {
 	char	*user_input;
+	char	*prompt;
 
-	user_input = readline(get_prompt());
-	while (user_input)
+	prompt = get_prompt();
+	if (!prompt)
+	{
+		ft_putstr("Error\nFailed to init prompt\n", 2);
+		data->exit_code = 1;
+		ft_kill(NULL, data);
+	}
+	user_input = readline(prompt);
+	free(prompt);
+	if (!user_input)
+		ft_exit(NULL, data);
+	else
 	{
 		if (ft_isvalidinput(user_input) == 0)
 			get_splited_line(user_input, data);
-		user_input = readline(get_prompt());
+		tty_loop(data);
 	}
-	ft_exit(NULL, data);
 }
 
 static void	init_data(t_data *data, char **envp)
@@ -89,6 +97,7 @@ static void	init_data(t_data *data, char **envp)
 	if (ft_tabcpy(data->envp, envp))
 	{
 		ft_putstr("Error\nFailed to init data struct\n", 2);
+		free(data->envp);
 		exit(EXIT_FAILURE);
 	}
 }

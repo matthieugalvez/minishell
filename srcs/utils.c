@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:29:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/01 16:34:03 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/02 14:49:33 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void	ft_kill(t_cmd *cmd, t_data *data)
 		ft_freetab(cmd->args);
 	if (data)
 		ft_freetab(data->envp);
+	clear_history();
 	exit(data->exit_code);
 }

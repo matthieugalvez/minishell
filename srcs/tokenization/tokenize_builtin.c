@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:54 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/02 13:35:12 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/02 16:21:30 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ void	tokenize_builtin(char **line, t_data *data)
 		close (cmd.fd_in);
 	if (cmd.fd_out > 1)
 		close (cmd.fd_out);
+	ft_freetab(cmd.args);
 }

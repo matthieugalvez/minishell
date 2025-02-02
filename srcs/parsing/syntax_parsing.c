@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/01 16:08:55 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/02 16:37:37 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	non_operator_case(char **line, int *parsing_case,
 	}
 	while (line[*i] && !ft_isoperator(line[*i][0]))
 	{
-		if (check_dir(line[*i]))
+		if (check_dir(line[*i]) && cmd_parsed == 0)
 		{
 			ft_printf_fd(2, "minishell: %s: Is a directory\n", line[*i]);
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 16:28:38 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/02 13:36:52 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/02 16:34:15 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,22 @@ void	init_tokenization(char **input, t_data *data)
 	parsing_case = syntax_parsing(input);
 	if (parsing_case > 0)
 	{
-		data->pid_tab = ft_calloc(sizeof(int), parsing_case);
+		data->pid_tab_len = parsing_case + 1;
+		data->pid_tab = ft_calloc(sizeof(int), data->pid_tab_len);
 		if (!data->pid_tab)
 		{
 			ft_putstr("Error\nFailed to init pid_tab\n", 2);
 			ft_kill(NULL, data);
 		}
-		data->pid_tab_len = parsing_case;
 		parsing_case = 1;
 	}
 	printf("%d\n", parsing_case);
-	if (parsing_case == -1 || !input[0])
-		ft_freetab(input);
-	else if (parsing_case == 0)
+	if (parsing_case == 0)
 		tokenize_builtin(input, data);
 	else if (parsing_case == 1)
 	{
 		tokenize_other(input, data, 0);
 		waitchildren(data);
 	}
+	ft_freetab(input);
 }

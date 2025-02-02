@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/01 16:54:40 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/02 16:28:05 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_exec(t_cmd *cmd, t_data *data)
 		ft_childprocess(cmd, data);
 	else
 	{
-		free(cmd->args);
+		ft_freetab(cmd->args);
 		if (cmd->fd_out != 1)
 			close(cmd->fd_out);
 	}
