@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 16:28:38 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/01 17:01:06 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/02 13:36:52 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	init_tokenization(char **input, t_data *data)
 		data->pid_tab_len = parsing_case;
 		parsing_case = 1;
 	}
+	printf("%d\n", parsing_case);
 	if (parsing_case == -1 || !input[0])
 		ft_freetab(input);
 	else if (parsing_case == 0)

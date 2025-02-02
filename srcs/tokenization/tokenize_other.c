@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/01 16:21:52 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/02 13:34:55 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	tokenize_other(char **line, t_data *data, int cmd_index)
 		ft_exit(NULL, data);
 	}
 	unquote_args(&cmd, data);
-	print_linetab("After unquote", cmd.args);
 	ft_exec(&cmd, data);
 	data->pid_tab[cmd_index] = cmd.pid;
 	if (line[i])

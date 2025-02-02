@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:44:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/31 15:30:46 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/02 13:34:43 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	unquote_args(t_cmd *cmd, t_data *data)
 		}
 		i++;
 	}
+	print_linetab("After unquote", cmd->args);
 }
 
 int	parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len)
