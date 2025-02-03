@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/02/03 16:24:38 by mgalvez          ###   ########.fr        #
+#    Updated: 2025/02/03 16:38:25 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ REDIRECT_SRCS	= get_redirect_fd.c heredoc.c
 SIGNAL_SRCS		= signal_handler.c
 TOKENIZE_SRCS	= tokenize_builtin.c tokenize_other.c tokenization_utils.c
 UNQUOTE_SRCS	= unquote_strings.c
-VISUAL_SRCS		= prompt.c
+VISUAL_SRCS		= prompt.c title.c
 
 LST_SRCS	= 	$(addprefix builtins/, ${BUILTINS_SRCS}) \
 				$(addprefix exec/, ${EXEC_SRCS}) \
@@ -100,4 +100,4 @@ fsanitize : libft
 g3 : libft
 	$(CC) -g3 $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
 	
-.PHONY: all clean fclean re libft fsanitize g3
+.PHONY: all clean fclean re libft fsanitize g3>>>>>>> 5b66f02688a49109fde9c7ae9d6e549fe2722472
