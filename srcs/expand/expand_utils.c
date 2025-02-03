@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:55:46 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 14:59:20 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:29:43 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_orphan_dollar(char *env_value)
 	i = 0;
 	while (env_value[i])
 	{
-		if (env_value[i] != '$' && env_value[i] != '\'' && env_value[i] != '\"')
+		if (env_value[i] != '$')
 			return (0);
 		i++;
 	}
