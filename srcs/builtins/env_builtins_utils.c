@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:25 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/01/29 16:53:34 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 17:38:02 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	**realloc_envp(char **old_envp, size_t new_size)
 		return (NULL);
 	if (ft_tabcpy(new_envp, old_envp) == 1)
 		return (NULL);
+	new_envp[new_size] = NULL;
 	ft_freetab(old_envp);
 	return (new_envp);
 }
@@ -64,7 +65,9 @@ int	add_env_var(t_data *data, t_cmd *cmd, char *var_name, int cmdi)
 			return (-1);
 		data->envp_len += 1;
 	}
-	data->envp[i] = cmd->args[cmdi];
+	data->envp[i] = ft_strdup(cmd->args[cmdi]);
+	if (!cmd->args[cmdi])
+		return (-1);
 	return (0);
 }
 
