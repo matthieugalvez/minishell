@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:04:15 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 12:23:17 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 13:58:51 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,24 @@ static char	*check_pathfound(t_data *data, char *pathfound, char **paths)
 	return (pathfound);
 }
 
-static char	*get_pathfound(char *path, char *cmd)
+static char	*get_pathfound(char *path, char *cmd, t_data *data)
 {
 	char	*pathfound;
 
 	pathfound = ft_strjoin(path, "/");
 	if (!pathfound)
+	{
+		ft_putstr("Error\nFailed to init pathfound\n", 2);
+		data->exit_code = 1;
 		return (NULL);
+	}
 	pathfound = ft_strjoin_free(pathfound, cmd);
 	if (!pathfound)
+	{
+		ft_putstr("Error\nFailed to init pathfound\n", 2);
+		data->exit_code = 1;
 		return (NULL);
+	}
 	return (pathfound);
 }
 
@@ -75,17 +83,14 @@ char	*ft_findpath(t_data *data, char *cmd)
 	paths = ft_retrievepath(data);
 	if (!paths)
 		return (NULL);
-	pathfound = get_pathfound(paths[i], cmd);
-	if (!pathfound)
-	{
-		ft_putstr("Error\nFailed to init pathfound\n", 2);
-		data->exit_code = 1;
-		return (NULL);
-	}
 	while (paths[i])
 	{
+		pathfound = get_pathfound(paths[i], cmd, data);
+		if (!pathfound)
+			return (NULL);
 		if (access(pathfound, F_OK) == 0)
 			return (check_pathfound(data, pathfound, paths));
+		free(pathfound);
 		i++;
 	}
 	ft_freetab(paths);

@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 12:23:14 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 14:13:17 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ static void	redirect_std(t_cmd *cmd)
 	}
 }
 
-static void	ft_childprocess(t_cmd *cmd, t_data *data)
+static void	ft_childprocess(t_cmd *cmd, t_data *data, char **line)
 {
 	char	*cmd_path;
 
 	signal_handler_child();
+	ft_freetab(line);
 	if (cmd->to_close_fd)
 		close(cmd->to_close_fd);
 	data->exit_code = exec_builtins(cmd, data);
@@ -68,7 +69,7 @@ static void	ft_childprocess(t_cmd *cmd, t_data *data)
 	ft_kill(cmd, data);
 }
 
-void	ft_exec(t_cmd *cmd, t_data *data)
+void	ft_exec(t_cmd *cmd, t_data *data, char **line)
 {
 	cmd->pid = fork();
 	if (cmd->pid < 0)
@@ -77,7 +78,7 @@ void	ft_exec(t_cmd *cmd, t_data *data)
 		exit(EXIT_FAILURE);
 	}
 	else if (!cmd->pid)
-		ft_childprocess(cmd, data);
+		ft_childprocess(cmd, data, line);
 	else
 	{
 		ft_freetab(cmd->args);

@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 12:23:55 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 14:13:44 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		parse_expand_quotes(char **input);
 //TOKENIZATION
 
 void	tokenize_builtin(char **line, t_data *data);
-void	tokenize_other(char **line, t_data *data, int cmd_index);
+void	tokenize_other(char **line, t_data *data, int cmd_index, int i);
 int		find_lens(char **line, int *i, int *cmd_len, int *args_len);
 int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
 void	unquote_args(t_cmd *cmd, t_data *data);
@@ -84,7 +84,7 @@ int		get_redirect_fd(t_cmd *cmd, char **line, int i);
 
 //EXEC
 
-void	ft_exec(t_cmd *cmd, t_data *data);
+void	ft_exec(t_cmd *cmd, t_data *data, char **line);
 int		get_heredoc_fd(char *limiter, char *name);
 char	*check_path(t_data *data, char *cmd_path);
 char	*ft_findpath(t_data *data, char *cmd);

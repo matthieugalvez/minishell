@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/02 16:27:09 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 14:12:13 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ static void	init_pipe(t_cmd *cmd, char *arg, int *i)
 		cmd->fd_out = 1;
 }
 
-void	tokenize_other(char **line, t_data *data, int cmd_index)
+void	tokenize_other(char **line, t_data *data, int cmd_index, int i)
 {
 	t_cmd		cmd;
-	int			i;
 	int			cmd_len;
 	int			args_len;
 
@@ -54,10 +53,10 @@ void	tokenize_other(char **line, t_data *data, int cmd_index)
 		ft_exit(NULL, data);
 	}
 	unquote_args(&cmd, data);
-	ft_exec(&cmd, data);
+	ft_exec(&cmd, data, line);
 	data->pid_tab[cmd_index] = cmd.pid;
 	if (line[i])
-		tokenize_other(&line[i], data, cmd_index + 1);
+		tokenize_other(line, data, cmd_index + 1, i);
 	else if (cmd.fd_in)
 		close (cmd.fd_in);
 }

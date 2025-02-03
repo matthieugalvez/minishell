@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 16:28:38 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 11:37:19 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 14:14:02 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	init_tokenization(char **input, t_data *data)
 	else if (parsing_case == 1)
 	{
 		init_tab_len(data);
-		tokenize_other(input, data, 0);
+		tokenize_other(input, data, 0, 0);
 		waitchildren(data);
 	}
 	data->pid_tab_len = 1;
