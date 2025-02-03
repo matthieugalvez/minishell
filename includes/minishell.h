@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/02 15:06:16 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 10:27:05 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*get_prompt(void);
 //SIGNAL
 
 void	signal_handler_init(void);
+void	signal_handler_inchild(void);
 void	signal_handler_child(void);
 
 // PARSING

@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:58:26 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/02 17:55:52 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 10:36:18 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ void	signal_handler_child(void)
 	sigint_sigaction.sa_handler = SIG_DFL;
 	sigaction(SIGQUIT, &sigquit_sigaction, NULL);
 	sigaction(SIGINT, &sigint_sigaction, NULL);
+}
+
+static void	in_child_sig_handler(int signal)
+{
+	if (signal == SIGQUIT)
+		ft_printf("Quit (core dumped)");
+	ft_printf("\n");
+}
+
+void	signal_handler_inchild(void)
+{
+	struct sigaction	inchild_sigaction;
+
+	ft_bzero(&inchild_sigaction, sizeof(inchild_sigaction));
+	inchild_sigaction.sa_handler = &in_child_sig_handler;
+	sigaction(SIGQUIT, &inchild_sigaction, NULL);
+	sigaction(SIGINT, &inchild_sigaction, NULL);
 }
 
 static void	sig_handler(int signal)

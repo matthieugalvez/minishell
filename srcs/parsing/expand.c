@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:55:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/02 17:49:08 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 10:19:09 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ static char	*get_expand_rpart(char *input, char *lpart, char *mpart)
 	len = ft_strlen(input) - start;
 	if (len)
 		out = ft_substr(input, start, len);
-	if (!out)
-		return (NULL);
 	return (out);
 }
 
@@ -49,8 +47,6 @@ static char	*get_expand_mpart(char *input, char *lpart)
 		len++;
 	}
 	out = ft_substr(input, start, len);
-	if (!out)
-		return (NULL);
 	return (out);
 }
 
