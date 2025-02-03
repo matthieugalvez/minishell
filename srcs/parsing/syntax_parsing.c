@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 11:36:30 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 18:19:02 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	non_operator_case(char **line, int *parsing_case,
 		int *cmd_parsed, int *i)
 {
-	if (*parsing_case == 0 && *cmd_parsed == 0)
+	if (*parsing_case == -1 && *cmd_parsed == 0)
 	{
 		*cmd_parsed = 1;
 		*parsing_case = ft_isbuiltin(line[*i]);
@@ -84,7 +84,7 @@ int	syntax_parsing(char **line, t_data *data)
 	int	cmd_parsed;
 
 	i = 0;
-	parsing_case = 0;
+	parsing_case = -1;
 	cmd_parsed = 0;
 	while (line[i])
 	{
