@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/02/03 11:59:15 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/02/03 16:35:32 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ PARSING_SRCS	= line_spliter.c syntax_parsing.c init_tokenization.c \
 SIGNAL_SRCS		= signal_handler.c
 TOKENIZE_SRCS	= tokenize_builtin.c tokenize_other.c unquote_strings.c \
 				  get_redirect_fd.c tokenization_utils.c
-VISUAL_SRCS		= prompt.c
+VISUAL_SRCS		= prompt.c title.c
 
 LST_SRCS	= 	$(addprefix builtins/, ${BUILTINS_SRCS}) \
 				$(addprefix exec/, ${EXEC_SRCS}) \

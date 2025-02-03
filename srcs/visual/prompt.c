@@ -3,59 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:39:01 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/02 15:51:22 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 16:35:08 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*static int	get_userlen(char *cwd)
+static char	*get_full_path(void)
 {
-	int	len;
-
-	len = 0;
-	while (*(cwd + len) && *(cwd + len) != '/')
-		len++;
-	return (len);
-}*/
-
-void	get_title(void)
-{
-	int		fd;
-	char	*line;
-
-	fd = open("./srcs/visual/title", O_RDONLY);
-	if (fd)
-	{
-		line = ft_getnextline(fd);
-		printf("\033[0;35m");
-		while (line)
-		{
-			printf("%s", line);
-			free(line);
-			line = ft_getnextline(fd);
-		}
-		printf("\033[0m\n");
-	}
-}
-
-char	*get_prompt(void)
-{
-	char	*fullpath;
-	char	*reducepath;
-	char	*active_dir;
-	char	*prompt;
 	char	cwd[PATH_MAX];
+	char	*fullpath;
 
 	getcwd(cwd, sizeof(cwd));
 	fullpath = ft_calloc(sizeof(char), ft_strlen(cwd) + 1);
 	if (!fullpath)
 		return (NULL);
 	ft_strlcpy(fullpath, cwd, ft_strlen(cwd) + 1);
-//	fullpath = ft_strdup(cwd + 6 + get_userlen(cwd + 6) + 1);
+	return (fullpath);
+}
+
+static char	*get_active_dir(void)
+{
+	char	*active_dir;
+	char	*fullpath;
+
+	fullpath = get_full_path();
+	if (!fullpath)
+		return (NULL);
 	if (ft_strrchr(fullpath, '/'))
 		active_dir = ft_strdup(ft_strrchr(fullpath, '/') + 1);
 	else
@@ -65,6 +42,17 @@ char	*get_prompt(void)
 		free(fullpath);
 		return (NULL);
 	}
+	return (active_dir);
+}
+
+static char	*get_reduce_path(char *active_dir)
+{
+	char	*reducepath;
+	char	*fullpath;
+
+	fullpath = get_full_path();
+	if (!fullpath)
+		return (NULL);
 	reducepath = ft_substr(fullpath, 0,
 			ft_strlen(fullpath) - ft_strlen(active_dir));
 	if (!reducepath)
@@ -73,8 +61,17 @@ char	*get_prompt(void)
 		free(active_dir);
 		return (NULL);
 	}
-//	reducepath = ft_strjoin_free2("~/", reducepath);
 	free(fullpath);
+	return (reducepath);
+}
+
+static char	*colorize_dir(char *active_dir, char *reducepath)
+{
+	char	*fullpath;
+
+	fullpath = get_full_path();
+	if (!fullpath)
+		return (NULL);
 	active_dir = ft_strjoin_free2("\001\e[36m\002", active_dir);
 	if (!active_dir)
 	{
@@ -89,6 +86,25 @@ char	*get_prompt(void)
 		free(reducepath);
 		return (NULL);
 	}
+	return (active_dir);
+}
+
+char	*get_prompt(void)
+{
+	char	*active_dir;
+	char	*reducepath;
+	char	*prompt;
+
+	active_dir = get_active_dir();
+	if (!active_dir)
+		return (NULL);
+	reducepath = get_reduce_path(active_dir);
+	if (!reducepath)
+	{
+		free(active_dir);
+		return (NULL);
+	}
+	active_dir = colorize_dir(active_dir, reducepath);
 	prompt = ft_strjoin(reducepath, active_dir);
 	free(reducepath);
 	free(active_dir);
