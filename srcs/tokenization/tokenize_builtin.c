@@ -6,11 +6,21 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:54 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/02 16:21:30 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 17:28:46 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static void	cleanup_builtin(t_cmd *cmd, t_data *data)
+{
+	data->exit_code = exec_builtins(cmd, data);
+	if (cmd->fd_in)
+		close (cmd->fd_in);
+	if (cmd->fd_out > 1)
+		close (cmd->fd_out);
+	ft_freetab(cmd->args);
+}
 
 void	tokenize_builtin(char **line, t_data *data)
 {
@@ -28,14 +38,15 @@ void	tokenize_builtin(char **line, t_data *data)
 		find_lens(line, &i, &cmd_len, &args_len);
 	if (parse_cmd(&cmd, line, cmd_len, args_len))
 	{
-		ft_putstr("Error\nFailed to initiate struct\n", 2);
+		data->exit_code = 1;
 		exit (EXIT_FAILURE);
 	}
-	unquote_args(&cmd, data);
-	data->exit_code = exec_builtins(&cmd, data);
-	if (cmd.fd_in)
-		close (cmd.fd_in);
-	if (cmd.fd_out > 1)
-		close (cmd.fd_out);
-	ft_freetab(cmd.args);
+	ft_unquote(cmd.args);
+	if (!cmd.args)
+	{
+		data->exit_code = 1;
+		ft_exit(&cmd, data);
+	}
+	print_linetab("After unquote", cmd.args);
+	cleanup_builtin(&cmd, data);
 }
