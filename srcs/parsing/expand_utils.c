@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:55:46 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/02 17:36:09 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 14:59:20 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,12 @@ static int	check_orphan_dollar(char *env_value)
 	return (1);
 }
 
-char	*get_env_value(char *env_value, t_data *data)
+static char	*search_env(char *env_value, t_data *data)
 {
 	int		i;
 	int		len;
 
 	i = 0;
-	if (check_orphan_dollar(env_value))
-		return (env_value);
-	if (env_value[1] == '?')
-	{
-		free(env_value);
-		return (ft_itoa(data->exit_code));
-	}
-	env_value = ft_strjoin_free(env_value, "=");
 	len = ft_strlen(&env_value[1]);
 	while (data->envp[i])
 	{
@@ -52,5 +44,23 @@ char	*get_env_value(char *env_value, t_data *data)
 		i++;
 	}
 	free(env_value);
-	return (NULL);
+	return (ft_calloc(sizeof (char), 1));
+}
+
+char	*get_env_value(char *env_value, t_data *data)
+{
+	char	*out;
+
+	if (check_orphan_dollar(env_value))
+		out = ft_strdup(env_value);
+	else if (env_value[1] == '?')
+		out = ft_itoa(data->exit_code);
+	else
+	{
+		out = ft_strjoin(env_value, "=");
+		if (!out)
+			return (NULL);
+		return (search_env(out, data));
+	}
+	return (out);
 }
