@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 15:40:40 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:39:09 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@ typedef struct s_data
 typedef struct s_cmd
 {
 	char			**args;
+	int				argc;
 	int				fd_in;
 	int				fd_out;
 	int				to_close_fd;
-	int				pid;
-	int				argc;
 }	t_cmd;
 
 // GENERAL
@@ -69,6 +68,9 @@ char	**ft_line_spliter(char const *s);
 void	init_tokenization(char **input, t_data *data);
 int		syntax_parsing(char **line, t_data *data);
 int		ft_isbuiltin(char *arg);
+
+//EXPAND
+
 void	ft_expand(char **input, t_data *data);
 char	*join_parts(char **parts, int *expand_index, t_data *data);
 char	**get_parts(char *input, int expand_index);
@@ -80,16 +82,15 @@ void	tokenize_builtin(char **line, t_data *data);
 void	tokenize_other(char **line, t_data *data, int cmd_index, int i);
 int		find_lens(char **line, int *i, int *cmd_len, int *args_len);
 int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
-void	unquote_args(t_cmd *cmd, t_data *data);
-void	ft_unquote(char **input);
+
+// REDIRECT
+
 int		get_redirect_fd(t_cmd *cmd, char **line, int i);
-
-//EXEC
-
-void	ft_exec(t_cmd *cmd, t_data *data, char **line);
 int		get_heredoc_fd(char *limiter, char *name);
-char	*check_path(t_data *data, char *cmd_path);
-char	*ft_findpath(t_data *data, char *cmd);
+
+// UNQUOTE
+
+void	ft_unquote(char **input);
 
 //	BUILTINS
 
@@ -109,6 +110,12 @@ char	**realloc_envp(char **old_envp, size_t new_size);
 int		add_env_var(t_data *data, t_cmd *cmd, char *var_name, int cmdi);
 int		remove_env_var(t_data *data, t_cmd *cmd, int cmdi);
 char	*get_env_value(char *env_value, t_data *data);
+
+//EXEC
+
+void	ft_exec(t_cmd *cmd, t_data *data, char **line, int cmd_index);
+char	*check_path(t_data *data, char *cmd_path);
+char	*ft_findpath(t_data *data, char *cmd);
 
 //	TEST - A SUPPRIMER !!
 void	print_linetab(char *str, char **input);

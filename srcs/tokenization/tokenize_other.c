@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 16:13:09 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 17:34:27 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,40 @@ static void	init_pipe(t_cmd *cmd, char *arg, int *i)
 		cmd->fd_out = 1;
 }
 
+static void	launch_cmd(t_cmd *cmd, t_data *data, char **line, int cmd_index)
+{
+	ft_unquote(cmd->args);
+	if (!cmd->args)
+	{
+		data->exit_code = 1;
+		ft_exit(cmd, data);
+	}
+	print_linetab("After unquote", cmd->args);
+	ft_exec(cmd, data, line, cmd_index);
+}
+
 void	tokenize_other(char **line, t_data *data, int cmd_index, int i)
 {
 	t_cmd		cmd;
 	int			cmd_len;
 	int			args_len;
+	int			j;
 
 	cmd_len = 0;
 	args_len = 0;
+	j = 0;
 	ft_bzero(&cmd, sizeof(cmd));
-	while (line[i] && ft_strncmp(line[i], "|", 1))
-		find_lens(line, &i, &cmd_len, &args_len);
-	init_pipe(&cmd, line[i], &i);
-	if (parse_cmd(&cmd, line, cmd_len, args_len))
+	while (line[i + j] && ft_strncmp(line[i + j], "|", 1))
+		find_lens(&line[i], &j, &cmd_len, &args_len);
+	init_pipe(&cmd, line[i + j], &j);
+	if (parse_cmd(&cmd, &line[i], cmd_len, args_len))
 	{
-		ft_putstr("Error\nFailed to initiate struct\n", 2);
 		data->exit_code = 1;
-		ft_exit(NULL, data);
+		ft_exit(&cmd, data);
 	}
-	unquote_args(&cmd, data);
-	ft_exec(&cmd, data, line);
-	data->pid_tab[cmd_index] = cmd.pid;
-	if (line[i])
-		tokenize_other(line, data, cmd_index + 1, i);
+	launch_cmd(&cmd, data, line, cmd_index);
+	if (line[i + j])
+		tokenize_other(line, data, cmd_index + 1, i + j);
 	else if (cmd.fd_in)
 		close (cmd.fd_in);
 }

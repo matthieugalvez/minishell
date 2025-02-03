@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 14:13:17 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 17:21:19 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ static void	ft_childprocess(t_cmd *cmd, t_data *data, char **line)
 	ft_kill(cmd, data);
 }
 
-void	ft_exec(t_cmd *cmd, t_data *data, char **line)
+void	ft_exec(t_cmd *cmd, t_data *data, char **line, int cmd_index)
 {
-	cmd->pid = fork();
-	if (cmd->pid < 0)
+	data->pid_tab[cmd_index] = fork();
+	if (data->pid_tab[cmd_index] < 0)
 	{
 		perror("fork");
 		exit(EXIT_FAILURE);
 	}
-	else if (!cmd->pid)
+	else if (!data->pid_tab[cmd_index])
 		ft_childprocess(cmd, data, line);
 	else
 	{
