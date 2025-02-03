@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:12:39 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 17:01:40 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:44:21 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	is_valid_env_var(char *arg)
 
 static int	is_valid_env_arg(char *arg, char *mode)
 {
-	if (!arg)
+	if (!*arg)
 	{
 		ft_printf_fd(2,
 			"minishell: %s: `': not a valid identifier\n", mode);
