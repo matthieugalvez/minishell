@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/02 16:22:01 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 13:45:21 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	get_splited_line(char *user_input, t_data *data)
 		ft_kill(NULL, data);
 	}
 	print_linetab("After split", split_user_input);
+	if (!split_user_input[0])
+		return ;
 	ft_expand(split_user_input, data);
 	if (!split_user_input)
 	{
@@ -60,6 +62,7 @@ static void	tty_loop(t_data *data)
 	char	*user_input;
 	char	*prompt;
 
+	signal_handler_init();
 	prompt = get_prompt();
 	if (!prompt)
 	{
@@ -73,6 +76,7 @@ static void	tty_loop(t_data *data)
 		ft_exit(NULL, data);
 	else
 	{
+		signal_handler_inchild();
 		if (ft_isvalidinput(user_input) == 0)
 			get_splited_line(user_input, data);
 		tty_loop(data);
@@ -100,6 +104,7 @@ static void	init_data(t_data *data, char **envp)
 		free(data->envp);
 		exit(EXIT_FAILURE);
 	}
+	data->pid_tab_len = 1;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -111,7 +116,6 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	init_data(&data, envp);
 	get_title();
-	signal_handler_init();
 	tty_loop(&data);
 	return (0);
 }

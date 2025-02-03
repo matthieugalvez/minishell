@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:55:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 15:09:09 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:11:57 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,15 @@ static char	*parse_expand(char *input, t_data *data, int expand_index)
 	parts = get_parts(input, expand_index);
 	if (!parts)
 		return (NULL);
-	parts[3] = ft_calloc(1, sizeof(char));
-	if (!parts[3])
-	{
-		ft_freetab(parts);
-		return (NULL);
-	}
+	parts[3] = NULL;
 	expand = join_parts(parts, &expand_index, data);
 	if (!expand)
 		return (NULL);
 	free(input);
 	if (expand && expand[expand_index] && ft_strchr(&expand[expand_index], '$'))
-		return (parse_expand(expand, data, 1));
+	{
+		return (parse_expand(expand, data, expand_index));
+	}
 	return (expand);
 }
 

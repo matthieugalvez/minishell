@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 12:00:01 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:40:40 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,14 @@ char	*get_prompt(void);
 //SIGNAL
 
 void	signal_handler_init(void);
+void	signal_handler_inchild(void);
 void	signal_handler_child(void);
 
 // PARSING
 
 char	**ft_line_spliter(char const *s);
 void	init_tokenization(char **input, t_data *data);
-int		syntax_parsing(char **line);
+int		syntax_parsing(char **line, t_data *data);
 int		ft_isbuiltin(char *arg);
 void	ft_expand(char **input, t_data *data);
 char	*join_parts(char **parts, int *expand_index, t_data *data);
@@ -76,7 +77,7 @@ int		parse_expand_quotes(char **input);
 //TOKENIZATION
 
 void	tokenize_builtin(char **line, t_data *data);
-void	tokenize_other(char **line, t_data *data, int cmd_index);
+void	tokenize_other(char **line, t_data *data, int cmd_index, int i);
 int		find_lens(char **line, int *i, int *cmd_len, int *args_len);
 int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
 void	unquote_args(t_cmd *cmd, t_data *data);
@@ -85,9 +86,10 @@ int		get_redirect_fd(t_cmd *cmd, char **line, int i);
 
 //EXEC
 
-void	ft_exec(t_cmd *cmd, t_data *data);
+void	ft_exec(t_cmd *cmd, t_data *data, char **line);
 int		get_heredoc_fd(char *limiter, char *name);
-char	*init_cmd_path(t_cmd *cmd, t_data *data);
+char	*check_path(t_data *data, char *cmd_path);
+char	*ft_findpath(t_data *data, char *cmd);
 
 //	BUILTINS
 

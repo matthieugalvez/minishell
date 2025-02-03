@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:25:51 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 15:35:08 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 14:28:28 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ static int	ft_heredoc(t_cmd *cmd, char *limiter)
 	if (!name)
 	{
 		ft_putstr("Error\nCouldn't generate temp file name\n", 2);
-		exit (EXIT_FAILURE);
+		return (INT_MIN);
 	}
 	cmd->fd_in = get_heredoc_fd(limiter, name);
+	if (cmd->fd_in == INT_MIN)
+		return (INT_MIN);
 	free(name);
 	return (2);
 }

@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:50:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 14:53:42 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:58:14 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*join_parts(char **parts, int *expand_index, t_data *data)
 	{
 		if (parts[0][0])
 			out = ft_strjoin_free2(parts[0], out);
-		*expand_index = ft_strlen(out) + 1;
+		*expand_index = ft_strlen(out);
 		if (parts[2][0])
 			out = ft_strjoin_free(out, parts[2]);
 	}
@@ -103,7 +103,7 @@ char	**get_parts(char *input, int expand_index)
 {
 	char	**parts;
 
-	parts = ft_calloc(4, sizeof(char *));
+	parts = ft_calloc(sizeof(char *), 4);
 	if (!parts)
 		return (NULL);
 	parts[0] = get_expand_lpart(input, expand_index);

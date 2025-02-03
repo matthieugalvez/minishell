@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:55:55 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 10:34:30 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 15:10:22 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,19 @@ static char	*ft_writetemp(int fd, char *name, char *limiter)
 	buf = ft_getnextline(STDIN_FILENO);
 	if (!buf)
 	{
+		unlink(name);
 		free(name);
 		ft_putstr("Error\nCouldn't retrieve STDIN line\n", 2);
 		return (NULL);
 	}
-	while (ft_strncmp(limiter, buf, ft_strlen(buf) != 0))
+	while (ft_strncmp(limiter, buf, ft_strlen(limiter)) != 0)
 	{
 		write(fd, buf, ft_strlen(buf));
 		free(buf);
 		buf = ft_getnextline(STDIN_FILENO);
 		if (!buf)
 		{
+			unlink(name);
 			free(name);
 			ft_putstr("Error\nCouldn't retrieve STDIN line\n", 2);
 			return (NULL);
@@ -45,7 +47,7 @@ int	get_heredoc_fd(char *limiter, char *name)
 
 	limiter = ft_strjoin(limiter, "\n");
 	if (!limiter)
-		return (-1);
+		return (INT_MIN);
 	fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
@@ -56,9 +58,10 @@ int	get_heredoc_fd(char *limiter, char *name)
 	free(limiter);
 	close(fd);
 	if (!name)
-		exit (EXIT_FAILURE);
+		return (INT_MIN);
 	fd = open(name, O_RDONLY);
 	if (fd < 0)
 		perror("heredoc");
+	unlink(name);
 	return (fd);
 }

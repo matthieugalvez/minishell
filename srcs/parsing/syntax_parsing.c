@@ -6,29 +6,13 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/02 16:37:37 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 11:36:30 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	check_dir(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		if (str[i] != '/' && str[i] != '.')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-static int	non_operator_case(char **line, int *parsing_case,
+static void	non_operator_case(char **line, int *parsing_case,
 		int *cmd_parsed, int *i)
 {
 	if (*parsing_case == 0 && *cmd_parsed == 0)
@@ -37,15 +21,7 @@ static int	non_operator_case(char **line, int *parsing_case,
 		*parsing_case = ft_isbuiltin(line[*i]);
 	}
 	while (line[*i] && !ft_isoperator(line[*i][0]))
-	{
-		if (check_dir(line[*i]) && cmd_parsed == 0)
-		{
-			ft_printf_fd(2, "minishell: %s: Is a directory\n", line[*i]);
-			return (1);
-		}
 		*i += 1;
-	}
-	return (0);
 }
 
 static int	check_multiple_operator(char *line)
@@ -101,7 +77,7 @@ static int	parse_operator(char **line, int i)
 	return (0);
 }
 
-int	syntax_parsing(char **line)
+int	syntax_parsing(char **line, t_data *data)
 {
 	int	i;
 	int	parsing_case;
@@ -113,7 +89,10 @@ int	syntax_parsing(char **line)
 	while (line[i])
 	{
 		if (line[i][0] == '|')
-			parsing_case++;
+		{
+			data->pid_tab_len++;
+			parsing_case = 1;
+		}
 		if (ft_isoperator(line[i][0]))
 		{
 			if (parse_operator(line, i))
@@ -121,10 +100,7 @@ int	syntax_parsing(char **line)
 			i ++;
 		}
 		else
-		{
-			if (non_operator_case(line, &parsing_case, &cmd_parsed, &i))
-				return (-1);
-		}
+			non_operator_case(line, &parsing_case, &cmd_parsed, &i);
 	}
 	return (parsing_case);
 }

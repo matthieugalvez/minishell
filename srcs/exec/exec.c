@@ -6,11 +6,25 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/02 16:28:05 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 14:13:17 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static char	*init_cmd_path(t_cmd *cmd, t_data *data)
+{
+	char		*cmd_path;
+
+	if (ft_strchr(cmd->args[0], '/'))
+	{
+		cmd_path = cmd->args[0];
+		cmd_path = check_path(data, cmd_path);
+	}
+	else
+		cmd_path = ft_findpath(data, cmd->args[0]);
+	return (cmd_path);
+}
 
 static void	redirect_std(t_cmd *cmd)
 {
@@ -28,11 +42,12 @@ static void	redirect_std(t_cmd *cmd)
 	}
 }
 
-static void	ft_childprocess(t_cmd *cmd, t_data *data)
+static void	ft_childprocess(t_cmd *cmd, t_data *data, char **line)
 {
 	char	*cmd_path;
 
 	signal_handler_child();
+	ft_freetab(line);
 	if (cmd->to_close_fd)
 		close(cmd->to_close_fd);
 	data->exit_code = exec_builtins(cmd, data);
@@ -47,17 +62,14 @@ static void	ft_childprocess(t_cmd *cmd, t_data *data)
 	redirect_std(cmd);
 	cmd_path = init_cmd_path(cmd, data);
 	if (!cmd_path)
-	{
-		data->exit_code = 127;
 		ft_kill(cmd, data);
-	}
 	execve(cmd_path, cmd->args, data->envp);
 	perror("minishell: execve");
 	data->exit_code = 1;
 	ft_kill(cmd, data);
 }
 
-void	ft_exec(t_cmd *cmd, t_data *data)
+void	ft_exec(t_cmd *cmd, t_data *data, char **line)
 {
 	cmd->pid = fork();
 	if (cmd->pid < 0)
@@ -66,7 +78,7 @@ void	ft_exec(t_cmd *cmd, t_data *data)
 		exit(EXIT_FAILURE);
 	}
 	else if (!cmd->pid)
-		ft_childprocess(cmd, data);
+		ft_childprocess(cmd, data, line);
 	else
 	{
 		ft_freetab(cmd->args);
