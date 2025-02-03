@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 14:12:13 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 16:13:09 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	tokenize_other(char **line, t_data *data, int cmd_index, int i)
 	int			cmd_len;
 	int			args_len;
 
-	i = 0;
 	cmd_len = 0;
 	args_len = 0;
 	ft_bzero(&cmd, sizeof(cmd));

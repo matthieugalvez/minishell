@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/02/03 16:35:32 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/02/03 16:38:25 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,19 +22,23 @@ DIR_OBJS = .objs
 DIR_LIBFT = libft
 
 BUILTINS_SRCS	= builtins.c env_builtins.c env_builtins_utils.c
-EXEC_SRCS		= exec.c heredoc.c pathfinder.c
-PARSING_SRCS	= line_spliter.c syntax_parsing.c init_tokenization.c \
-				  expand.c expand_utils.c parsing_utils.c expand_parts.c
+EXEC_SRCS		= exec.c pathfinder.c
+EXPAND_SRCS		= expand.c expand_parts.c expand_utils.c
+PARSING_SRCS	= line_spliter.c syntax_parsing.c init_tokenization.c parsing_utils.c
+REDIRECT_SRCS	= get_redirect_fd.c heredoc.c
 SIGNAL_SRCS		= signal_handler.c
-TOKENIZE_SRCS	= tokenize_builtin.c tokenize_other.c unquote_strings.c \
-				  get_redirect_fd.c tokenization_utils.c
+TOKENIZE_SRCS	= tokenize_builtin.c tokenize_other.c tokenization_utils.c
+UNQUOTE_SRCS	= unquote_strings.c
 VISUAL_SRCS		= prompt.c title.c
 
 LST_SRCS	= 	$(addprefix builtins/, ${BUILTINS_SRCS}) \
 				$(addprefix exec/, ${EXEC_SRCS}) \
+				$(addprefix expand/, ${EXPAND_SRCS}) \
 				$(addprefix parsing/, ${PARSING_SRCS}) \
+				$(addprefix redirect/, ${REDIRECT_SRCS}) \
 				$(addprefix signal/, ${SIGNAL_SRCS}) \
 				$(addprefix tokenization/, ${TOKENIZE_SRCS}) \
+				$(addprefix unquote/, ${UNQUOTE_SRCS}) \
 				$(addprefix visual/, ${VISUAL_SRCS}) \
 				main.c \
 				utils.c \
@@ -56,11 +60,13 @@ END			=	\033[0m
 $(DIR_OBJS)/%.o: ${DIR_SRCS}/%.c $(INCS) Makefile libft/libft.a
 	@ mkdir -p $(DIR_OBJS)
 	@ mkdir -p $(DIR_OBJS)/builtins
-	@ mkdir -p $(DIR_OBJS)/data
 	@ mkdir -p $(DIR_OBJS)/exec
+	@ mkdir -p $(DIR_OBJS)/expand
 	@ mkdir -p $(DIR_OBJS)/parsing
+	@ mkdir -p $(DIR_OBJS)/redirect
 	@ mkdir -p $(DIR_OBJS)/signal
 	@ mkdir -p $(DIR_OBJS)/tokenization
+	@ mkdir -p $(DIR_OBJS)/unquote
 	@ mkdir -p $(DIR_OBJS)/visual
 	@ $(CC) $(CFLAGS) -I $(DIR_INCS) -c $< -o $@
 	@ printf "$(ERASE)$(BLUE) > Compilation :$(END) $<"
@@ -94,4 +100,4 @@ fsanitize : libft
 g3 : libft
 	$(CC) -g3 $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
 	
-.PHONY: all clean fclean re libft fsanitize g3
+.PHONY: all clean fclean re libft fsanitize g3>>>>>>> 5b66f02688a49109fde9c7ae9d6e549fe2722472
