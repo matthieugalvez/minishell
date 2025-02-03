@@ -100,4 +100,4 @@ fsanitize : libft
 g3 : libft
 	$(CC) -g3 $(SRCS) -I $(DIR_INCS) $(CFLAGS) ${LIBS} -o $@
 	
-.PHONY: all clean fclean re libft fsanitize g3>>>>>>> 5b66f02688a49109fde9c7ae9d6e549fe2722472
+.PHONY: all clean fclean re libft fsanitize g3
