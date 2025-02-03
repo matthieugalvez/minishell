@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 10:28:16 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 11:14:31 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ static void	init_data(t_data *data, char **envp)
 		free(data->envp);
 		exit(EXIT_FAILURE);
 	}
+	data->pid_tab_len = 1;
 }
 
 int	main(int argc, char **argv, char **envp)

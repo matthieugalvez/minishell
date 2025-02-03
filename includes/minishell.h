@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 10:27:05 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 12:23:55 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	signal_handler_child(void);
 
 char	**ft_line_spliter(char const *s);
 void	init_tokenization(char **input, t_data *data);
-int		syntax_parsing(char **line);
+int		syntax_parsing(char **line, t_data *data);
 int		ft_isbuiltin(char *arg);
 void	ft_expand(char **input, t_data *data);
 int		parse_expand_quotes(char **input);
@@ -86,7 +86,8 @@ int		get_redirect_fd(t_cmd *cmd, char **line, int i);
 
 void	ft_exec(t_cmd *cmd, t_data *data);
 int		get_heredoc_fd(char *limiter, char *name);
-char	*init_cmd_path(t_cmd *cmd, t_data *data);
+char	*check_path(t_data *data, char *cmd_path);
+char	*ft_findpath(t_data *data, char *cmd);
 
 //	BUILTINS
 

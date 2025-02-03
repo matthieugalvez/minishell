@@ -6,11 +6,38 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:04:15 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/28 16:38:13 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:23:17 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static char	*check_pathfound(t_data *data, char *pathfound, char **paths)
+{
+	ft_freetab(paths);
+	if (access(pathfound, X_OK) != 0)
+	{
+		ft_putstr("minishell: ", 2);
+		perror(pathfound);
+		data->exit_code = 126;
+		free(pathfound);
+		return (NULL);
+	}
+	return (pathfound);
+}
+
+static char	*get_pathfound(char *path, char *cmd)
+{
+	char	*pathfound;
+
+	pathfound = ft_strjoin(path, "/");
+	if (!pathfound)
+		return (NULL);
+	pathfound = ft_strjoin_free(pathfound, cmd);
+	if (!pathfound)
+		return (NULL);
+	return (pathfound);
+}
 
 static char	**ft_retrievepath(t_data *data)
 {
@@ -22,15 +49,23 @@ static char	**ft_retrievepath(t_data *data)
 	while (data->envp[i] && ft_strnstr(data->envp[i], "PATH=", 5) == NULL)
 		i++;
 	if (!data->envp[i])
+	{
+		ft_putstr("Error : failed to retrieve path list\n", 2);
+		data->exit_code = 1;
 		return (NULL);
+	}
 	paths = ft_strnstr(data->envp[i], "PATH=", 5);
 	env_path = ft_split(&paths[5], ':');
 	if (!env_path)
+	{
+		ft_putstr("Error : failed to retrieve path list\n", 2);
+		data->exit_code = 1;
 		return (NULL);
+	}
 	return (env_path);
 }
 
-static char	*ft_findpath(t_data *data, char *cmd)
+char	*ft_findpath(t_data *data, char *cmd)
 {
 	int		i;
 	char	*pathfound;
@@ -39,49 +74,50 @@ static char	*ft_findpath(t_data *data, char *cmd)
 	i = 0;
 	paths = ft_retrievepath(data);
 	if (!paths)
+		return (NULL);
+	pathfound = get_pathfound(paths[i], cmd);
+	if (!pathfound)
 	{
-		ft_putstr("Error : failed to retrieve path list\n", 2);
+		ft_putstr("Error\nFailed to init pathfound\n", 2);
+		data->exit_code = 1;
 		return (NULL);
 	}
 	while (paths[i])
 	{
-		pathfound = ft_strjoin(paths[i], "/");
-		pathfound = ft_strjoin_free(pathfound, cmd);
-		if (access(pathfound, X_OK) == 0)
-		{
-			ft_freetab(paths);
-			return (pathfound);
-		}
-		free(pathfound);
+		if (access(pathfound, F_OK) == 0)
+			return (check_pathfound(data, pathfound, paths));
 		i++;
 	}
 	ft_freetab(paths);
+	ft_printf_fd(2, "minishell: %s: command not found\n", cmd);
+	data->exit_code = 127;
 	return (NULL);
 }
 
-char	*init_cmd_path(t_cmd *cmd, t_data *data)
+char	*check_path(t_data *data, char *cmd_path)
 {
-	char	*cmd_path;
+	struct stat	path_stat;
 
-	if (ft_strchr(cmd->args[0], '/'))
+	stat(cmd_path, &path_stat);
+	if (S_ISDIR(path_stat.st_mode))
 	{
-		cmd_path = cmd->args[0];
-		if (access(cmd_path, X_OK) != 0)
-		{
-			ft_putstr("minishell: ", 2);
-			perror(cmd->args[0]);
-			return (NULL);
-		}
+		ft_printf_fd(2, "minishell: %s: Is a directory\n", cmd_path);
+		data->exit_code = 126;
+		return (NULL);
 	}
-	else
+	if (access(cmd_path, F_OK) != 0)
 	{
-		cmd_path = ft_findpath(data, cmd->args[0]);
-		if (!cmd_path)
-		{
-			ft_putstr("minishell: ", 2);
-			ft_putstr(cmd->args[0], 2);
-			ft_putstr(": command not found\n", 2);
-		}
+		ft_putstr("minishell: ", 2);
+		perror(cmd_path);
+		data->exit_code = 127;
+		return (NULL);
+	}
+	if (access(cmd_path, X_OK) != 0)
+	{
+		ft_putstr("minishell: ", 2);
+		perror(cmd_path);
+		data->exit_code = 126;
+		return (NULL);
 	}
 	return (cmd_path);
 }

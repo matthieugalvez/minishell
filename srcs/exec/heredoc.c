@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:55:55 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/01/27 10:34:30 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 12:26:28 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*ft_writetemp(int fd, char *name, char *limiter)
 		ft_putstr("Error\nCouldn't retrieve STDIN line\n", 2);
 		return (NULL);
 	}
-	while (ft_strncmp(limiter, buf, ft_strlen(buf) != 0))
+	while (ft_strncmp(limiter, buf, ft_strlen(limiter) + 1 != 0))
 	{
 		write(fd, buf, ft_strlen(buf));
 		free(buf);

@@ -6,17 +6,11 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:58:26 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 10:36:18 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/03 11:22:15 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static void	child_sig_handler(int signal)
-{
-	(void)signal;
-	ft_printf_fd(2, "Quit (core dumped)\n");
-}
 
 void	signal_handler_child(void)
 {
@@ -25,7 +19,7 @@ void	signal_handler_child(void)
 
 	ft_bzero(&sigquit_sigaction, sizeof(sigquit_sigaction));
 	ft_bzero(&sigint_sigaction, sizeof(sigint_sigaction));
-	sigquit_sigaction.sa_handler = &child_sig_handler;
+	sigquit_sigaction.sa_handler = SIG_DFL;
 	sigint_sigaction.sa_handler = SIG_DFL;
 	sigaction(SIGQUIT, &sigquit_sigaction, NULL);
 	sigaction(SIGINT, &sigint_sigaction, NULL);
