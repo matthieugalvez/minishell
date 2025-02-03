@@ -6,12 +6,11 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:03:59 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 16:06:41 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:14:27 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 
 void	ft_freetab(char **tab)
 {
