@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:04:15 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 13:58:51 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/04 13:20:17 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char	*check_pathfound(t_data *data, char *pathfound, char **paths)
 {
 	ft_freetab(paths);
-	if (access(pathfound, X_OK) != 0)
+	if (access(pathfound, X_OK))
 	{
 		ft_putstr("minishell: ", 2);
 		perror(pathfound);
@@ -88,7 +88,7 @@ char	*ft_findpath(t_data *data, char *cmd)
 		pathfound = get_pathfound(paths[i], cmd, data);
 		if (!pathfound)
 			return (NULL);
-		if (access(pathfound, F_OK) == 0)
+		if (!access(pathfound, F_OK))
 			return (check_pathfound(data, pathfound, paths));
 		free(pathfound);
 		i++;
@@ -110,14 +110,13 @@ char	*check_path(t_data *data, char *cmd_path)
 		data->exit_code = 126;
 		return (NULL);
 	}
-	if (access(cmd_path, F_OK) != 0)
+	if (access(cmd_path, F_OK))
 	{
-		ft_putstr("minishell: ", 2);
-		perror(cmd_path);
+		ft_printf_fd(2, "minishell: %s: command not found\n", cmd_path);
 		data->exit_code = 127;
 		return (NULL);
 	}
-	if (access(cmd_path, X_OK) != 0)
+	if (access(cmd_path, X_OK))
 	{
 		ft_putstr("minishell: ", 2);
 		perror(cmd_path);

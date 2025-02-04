@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 18:19:02 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/04 13:52:00 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,17 @@ static int	parse_operator(char **line, int i)
 	operator[0] = line[i][0];
 	if (ft_strlen(line[i]) > 2
 		|| (ft_strlen(line[i]) > 1 && line[i][1] != operator[0])
-		|| ((operator[0] == '|' || operator[0] == '&')
-			&& (i == 0 || !line[i + 1]))
-		|| (line[i + 1] && ft_isoperator(line[i + 1][0])))
+		|| ((ft_isoperator(operator[0]) == 2) && (i == 0 || !line[i + 1]))
+		|| (line[i + 1]
+			&& ft_isoperator(line[i + 1][0]) == ft_isoperator(line[i][0]))
+		|| (operator[0] == '|' && ft_strlen(line[i]) > 1))
 	{
 		operator[1] = line[i][1];
 		ft_printf_fd(2,
 			"minishell: syntax error near unexpected token `%s'\n", operator);
 		return (1);
 	}
-	else if (!line[i + 1] || ft_isoperator(line[i + 1][0]))
+	else if (!line[i + 1])
 	{
 		ft_printf_fd(2,
 			"minishell: syntax error near unexpected token `newline'\n");

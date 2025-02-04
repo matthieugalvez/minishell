@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 17:21:19 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/04 13:30:18 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@ static char	*init_cmd_path(t_cmd *cmd, t_data *data)
 {
 	char		*cmd_path;
 
-	if (ft_strchr(cmd->args[0], '/'))
+	if (!cmd->args[0][0])
+	{
+		cmd_path = NULL;
+		ft_printf_fd(2, "minishell: %s: command not found\n", cmd->args[0]);
+	}
+	else if (ft_strchr(cmd->args[0], '/'))
 	{
 		cmd_path = cmd->args[0];
 		cmd_path = check_path(data, cmd_path);
