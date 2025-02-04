@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:55:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 20:05:21 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:26:06 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static char	*parse_expand(char *input, t_data *data, int expand_index)
 	if (!parts)
 		return (NULL);
 	parts[3] = NULL;
-	print_linetab("During Expand", parts);
 	expand = join_parts(parts, &expand_index, data);
 	if (!expand)
 		return (NULL);
@@ -33,7 +32,24 @@ static char	*parse_expand(char *input, t_data *data, int expand_index)
 	return (expand);
 }
 
-void	ft_expand(char **input, t_data *data)
+static char	**ft_expand(char **input, t_data *data, int *i)
+{
+	input[*i] = parse_expand(input[*i], data, 0);
+	if (!input[*i])
+	{
+		data->exit_code = 1;
+		ft_kill(NULL, data);
+	}
+	input = split_expand_result(input, i);
+	if (!input)
+	{
+		data->exit_code = 1;
+		ft_kill(NULL, data);
+	}
+	return (input);
+}
+
+char	**ft_checkexpand(char **input, t_data *data)
 {
 	int		i;
 	char	*found_expand;
@@ -43,14 +59,7 @@ void	ft_expand(char **input, t_data *data)
 	{
 		found_expand = ft_strchr(input[i], '$');
 		if (found_expand)
-		{
-			input[i] = parse_expand(input[i], data, 0);
-			if (!input[i])
-			{
-				data->exit_code = 1;
-				ft_kill(NULL, data);
-			}
-		}
+			input = ft_expand(input, data, &i);
 		i ++;
 	}
 	i = 0;
@@ -60,4 +69,5 @@ void	ft_expand(char **input, t_data *data)
 			ft_cut_tabline(input, i);
 		i++;
 	}
+	return (input);
 }

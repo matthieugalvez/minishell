@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:06:28 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 11:46:36 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:04:13 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 int		ft_strrncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strtrim_free(char *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	ft_swap(int *n1, int *n2);
 int		ft_tabcpy(char **dest, char **src);
