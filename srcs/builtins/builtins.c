@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/04 15:15:51 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 19:12:33 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_pwd(t_cmd *cmd)
 	ft_bzero(buf, sizeof(buf));
 	if (!getcwd(buf, sizeof(buf)))
 	{
-		perror("pwd");
+		perror("minishell: pwd");
 		return (1);
 	}
 	ft_printf_fd(cmd->fd_out, "%s\n", &buf[0]);
@@ -28,7 +28,8 @@ int	ft_pwd(t_cmd *cmd)
 
 int	ft_exit(t_cmd *cmd, t_data *data)
 {
-	ft_putstr("exit\n", 2);
+	if (!data->is_child)
+		ft_putstr("exit\n", 2);
 	if (cmd)
 	{
 		if (cmd->argc > 1)

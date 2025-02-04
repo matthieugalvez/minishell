@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/04 19:08:33 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 19:45:06 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 typedef struct s_data
 {
+	int			is_child;
 	char		**envp;
 	int			envp_len;
 	int			exit_code;
