@@ -6,13 +6,13 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:10 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 16:05:17 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:03:48 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	is_valid_env_var(char *arg)
+static int	is_valid_env_var(char *arg, char *mode)
 {
 	int	i;
 
@@ -20,17 +20,16 @@ static int	is_valid_env_var(char *arg)
 	if (*arg && (!ft_isalpha(*arg) && *arg != '_'))
 	{
 		ft_printf_fd(2,
-			"minishell: export: `%s': not a valid identifier\n", arg);
+			"minishell: %s: `%s': not a valid identifier\n", mode, arg);
 		return (1);
 	}
 	while (arg[i])
 	{
-		if (!ft_isalnum(arg[i]) && arg[i] != '_')
+		if ((!ft_isalnum(arg[i]) && arg[i] != '_' && arg[i] != '=')
+			|| (!ft_strncmp(mode, "unset", 5) && arg[i] == '='))
 		{
-			if (arg[i] == '=')
-				break ;
 			ft_printf_fd(2,
-				"minishell: export: `%s': not a valid identifier\n", arg);
+				"minishell: %s: `%s': not a valid identifier\n", mode, arg);
 			return (1);
 		}
 		i ++;
@@ -54,9 +53,7 @@ static int	is_valid_env_arg(char *arg, char *mode)
 		ft_printf_fd(2, ": invalid option\n");
 		return (1);
 	}
-	if (ft_strncmp(mode, "export", 7))
-		return (0);
-	return (is_valid_env_var(arg));
+	return (is_valid_env_var(arg, mode));
 }
 
 int	ft_export(t_data *data, t_cmd *cmd)
