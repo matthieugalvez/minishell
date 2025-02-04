@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/02/04 15:33:34 by mmanuell         ###   ########.fr        #
+#    Updated: 2025/02/04 19:08:49 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ DIR_LIBFT = libft
 
 BUILTINS_SRCS	= builtins.c env_builtins.c env_builtins_utils.c ft_echo.c ft_cd.c ft_unset_export.c
 EXEC_SRCS		= exec.c pathfinder.c
-EXPAND_SRCS		= expand.c expand_parts.c expand_utils.c split_expand.c
+EXPAND_SRCS		= expand.c expand_parts.c expand_utils.c split_expand.c split_expand_utils.c
 PARSING_SRCS	= line_spliter.c syntax_parsing.c init_tokenization.c parsing_utils.c
 REDIRECT_SRCS	= get_redirect_fd.c heredoc.c
 SIGNAL_SRCS		= signal_handler.c

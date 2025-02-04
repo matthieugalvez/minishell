@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:10 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 18:03:48 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/04 19:18:15 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ static int	is_valid_env_var(char *arg, char *mode)
 	}
 	while (arg[i])
 	{
-		if ((!ft_isalnum(arg[i]) && arg[i] != '_' && arg[i] != '=')
+		if ((!ft_isalnum(arg[i]) && arg[i] != '_')
 			|| (!ft_strncmp(mode, "unset", 5) && arg[i] == '='))
 		{
+			if (!ft_strncmp(mode, "export", 6) && arg[i] == '=')
+				break ;
 			ft_printf_fd(2,
 				"minishell: %s: `%s': not a valid identifier\n", mode, arg);
 			return (1);
