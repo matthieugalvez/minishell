@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:55:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 16:11:57 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:05:21 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ static char	*parse_expand(char *input, t_data *data, int expand_index)
 	char	**parts;
 	char	*expand;
 
-	parts = get_parts(input, expand_index);
+	parts = get_parts(input, &expand_index);
 	if (!parts)
 		return (NULL);
 	parts[3] = NULL;
+	print_linetab("During Expand", parts);
 	expand = join_parts(parts, &expand_index, data);
 	if (!expand)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:50:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 16:15:03 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/04 10:42:21 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,45 +33,53 @@ static char	*get_expand_mpart(char *input, char *lpart)
 	int		len;
 
 	start = ft_strlen(lpart);
-	i = start + 1;
+	i = start;
 	len = 1;
-	while (input[i])
+	while (input[++i])
 	{
-		if (input[i] == '?' && i > 0 && input[i - 1] == '$')
+		if ((input[i] == '?' || input[i] == '\"' || input[i] == '\'')
+			&& input[i - 1] == '$')
 			len++;
 		if (!ft_isalnum(input[i]) && input[i] != '_')
 			break ;
-		i++;
+		if (input[i - 1] == '$'
+			&& !ft_isalpha(input[i]) && input[i] != '_')
+		{
+			len ++;
+			break ;
+		}
 		len++;
 	}
 	out = ft_substr(input, start, len);
 	return (out);
 }
 
-static char	*get_expand_lpart(char *input, int expand_index)
+static char	*get_expand_lpart(char *input, int *expand_index)
 {
 	int		double_quote;
 	char	*out;
 
 	double_quote = -1;
-	while (input[expand_index])
+	while (input[*expand_index])
 	{
-		if (input[expand_index] == '\"')
+		if (input[*expand_index] == '\"')
 			double_quote *= -1;
-		if (input[expand_index] == '\'' && double_quote == -1)
+		if (input[*expand_index] == '\'' && double_quote == -1)
 		{
-			expand_index++;
-			while (input[expand_index] && input[expand_index] != '\'')
-				expand_index++;
+			*expand_index += 1;
+			while (input[*expand_index] && input[*expand_index] != '\'')
+				*expand_index += 1;
 		}
-		if (input[expand_index] == '$')
+		if (input[*expand_index] == '$' && (!(double_quote == 1
+					&& input[*expand_index + 1]
+					&& input[*expand_index + 1] == '\"')))
 		{
-			out = ft_substr(input, 0, expand_index);
+			out = ft_substr(input, 0, *expand_index);
 			return (out);
 		}
-		expand_index++;
+		*expand_index += 1;
 	}
-	out = ft_calloc(sizeof (char), 1);
+	out = ft_substr(input, 0, *expand_index);
 	return (out);
 }
 
@@ -99,7 +107,7 @@ char	*join_parts(char **parts, int *expand_index, t_data *data)
 	return (out);
 }
 
-char	**get_parts(char *input, int expand_index)
+char	**get_parts(char *input, int *expand_index)
 {
 	char	**parts;
 
