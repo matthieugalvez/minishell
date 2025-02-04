@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:54 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 17:28:46 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/04 14:28:04 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	tokenize_builtin(char **line, t_data *data)
 		data->exit_code = 1;
 		exit (EXIT_FAILURE);
 	}
+	print_linetab("After Tokenisation", cmd.args);
 	ft_unquote(cmd.args);
 	if (!cmd.args)
 	{

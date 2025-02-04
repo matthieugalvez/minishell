@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:44:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 17:25:46 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/04 14:32:14 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	check_redirect(t_cmd *cmd, char **line, int cmd_len)
 			ft_freetab(cmd->args);
 			return (-1);
 		}
-		if (i > cmd_len)
+		if (i >= cmd_len)
 			break ;
 		cmd->args[j] = ft_strdup(line[i]);
 		if (!cmd->args[j])
@@ -62,10 +62,13 @@ int	parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len)
 int	find_lens(char **line, int *i, int *cmd_len, int *args_len)
 {
 	*cmd_len += 1;
-	if (ft_strncmp(line[*i], "<", 1) && ft_strncmp(line[*i], ">", 1))
+	if (!ft_isoperator(line[*i][0]))
 		*args_len += 1;
 	else
+	{
+		*cmd_len += 1;
 		*i += 1;
+	}
 	*i += 1;
 	return (0);
 }

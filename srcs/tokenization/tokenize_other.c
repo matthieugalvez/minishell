@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 17:34:27 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/04 14:26:14 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	tokenize_other(char **line, t_data *data, int cmd_index, int i)
 	args_len = 0;
 	j = 0;
 	ft_bzero(&cmd, sizeof(cmd));
-	while (line[i + j] && ft_strncmp(line[i + j], "|", 1))
+	while (line[i + j] && ft_isoperator(line[i + j][0]) != 2)
 		find_lens(&line[i], &j, &cmd_len, &args_len);
 	init_pipe(&cmd, line[i + j], &j);
 	if (parse_cmd(&cmd, &line[i], cmd_len, args_len))
@@ -64,6 +64,7 @@ void	tokenize_other(char **line, t_data *data, int cmd_index, int i)
 		data->exit_code = 1;
 		ft_exit(&cmd, data);
 	}
+	print_linetab("After Tokenisation", cmd.args);
 	launch_cmd(&cmd, data, line, cmd_index);
 	if (line[i + j])
 		tokenize_other(line, data, cmd_index + 1, i + j);
