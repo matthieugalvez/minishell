@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:25 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 17:38:02 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:38:36 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,6 @@ char	*parse_var_name(char *arg)
 		return (NULL);
 }
 
-int	get_env_index(char *env_var, t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->envp_len)
-	{
-		if (!ft_strncmp(env_var, data->envp[i], ft_strlen(env_var)))
-			return (i);
-		i++;
-	}
-	return (i);
-}
-
 int	add_env_var(t_data *data, t_cmd *cmd, char *var_name, int cmdi)
 {
 	int	i;
@@ -65,8 +51,9 @@ int	add_env_var(t_data *data, t_cmd *cmd, char *var_name, int cmdi)
 			return (-1);
 		data->envp_len += 1;
 	}
+	free (data->envp[i]);
 	data->envp[i] = ft_strdup(cmd->args[cmdi]);
-	if (!cmd->args[cmdi])
+	if (!data->envp[i])
 		return (-1);
 	return (0);
 }

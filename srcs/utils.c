@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:29:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 18:16:45 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:35:05 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	exec_builtins(t_cmd *cmd, t_data *data)
 	if (!cmd->args[0])
 		return (1);
 	if (!ft_strncmp(cmd->args[0], "cd", 3))
-		return (ft_cd(cmd));
+		return (ft_cd(cmd, data));
 	if (!ft_strncmp(cmd->args[0], "env", 4))
 		return (ft_env(cmd, data, NULL));
 	if (!ft_strncmp(cmd->args[0], "export", 7))

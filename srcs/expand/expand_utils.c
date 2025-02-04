@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:55:46 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 13:57:53 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:46:40 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*search_env(char *env_value, t_data *data)
 	return (ft_calloc(sizeof (char), 1));
 }
 
-char	*get_env_value(char *env_value, t_data *data)
+char	*get_expand_value(char *env_value, t_data *data)
 {
 	char	*out;
 

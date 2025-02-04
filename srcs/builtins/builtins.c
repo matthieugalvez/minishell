@@ -6,27 +6,11 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/04 11:07:19 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:15:51 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	ft_cd(t_cmd *cmd)
-{
-	if (cmd->argc > 2)
-	{
-		ft_putstr("minishell: cd: too many arguments\n", 2);
-		return (1);
-	}
-	if (chdir(cmd->args[1]))
-	{
-		ft_putstr("minishell: cd: ", 2);
-		perror(cmd->args[1]);
-		return (1);
-	}
-	return (0);
-}
 
 int	ft_pwd(t_cmd *cmd)
 {

@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:50:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 10:42:21 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:48:39 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*join_parts(char **parts, int *expand_index, t_data *data)
 {
 	char	*out;
 
-	out = get_env_value(parts[1], data);
+	out = get_expand_value(parts[1], data);
 	if (!out)
 	{
 		ft_freetab(parts);
