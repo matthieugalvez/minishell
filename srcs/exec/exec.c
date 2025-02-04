@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/04 13:30:18 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/04 19:12:13 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	ft_childprocess(t_cmd *cmd, t_data *data, char **line)
 	ft_freetab(line);
 	if (cmd->to_close_fd)
 		close(cmd->to_close_fd);
+	data->is_child = 1;
 	data->exit_code = exec_builtins(cmd, data);
 	if (data->exit_code != 2)
 	{
