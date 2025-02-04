@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:39:01 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 16:35:08 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:49:04 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,14 @@ static char	*get_full_path(void)
 	char	cwd[PATH_MAX];
 	char	*fullpath;
 
-	getcwd(cwd, sizeof(cwd));
+	if (!getcwd(cwd, sizeof(cwd)))
+	{
+		fullpath = ft_calloc(sizeof(char), 2);
+		if (!fullpath)
+			return (NULL);
+		fullpath[0] = '?';
+		return (fullpath);
+	}
 	fullpath = ft_calloc(sizeof(char), ft_strlen(cwd) + 1);
 	if (!fullpath)
 		return (NULL);
