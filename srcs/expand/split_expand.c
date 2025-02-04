@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:05:32 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 14:12:02 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:49:04 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,39 @@ static char	**init_expand_tab(char **input, char **split_expand, int *index)
 	return (output);
 }
 
+static char	**quote_operators(char **split_expand)
+{
+	int		i;
+	char	*quoted_string;
+
+	i = 0;
+	while (split_expand[i])
+	{
+		if (ft_isoperator(split_expand[i][0]))
+		{
+			quoted_string = ft_strjoin("\"", split_expand[i]);
+			if (!quoted_string)
+				return (NULL);
+			quoted_string = ft_strjoin_free(quoted_string, "\"");
+			if (!quoted_string)
+				return (NULL);
+			free(split_expand[i]);
+			split_expand[i] = quoted_string;
+		}
+		i++;
+	}
+	return (split_expand);
+}
+
 char	**split_expand_result(char **input, int *index)
 {
 	char	**output;
 	char	**split_expand;
 
 	split_expand = ft_split(input[*index], ' ');
+	if (!split_expand)
+		return (NULL);
+	split_expand = quote_operators(split_expand);
 	if (!split_expand)
 		return (NULL);
 	output = init_expand_tab(input, split_expand, index);
