@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 18:47:24 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:23:51 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ int		ft_isbuiltin(char *arg);
 
 //EXPAND
 
-void	ft_expand(char **input, t_data *data);
+char	**ft_checkexpand(char **input, t_data *data);
 char	*join_parts(char **parts, int *expand_index, t_data *data);
 char	**get_parts(char *input, int *expand_index);
 int		parse_expand_quotes(char **input);
+char	**split_expand_result(char **input, int *index);
 
 //TOKENIZATION
 

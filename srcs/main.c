@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 13:45:21 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/04 14:23:34 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	get_splited_line(char *user_input, t_data *data)
 	print_linetab("After split", split_user_input);
 	if (!split_user_input[0])
 		return ;
-	ft_expand(split_user_input, data);
+	split_user_input = ft_checkexpand(split_user_input, data);
 	if (!split_user_input)
 	{
 		data->exit_code = 1;
