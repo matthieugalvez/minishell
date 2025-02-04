@@ -6,11 +6,24 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:44:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 14:32:14 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/04 14:52:26 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static int	write_args(t_cmd *cmd, char **line, int *i, int *j)
+{
+	cmd->args[*j] = ft_strdup(line[*i]);
+	if (!cmd->args[*j])
+	{
+		ft_freetab(cmd->args);
+		return (1);
+	}
+	*j += 1;
+	*i += 1;
+	return (0);
+}
 
 static int	check_redirect(t_cmd *cmd, char **line, int cmd_len)
 {
@@ -29,14 +42,9 @@ static int	check_redirect(t_cmd *cmd, char **line, int cmd_len)
 		}
 		if (i >= cmd_len)
 			break ;
-		cmd->args[j] = ft_strdup(line[i]);
-		if (!cmd->args[j])
-		{
-			ft_freetab(cmd->args);
-			return (-1);
-		}
-		j++;
-		i++;
+		if (!ft_isoperator(line[i][0]))
+			if (write_args(cmd, line, &i, &j))
+				return (-1);
 	}
 	return (j);
 }
@@ -48,7 +56,7 @@ int	parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len)
 	cmd->args = ft_calloc(sizeof(char *), args_len + 1);
 	if (!cmd->args)
 	{
-		ft_putstr("Error\nFailed to initiate struct\n", 2);
+		ft_putstr("Error\nFailed to initiate args tab\n", 2);
 		return (1);
 	}
 	i = check_redirect(cmd, line, cmd_len);
