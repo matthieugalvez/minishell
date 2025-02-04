@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:55:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 14:26:06 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:24:43 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static char	*parse_expand(char *input, t_data *data, int expand_index)
 	if (!parts)
 		return (NULL);
 	parts[3] = NULL;
+	print_linetab("During Expand", parts);
 	expand = join_parts(parts, &expand_index, data);
 	if (!expand)
 		return (NULL);
 	free(input);
-	if (expand && expand[expand_index] && ft_strchr(&expand[expand_index], '$'))
-	{
+	if (expand && expand[expand_index]
+		&& ft_strchr(&expand[expand_index], '$'))
 		return (parse_expand(expand, data, expand_index));
-	}
 	return (expand);
 }
 
@@ -40,7 +40,9 @@ static char	**ft_expand(char **input, t_data *data, int *i)
 		data->exit_code = 1;
 		ft_kill(NULL, data);
 	}
+	print_linetab("After Expand", input);
 	input = split_expand_result(input, i);
+	print_linetab("After Split Expand", input);
 	if (!input)
 	{
 		data->exit_code = 1;
