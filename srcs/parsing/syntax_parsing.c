@@ -6,7 +6,7 @@
 /*   By: mmanuell <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:08 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/05 12:52:46 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 13:57:42 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	check_operator_parameter(char **line, int i)
 	return (0);
 }
 
-static int	parse_operator(char **line, int *i)
+static int	parse_operator(char **line, int *i, int *parsing_case)
 {
 	if (check_multiple_operator(line[*i]))
 		return (1);
@@ -85,6 +85,8 @@ static int	parse_operator(char **line, int *i)
 	}
 	if (ft_isoperator(line[*i][0]) == 1)
 		*i += 1;
+	if (*parsing_case == -1)
+		*parsing_case = 1;
 	return (0);
 }
 
@@ -106,7 +108,7 @@ int	syntax_parsing(char **line, t_data *data)
 		}
 		if (ft_isoperator(line[i][0]))
 		{
-			if (parse_operator(line, &i))
+			if (parse_operator(line, &i, &parsing_case))
 				return (-1);
 			i ++;
 		}
