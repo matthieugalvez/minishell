@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:55:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/05 12:42:04 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:32:11 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ static char	**ft_expand(char **input, t_data *data, int *i)
 		ft_kill(NULL, data);
 	}
 	print_linetab("After Expand", input);
-	input = split_expand_result(input, i);
+	if (!(input[*i - 1] && (input[*i - 1][0] == '>'
+			|| input[*i - 1][0] == '<')))
+		input = split_expand_result(input, i);
 	print_linetab("After Split Expand", input);
 	if (!input)
 	{
