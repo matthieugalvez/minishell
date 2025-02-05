@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:55:46 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/05 11:44:57 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:50:30 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ char	*expand_passquotes(char *input, int i)
 	char	*out;
 
 	if (input[i + 1] && input[i] == input[i + 1])
-	{
 		out = ft_substr(input, i - 1, 3);
-	}
+	else if (input[i] == '?')
+		out = ft_substr(input, i - 1, 2);
 	else
 	{
 		out = ft_calloc(3, sizeof(char));
