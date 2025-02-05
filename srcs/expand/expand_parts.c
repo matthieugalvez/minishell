@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:50:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/05 15:24:15 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:52:05 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ static char	*get_expand_rpart(char *input, char *lpart, char *mpart)
 		return (ft_calloc(sizeof(char), 1));
 }
 
-static char	*get_expand_mpart(char *input, char *lpart)
+static char	*get_expand_mpart(char *input, int start)
 {
 	char	*out;
-	int		start;
 	int		i;
 	int		len;
 
-	start = ft_strlen(lpart);
 	i = start;
 	len = 1;
+	if (!input[i])
+		return (ft_calloc(sizeof (char), 1));
 	while (input[++i])
 	{
 		if ((input[i] == '?' || input[i] == '\"' || input[i] == '\'')
@@ -122,7 +122,7 @@ char	**get_parts(char *input, int *expand_index, int *double_quote)
 		free(parts);
 		return (NULL);
 	}
-	parts[1] = get_expand_mpart(input, parts[0]);
+	parts[1] = get_expand_mpart(input, ft_strlen(parts[0]));
 	if (!parts[1])
 	{
 		ft_freetab(parts);

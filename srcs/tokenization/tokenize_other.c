@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/05 12:09:53 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 16:12:51 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	launch_cmd(t_cmd *cmd, t_data *data, char **line, int cmd_index)
 		data->exit_code = 1;
 		ft_exit(cmd, data);
 	}
-	print_linetab("After unquote", cmd->args);
+	//print_linetab("After unquote", cmd->args);
 	ft_exec(cmd, data, line, cmd_index);
 }
 
@@ -64,7 +64,7 @@ void	tokenize_other(char **line, t_data *data, int cmd_index, int i)
 		data->exit_code = 1;
 		ft_kill(&cmd, data);
 	}
-	print_linetab("After Tokenisation", cmd.args);
+	//print_linetab("After Tokenisation", cmd.args);
 	launch_cmd(&cmd, data, line, cmd_index);
 	if (line[i + j])
 		tokenize_other(line, data, cmd_index + 1, i + j);
