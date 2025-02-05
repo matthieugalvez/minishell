@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:10 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 19:18:15 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:55:17 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ int	ft_export(t_data *data, t_cmd *cmd)
 				if (add_env_var(data, cmd, var_name, cmdi) == -1)
 				{
 					data->exit_code = 1;
+					free (var_name);
 					ft_kill(cmd, data);
 				}
+				free (var_name);
 			}
 		}
 	}
