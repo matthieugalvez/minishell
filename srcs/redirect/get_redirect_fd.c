@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:25:51 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/04 15:39:16 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 12:01:39 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ static int	ft_heredoc(t_cmd *cmd, char *limiter)
 		return (INT_MIN);
 	}
 	cmd->fd_in = get_heredoc_fd(limiter, name);
-	if (cmd->fd_in == INT_MIN)
-		return (INT_MIN);
 	free(name);
 	return (2);
 }

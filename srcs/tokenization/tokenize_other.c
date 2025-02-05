@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/04 14:26:14 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 12:09:53 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	init_pipe(t_cmd *cmd, char *arg, int *i)
 {
 	static int	pipe_fd[2] = {0};
 
-	if (cmd->fd_in)
+	if (cmd->fd_in > 0)
 		close(cmd->fd_in);
 	cmd->fd_in = pipe_fd[0];
 	if (arg && !ft_strncmp(arg, "|", 1))
@@ -62,12 +62,12 @@ void	tokenize_other(char **line, t_data *data, int cmd_index, int i)
 	if (parse_cmd(&cmd, &line[i], cmd_len, args_len))
 	{
 		data->exit_code = 1;
-		ft_exit(&cmd, data);
+		ft_kill(&cmd, data);
 	}
 	print_linetab("After Tokenisation", cmd.args);
 	launch_cmd(&cmd, data, line, cmd_index);
 	if (line[i + j])
 		tokenize_other(line, data, cmd_index + 1, i + j);
-	else if (cmd.fd_in)
+	else if (cmd.fd_in > 0)
 		close (cmd.fd_in);
 }

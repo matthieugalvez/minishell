@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:55:55 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 15:10:22 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 12:05:43 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static char	*ft_writetemp(int fd, char *name, char *limiter)
 	if (!buf)
 	{
 		unlink(name);
-		free(name);
 		ft_putstr("Error\nCouldn't retrieve STDIN line\n", 2);
 		return (NULL);
 	}
@@ -32,7 +31,6 @@ static char	*ft_writetemp(int fd, char *name, char *limiter)
 		if (!buf)
 		{
 			unlink(name);
-			free(name);
 			ft_putstr("Error\nCouldn't retrieve STDIN line\n", 2);
 			return (NULL);
 		}
@@ -58,7 +56,7 @@ int	get_heredoc_fd(char *limiter, char *name)
 	free(limiter);
 	close(fd);
 	if (!name)
-		return (INT_MIN);
+		return (-1);
 	fd = open(name, O_RDONLY);
 	if (fd < 0)
 		perror("heredoc");

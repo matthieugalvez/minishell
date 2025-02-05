@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:08:54 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 14:28:04 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 12:10:28 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	cleanup_builtin(t_cmd *cmd, t_data *data)
 {
 	data->exit_code = exec_builtins(cmd, data);
-	if (cmd->fd_in)
+	if (cmd->fd_in > 0)
 		close (cmd->fd_in);
 	if (cmd->fd_out > 1)
 		close (cmd->fd_out);
@@ -39,7 +39,7 @@ void	tokenize_builtin(char **line, t_data *data)
 	if (parse_cmd(&cmd, line, cmd_len, args_len))
 	{
 		data->exit_code = 1;
-		exit (EXIT_FAILURE);
+		ft_kill(&cmd, data);
 	}
 	print_linetab("After Tokenisation", cmd.args);
 	ft_unquote(cmd.args);
