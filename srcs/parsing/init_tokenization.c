@@ -6,17 +6,20 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 16:28:38 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/05 13:58:15 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 16:54:08 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	g_sig_errno = 0;
 
 static void	waitchildren(t_data *data)
 {
 	int		i;
 	int		status;
 
+	status = -1;
 	i = 0;
 	while (i < data->pid_tab_len)
 	{
@@ -24,6 +27,8 @@ static void	waitchildren(t_data *data)
 		i++;
 	}
 	data->exit_code = WEXITSTATUS(status);
+	if (status == -1)
+		data->exit_code = g_sig_errno;
 	free(data->pid_tab);
 	data->pid_tab_len = 0;
 }
