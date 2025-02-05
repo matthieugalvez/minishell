@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:17:57 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/05 14:33:19 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 18:16:28 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*make_newfilename(char **filename_tab)
 	char	*new_filename;
 
 	new_filename = ft_strdup(filename_tab[0]);
-	free(filename_tab);
+	ft_freetab(filename_tab);
 	if (!new_filename)
 	{
 		ft_putstr("Error\nFailed to init string\n", 2);
