@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:05:32 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 19:08:20 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:20:02 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ char	**split_expand_result(char **input, int *index)
 	char	**output;
 	char	**split_expand;
 
+	if (!ft_strncmp(input[*index], " ", ft_strlen(input[*index])))
+		return (input);
 	split_expand = ft_split_quotes(input[*index]);
 	if (!split_expand)
 		return (NULL);
