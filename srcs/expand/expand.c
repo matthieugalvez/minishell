@@ -6,35 +6,37 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:55:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 17:24:43 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:21:42 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*parse_expand(char *input, t_data *data, int expand_index)
+static char	*parse_expand(char *input, t_data *data, int expand_index, int double_quote)
 {
 	char	**parts;
 	char	*expand;
 
-	parts = get_parts(input, &expand_index);
+	parts = get_parts(input, &expand_index, &double_quote);
 	if (!parts)
 		return (NULL);
 	parts[3] = NULL;
-	print_linetab("During Expand", parts);
+	//print_linetab("During Expand", parts);
 	expand = join_parts(parts, &expand_index, data);
+	printf("expand %s\n", expand);
+	printf("index %d : %s\n", expand_index, &expand[expand_index]);
 	if (!expand)
 		return (NULL);
 	free(input);
 	if (expand && expand[expand_index]
 		&& ft_strchr(&expand[expand_index], '$'))
-		return (parse_expand(expand, data, expand_index));
+		return (parse_expand(expand, data, expand_index, double_quote));
 	return (expand);
 }
 
 static char	**ft_expand(char **input, t_data *data, int *i)
 {
-	input[*i] = parse_expand(input[*i], data, 0);
+	input[*i] = parse_expand(input[*i], data, 0, -1);
 	if (!input[*i])
 	{
 		data->exit_code = 1;
