@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:07:19 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/05 16:12:19 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:10:07 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	get_splited_line(char *user_input, t_data *data)
 		data->exit_code = 1;
 		ft_kill(NULL, data);
 	}
-	//print_linetab("After split", split_user_input);
 	if (!split_user_input[0])
 		return ;
 	split_user_input = ft_checkexpand(split_user_input, data);
@@ -33,7 +32,6 @@ static void	get_splited_line(char *user_input, t_data *data)
 		data->exit_code = 1;
 		ft_kill(NULL, data);
 	}
-	//print_linetab("After expands", split_user_input);
 	init_tokenization(split_user_input, data);
 }
 

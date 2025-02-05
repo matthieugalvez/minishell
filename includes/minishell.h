@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/05 17:07:25 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:10:43 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,5 @@ char	*get_env_var(t_data *data, char *var_name);
 void	ft_exec(t_cmd *cmd, t_data *data, char **line, int cmd_index);
 char	*check_path(t_data *data, char *cmd_path);
 char	*ft_findpath(t_data *data, char *cmd);
-
-//	TEST - A SUPPRIMER !!
-void	print_linetab(char *str, char **input);
 
 #endif

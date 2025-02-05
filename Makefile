@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/02/05 14:26:25 by mgalvez          ###   ########.fr        #
+#    Updated: 2025/02/05 19:10:36 by mmanuell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,7 @@ LST_SRCS	= 	$(addprefix builtins/, ${BUILTINS_SRCS}) \
 				$(addprefix unquote/, ${UNQUOTE_SRCS}) \
 				$(addprefix visual/, ${VISUAL_SRCS}) \
 				main.c \
-				utils.c \
-				print_linetab.c ##A SUPPRIMER !!
+				utils.c 
 
 LST_OBJS = $(LST_SRCS:.c=.o)
 LST_INCS = minishell.h
