@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:08:25 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 15:38:36 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:52:24 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	remove_env_var(t_data *data, t_cmd *cmd, int cmdi)
 	if (!var_name)
 		return (-1);
 	i = get_env_index(var_name, data) - 1;
+	free(var_name);
 	if (i < data->envp_len - 1)
 	{
 		free(data->envp[i + 1]);

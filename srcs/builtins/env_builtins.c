@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:12:39 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 15:44:32 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:03:29 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_env_var(t_data *data, char *var_name)
 
 	i = get_env_index(var_name, data);
 	if (i == data->envp_len)
-		return (ft_calloc(1, 1));
+		return (ft_calloc(sizeof(char), 1));
 	return (ft_substr(data->envp[i],
 			ft_strlen(var_name),
 			ft_strlen(data->envp[i]) - ft_strlen(var_name)));
