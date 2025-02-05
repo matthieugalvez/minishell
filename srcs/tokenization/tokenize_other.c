@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:07 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/05 16:12:51 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:27:34 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,4 @@ void	tokenize_other(char **line, t_data *data, int cmd_index, int i)
 	launch_cmd(&cmd, data, line, cmd_index);
 	if (line[i + j])
 		tokenize_other(line, data, cmd_index + 1, i + j);
-	else if (cmd.fd_in > 0)
-		close (cmd.fd_in);
 }
