@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:58:26 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/03 11:22:15 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 16:48:12 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,15 @@ void	signal_handler_child(void)
 
 static void	in_child_sig_handler(int signal)
 {
+	extern int	g_sig_errno;
+
+	if (signal == SIGINT)
+		g_sig_errno = 130;
 	if (signal == SIGQUIT)
+	{
+		g_sig_errno = 131;
 		ft_printf("Quit (core dumped)");
+	}
 	ft_printf("\n");
 }
 

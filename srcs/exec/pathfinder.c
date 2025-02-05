@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:04:15 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/04 13:20:17 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 17:15:40 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,17 @@ char	*check_path(t_data *data, char *cmd_path)
 {
 	struct stat	path_stat;
 
+	if (access(cmd_path, F_OK))
+	{
+		ft_printf_fd(2, "minishell: %s: command not found\n", cmd_path);
+		data->exit_code = 127;
+		return (NULL);
+	}
 	stat(cmd_path, &path_stat);
 	if (S_ISDIR(path_stat.st_mode))
 	{
 		ft_printf_fd(2, "minishell: %s: Is a directory\n", cmd_path);
 		data->exit_code = 126;
-		return (NULL);
-	}
-	if (access(cmd_path, F_OK))
-	{
-		ft_printf_fd(2, "minishell: %s: command not found\n", cmd_path);
-		data->exit_code = 127;
 		return (NULL);
 	}
 	if (access(cmd_path, X_OK))
