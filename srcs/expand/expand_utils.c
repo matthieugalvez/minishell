@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:55:46 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/05 14:50:30 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:11:21 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*search_env(char *env_value, t_data *data)
 	return (ft_calloc(sizeof (char), 1));
 }
 
-char	*get_expand_value(char *env_value, t_data *data)
+char	*get_expand_value(char *env_value, int double_quote, t_data *data)
 {
 	char	*out;
 	char	*trim;
@@ -62,9 +62,12 @@ char	*get_expand_value(char *env_value, t_data *data)
 		if (!out)
 			return (NULL);
 		out = search_env(out, data);
-		trim = ft_strtrim(out, " ");
-		free(out);
-		return (trim);
+		if (double_quote == -1)
+		{
+			trim = ft_strtrim(out, " ");
+			free(out);
+			return (trim);
+		}
 	}
 	return (out);
 }
