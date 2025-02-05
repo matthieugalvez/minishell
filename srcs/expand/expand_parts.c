@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:50:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 15:48:39 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:22:53 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*get_expand_mpart(char *input, char *lpart)
 	{
 		if ((input[i] == '?' || input[i] == '\"' || input[i] == '\'')
 			&& input[i - 1] == '$')
-			len++;
+			return (expand_passquotes(input, i));
 		if (!ft_isalnum(input[i]) && input[i] != '_')
 			break ;
 		if (input[i - 1] == '$'
@@ -54,23 +54,21 @@ static char	*get_expand_mpart(char *input, char *lpart)
 	return (out);
 }
 
-static char	*get_expand_lpart(char *input, int *expand_index)
+static char	*get_expand_lpart(char *input, int *expand_index, int *double_quote)
 {
-	int		double_quote;
 	char	*out;
 
-	double_quote = -1;
 	while (input[*expand_index])
 	{
 		if (input[*expand_index] == '\"')
-			double_quote *= -1;
-		if (input[*expand_index] == '\'' && double_quote == -1)
+			*double_quote *= -1;
+		if (input[*expand_index] == '\'' && *double_quote == -1)
 		{
 			*expand_index += 1;
 			while (input[*expand_index] && input[*expand_index] != '\'')
 				*expand_index += 1;
 		}
-		if (input[*expand_index] == '$' && (!(double_quote == 1
+		if (input[*expand_index] == '$' && (!(*double_quote == 1
 					&& input[*expand_index + 1]
 					&& input[*expand_index + 1] == '\"')))
 		{
@@ -107,14 +105,14 @@ char	*join_parts(char **parts, int *expand_index, t_data *data)
 	return (out);
 }
 
-char	**get_parts(char *input, int *expand_index)
+char	**get_parts(char *input, int *expand_index, int *double_quote)
 {
 	char	**parts;
 
 	parts = ft_calloc(sizeof(char *), 4);
 	if (!parts)
 		return (NULL);
-	parts[0] = get_expand_lpart(input, expand_index);
+	parts[0] = get_expand_lpart(input, expand_index, double_quote);
 	if (!parts[0])
 	{
 		free(parts);

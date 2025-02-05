@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/04 19:45:06 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:23:34 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,11 @@ int		ft_isbuiltin(char *arg);
 char	**ft_checkexpand(char **input, t_data *data);
 char	*get_expand_value(char *env_value, t_data *data);
 char	*join_parts(char **parts, int *expand_index, t_data *data);
-char	**get_parts(char *input, int *expand_index);
+char	**get_parts(char *input, int *expand_index, int *double_quote);
 int		parse_expand_quotes(char **input);
 char	**split_expand_result(char **input, int *index);
 char	**ft_split_quotes(char const *s);
+char	*expand_passquotes(char *input, int i);
 
 //TOKENIZATION
 

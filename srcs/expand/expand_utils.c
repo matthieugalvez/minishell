@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:55:46 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 15:46:40 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:44:57 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static char	*search_env(char *env_value, t_data *data)
 char	*get_expand_value(char *env_value, t_data *data)
 {
 	char	*out;
+	char	*trim;
 
 	if (check_orphan_dollar(env_value))
 		out = ft_strdup(env_value);
@@ -60,7 +61,29 @@ char	*get_expand_value(char *env_value, t_data *data)
 		out = ft_strjoin(env_value, "=");
 		if (!out)
 			return (NULL);
-		return (search_env(out, data));
+		out = search_env(out, data);
+		trim = ft_strtrim(out, " ");
+		free(out);
+		return (trim);
+	}
+	return (out);
+}
+
+char	*expand_passquotes(char *input, int i)
+{
+	char	*out;
+
+	if (input[i + 1] && input[i] == input[i + 1])
+	{
+		out = ft_substr(input, i - 1, 3);
+	}
+	else
+	{
+		out = ft_calloc(3, sizeof(char));
+		if (!out)
+			return (NULL);
+		out[0] = ' ';
+		out[1] = 0;
 	}
 	return (out);
 }

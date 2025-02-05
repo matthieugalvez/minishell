@@ -6,12 +6,11 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:15:24 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 19:42:24 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:44:13 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 static int	operator_lenght(char const *s)
 {
@@ -105,4 +104,3 @@ char	**ft_split_quotes(char const *s)
 		return (NULL);
 	return (make_tab(s, words_nb, tab));
 }
-
