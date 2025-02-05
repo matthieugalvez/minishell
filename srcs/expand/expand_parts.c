@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:50:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/05 12:22:53 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:24:15 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,11 @@ char	*join_parts(char **parts, int *expand_index, t_data *data)
 			out = ft_strjoin_free(out, parts[2]);
 	}
 	else
+	{
+		if (out)
+			free(out);
 		out = ft_strjoin(parts[0], parts[2]);
+	}
 	ft_freetab(parts);
 	return (out);
 }
