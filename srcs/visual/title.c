@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 16:32:02 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/03 16:32:21 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:40:14 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	get_title(void)
 			line = ft_getnextline(fd);
 		}
 		printf("\033[0m\n");
+		close(fd);
 	}
 }
