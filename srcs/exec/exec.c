@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:54:29 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/04 19:12:13 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 12:25:21 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static char	*init_cmd_path(t_cmd *cmd, t_data *data)
 
 static void	redirect_std(t_cmd *cmd)
 {
-	if (cmd->fd_in < 0 || cmd->fd_out < 0)
-		exit (EXIT_FAILURE);
 	if (cmd->fd_in)
 	{
 		dup2(cmd->fd_in, STDIN_FILENO);
@@ -47,15 +45,28 @@ static void	redirect_std(t_cmd *cmd)
 	}
 }
 
+static void	init_child(t_cmd *cmd, t_data *data, char **line)
+{
+	signal_handler_child();
+	ft_freetab(line);
+	if (cmd->to_close_fd > 0)
+		close(cmd->to_close_fd);
+	data->is_child = 1;
+	if (cmd->fd_in < 0 || cmd->fd_out < 0)
+	{
+		if (cmd->fd_in > 0)
+			close(cmd->fd_in);
+		if (cmd->fd_out > 0)
+			close(cmd->fd_out);
+		exit (EXIT_FAILURE);
+	}
+}
+
 static void	ft_childprocess(t_cmd *cmd, t_data *data, char **line)
 {
 	char	*cmd_path;
 
-	signal_handler_child();
-	ft_freetab(line);
-	if (cmd->to_close_fd)
-		close(cmd->to_close_fd);
-	data->is_child = 1;
+	init_child(cmd, data, line);
 	data->exit_code = exec_builtins(cmd, data);
 	if (data->exit_code != 2)
 	{
@@ -88,7 +99,7 @@ void	ft_exec(t_cmd *cmd, t_data *data, char **line, int cmd_index)
 	else
 	{
 		ft_freetab(cmd->args);
-		if (cmd->fd_out != 1)
+		if (cmd->fd_out > 1)
 			close(cmd->fd_out);
 	}
 }

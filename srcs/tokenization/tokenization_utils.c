@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:44:51 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/04 14:52:26 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 11:55:55 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ static int	check_redirect(t_cmd *cmd, char **line, int cmd_len)
 	{
 		i += get_redirect_fd(cmd, line, i);
 		if (i < 0)
-		{
-			ft_freetab(cmd->args);
 			return (-1);
-		}
 		if (i >= cmd_len)
 			break ;
 		if (!ft_isoperator(line[i][0]))
