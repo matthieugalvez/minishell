@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:25:51 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/05 12:01:39 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 14:35:52 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ static int	ft_outfile_append(t_cmd *cmd, char *outfile)
 		return (2);
 	if (cmd->fd_out > 1)
 		close(cmd->fd_out);
+	outfile = unquote_filename(outfile);
+	if (!outfile)
+		return (INT_MIN);
 	cmd->fd_out = open(outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (cmd->fd_out < 0)
 	{
@@ -33,6 +36,9 @@ static int	ft_outfile_truncate(t_cmd *cmd, char *outfile)
 		return (2);
 	if (cmd->fd_out > 1)
 		close(cmd->fd_out);
+	outfile = unquote_filename(outfile);
+	if (!outfile)
+		return (INT_MIN);
 	cmd->fd_out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (cmd->fd_out < 0)
 	{
@@ -50,6 +56,9 @@ static int	ft_heredoc(t_cmd *cmd, char *limiter)
 		return (2);
 	if (cmd->fd_in > 0)
 		close(cmd->fd_in);
+	limiter = unquote_filename(limiter);
+	if (!limiter)
+		return (INT_MIN);
 	name = ft_makerngname(12);
 	if (!name)
 	{
@@ -67,6 +76,9 @@ static int	ft_infile(t_cmd *cmd, char *infile)
 		return (2);
 	if (cmd->fd_in > 0)
 		close(cmd->fd_in);
+	infile = unquote_filename(infile);
+	if (!infile)
+		return (INT_MIN);
 	cmd->fd_in = open(infile, O_RDONLY);
 	if (cmd->fd_in < 0)
 	{

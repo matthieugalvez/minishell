@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:55:44 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/05 12:23:34 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:29:00 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int		parse_cmd(t_cmd *cmd, char **line, int cmd_len, int args_len);
 // REDIRECT
 
 int		get_redirect_fd(t_cmd *cmd, char **line, int i);
+char	*unquote_filename(char *filename);
 int		get_heredoc_fd(char *limiter, char *name);
 
 // UNQUOTE
