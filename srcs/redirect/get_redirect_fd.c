@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:25:51 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/05 18:14:42 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/05 18:41:39 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static int	ft_outfile_append(t_cmd *cmd, char *outfile)
 	if (!outfile)
 		return (INT_MIN);
 	cmd->fd_out = open(outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	free(outfile);
 	if (cmd->fd_out < 0)
 	{
 		ft_putstr("minishell: ", 2);
 		perror(outfile);
 	}
+	free(outfile);
 	return (2);
 }
 
@@ -41,12 +41,12 @@ static int	ft_outfile_truncate(t_cmd *cmd, char *outfile)
 	if (!outfile)
 		return (INT_MIN);
 	cmd->fd_out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	free(outfile);
 	if (cmd->fd_out < 0)
 	{
 		ft_putstr("minishell: ", 2);
 		perror(outfile);
 	}
+	free(outfile);
 	return (2);
 }
 
@@ -84,12 +84,12 @@ static int	ft_infile(t_cmd *cmd, char *infile)
 	if (!infile)
 		return (INT_MIN);
 	cmd->fd_in = open(infile, O_RDONLY);
-	free(infile);
 	if (cmd->fd_in < 0)
 	{
 		ft_putstr("minishell: ", 2);
 		perror(infile);
 	}
+	free(infile);
 	return (2);
 }
 
