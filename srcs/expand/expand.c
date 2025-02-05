@@ -6,13 +6,14 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:55:27 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/05 12:21:42 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:42:04 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*parse_expand(char *input, t_data *data, int expand_index, int double_quote)
+static char	*parse_expand(char *input, t_data *data,
+int expand_index, int double_quote)
 {
 	char	**parts;
 	char	*expand;
@@ -21,10 +22,8 @@ static char	*parse_expand(char *input, t_data *data, int expand_index, int doubl
 	if (!parts)
 		return (NULL);
 	parts[3] = NULL;
-	//print_linetab("During Expand", parts);
+	print_linetab("During Expand", parts);
 	expand = join_parts(parts, &expand_index, data);
-	printf("expand %s\n", expand);
-	printf("index %d : %s\n", expand_index, &expand[expand_index]);
 	if (!expand)
 		return (NULL);
 	free(input);
@@ -61,10 +60,15 @@ char	**ft_checkexpand(char **input, t_data *data)
 	i = 0;
 	while (input[i])
 	{
-		found_expand = ft_strchr(input[i], '$');
-		if (found_expand)
-			input = ft_expand(input, data, &i);
-		i ++;
+		if (i > 0 && !ft_strncmp(input[i - 1], "<<", ft_strlen(input[i - 1])))
+			i++;
+		else
+		{
+			found_expand = ft_strchr(input[i], '$');
+			if (found_expand)
+				input = ft_expand(input, data, &i);
+			i++;
+		}
 	}
 	i = 0;
 	while (input[i])
