@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 16:28:38 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/05 16:54:08 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/06 13:31:37 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ void	init_tokenization(char **input, t_data *data)
 	int		parsing_case;
 
 	parsing_case = syntax_parsing(input, data);
-	if (parsing_case == 0)
+	if (parsing_case == -1)
+		data->exit_code = 2;
+	else if (parsing_case == 0)
 		tokenize_builtin(input, data);
 	else if (parsing_case == 1)
 	{
