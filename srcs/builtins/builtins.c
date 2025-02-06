@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/06 11:32:07 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:39:39 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_pwd(t_cmd *cmd)
 	ft_bzero(buf, sizeof(buf));
 	if (!getcwd(buf, sizeof(buf)))
 	{
-		perror("minishell: pwd");
+		perror("minishell: pwd: error retrieving current directory: getcwd");
 		return (1);
 	}
 	ft_printf_fd(cmd->fd_out, "%s\n", &buf[0]);
