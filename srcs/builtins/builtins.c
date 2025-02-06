@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:20:34 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/05 18:09:01 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/06 11:32:07 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	ft_exit(t_cmd *cmd, t_data *data)
 			ft_putstr("minishell: exit: ", 2);
 			ft_putstr(cmd->args[1], 2);
 			ft_putstr(": numeric argument required\n", 2);
+			data->exit_code = 2;
 		}
 		else if (cmd->argc > 2)
 		{

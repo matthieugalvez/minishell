@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:21:10 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/05 14:55:17 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:09:33 by mmanuell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	is_valid_env_arg(char *arg, char *mode)
 		if (*(arg + 1))
 			ft_printf_fd(2, "%c", *(arg + 1));
 		ft_printf_fd(2, ": invalid option\n");
-		return (1);
+		return (2);
 	}
 	return (is_valid_env_var(arg, mode));
 }
@@ -62,11 +62,13 @@ int	ft_export(t_data *data, t_cmd *cmd)
 {
 	int		cmdi;
 	char	*var_name;
+	int		i;
 
 	cmdi = 0;
 	while (++cmdi < cmd->argc)
 	{
-		if (!is_valid_env_arg(cmd->args[cmdi], "export"))
+		i = is_valid_env_arg(cmd->args[cmdi], "export");
+		if (i == 0)
 		{
 			var_name = parse_var_name(cmd->args[cmdi]);
 			if (var_name)
@@ -80,6 +82,7 @@ int	ft_export(t_data *data, t_cmd *cmd)
 				free (var_name);
 			}
 		}
+		return (i);
 	}
 	return (0);
 }
