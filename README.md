@@ -14,31 +14,31 @@ make
 
 ## Redirection options
 
-# infile
+### infile
 ```bash
-< <infile name> <program>
+\< <infile name> <program>
 ```
 Redirect program's input into infile.
 
-# heredoc
+### heredoc
 ```bash
 << <EOF> <program>
 ```
 Redirect program's input into a heredoc terminated by <EOF>.
 
-# truncate outfile
+### truncate outfile
 ```bash
-> <outfile name> <program>
+\> <outfile name> <program>
 ```
 Redirect program's output into outfile. Write over pre-existing outfile.
 
-# append outfile
+### append outfile
 ```bash
 >> <outfile name> <program>
 ```
 Redirect program's output into outfile. append at the end of pre-existing outfile.
 
-# pipe
+### pipe
 ```bash
 <program 1> | <program 2>
 ```
@@ -47,19 +47,19 @@ Pipe the output of <program 1> into the input of <program 2>.
 
 ## Builtin functions
 
-# exit
+### exit
 ```bash
 exit [exit code]
 ```
 Exit minishell with the last known exit code or the optional [exit code] option.
 
-# pwd
+### pwd
 ```bash
 pwd
 ```
 Print current working directory of minishell.
 
-# cd
+### cd
 ```bash
 cd [path]
 ```
