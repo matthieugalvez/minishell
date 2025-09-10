@@ -15,31 +15,31 @@ make
 ## Redirection options
 
 ### infile
-```bash
-\< <infile name> <program>
+```
+< <infile name> <program>
 ```
 Redirect program's input into infile.
 
 ### heredoc
-```bash
+```
 << <EOF> <program>
 ```
 Redirect program's input into a heredoc terminated by <EOF>.
 
 ### truncate outfile
-```bash
-\> <outfile name> <program>
+```
+> <outfile name> <program>
 ```
 Redirect program's output into outfile. Write over pre-existing outfile.
 
 ### append outfile
-```bash
+```
 >> <outfile name> <program>
 ```
 Redirect program's output into outfile. append at the end of pre-existing outfile.
 
 ### pipe
-```bash
+```
 <program 1> | <program 2>
 ```
 Pipe the output of <program 1> into the input of <program 2>.
@@ -48,19 +48,43 @@ Pipe the output of <program 1> into the input of <program 2>.
 ## Builtin functions
 
 ### exit
-```bash
+```
 exit [exit code]
 ```
 Exit minishell with the last known exit code or the optional [exit code] option.
 
 ### pwd
-```bash
+```
 pwd
 ```
 Print current working directory of minishell.
 
 ### cd
-```bash
+```
 cd [path]
 ```
 Move current working directory to [path]. Support both relative and absolute path. If no option is specified, cd try to set current working directory to environment variable "HOME".
+
+### echo
+```
+echo [-n] <string>
+```
+Print <string> into standard output followed by a newline. [-n] option escape the terminating newline.
+
+### env
+```
+env
+```
+Print current minishell environment.
+
+### export
+```
+export <variable name>=<attribute>
+```
+Add the variable with name <variable name> with attribute <attribute> to the minishell environment.
+
+### unset
+```
+unset <variable name>
+```
+Remove the variable with name <variable name> from the minishell environment.
