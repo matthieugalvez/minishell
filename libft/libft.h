@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:06:28 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/04 11:04:13 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/09/10 13:33:18 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_list {
 	struct s_list	*next;
 }	t_list;
 
+double	ft_atof(char *num1, char *num2);
 int		ft_atoi(const char *nptr);
 long	ft_atol(const char *nptr);
 void	ft_bzero(void *s, size_t n);
@@ -30,7 +31,7 @@ int		ft_checkrepeatingnbrs(int *tab, int depht);
 int		ft_checksortednmbrs(int *tab, int depht);
 void	ft_cut_tabline(char **tab, int i);
 void	ft_freetab(char **tab);
-void	ft_freentab(char **tab, size_t count);
+void	ft_freentab(char **tab, size_t size);
 int		ft_getbiggest(int *tab, int len);
 int		ft_getmult(int nb);
 char	*ft_getnextline(int fd);
@@ -81,11 +82,11 @@ int		ft_putunsint(unsigned int nbr, char *base);
 char	**ft_split(char const *s, char c);
 char	**ft_split_free(char *s, char c);
 char	*ft_strchr(const char *s, int c);
+int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strdup(const char *s);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strjoin_free(char *s1, char const *s2);
-char	*ft_strjoin_free2(char const *s1, char *s2);
+char	*ft_strjoin_free(char *s1, char *s2, int to_free);
 size_t	ft_strlcat(char *dst, const char *src, size_t siz);
 size_t	ft_strlcpy(char *dst, const char *src, size_t siz);
 size_t	ft_strlen(const char *s);

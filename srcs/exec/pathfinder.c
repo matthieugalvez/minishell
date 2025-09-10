@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:04:15 by mgalvez           #+#    #+#             */
-/*   Updated: 2025/02/05 17:15:40 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/09/10 13:27:22 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*get_pathfound(char *path, char *cmd, t_data *data)
 		data->exit_code = 1;
 		return (NULL);
 	}
-	pathfound = ft_strjoin_free(pathfound, cmd);
+	pathfound = ft_strjoin_free(pathfound, cmd, 1);
 	if (!pathfound)
 	{
 		ft_putstr("Error\nFailed to init pathfound\n", 2);

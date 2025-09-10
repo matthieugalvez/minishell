@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:39:01 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/05 12:19:59 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/09/10 13:35:03 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,13 @@ static char	*get_reduce_path(char *active_dir)
 
 static char	*colorize_dir(char *active_dir, char *reducepath)
 {
-	active_dir = ft_strjoin_free2("\001\e[36m\002", active_dir);
+	active_dir = ft_strjoin_free("\001\e[36m\002", active_dir, 2);
 	if (!active_dir)
 	{
 		free(reducepath);
 		return (NULL);
 	}
-	active_dir = ft_strjoin_free(active_dir, ": \001\e[0m\002");
+	active_dir = ft_strjoin_free(active_dir, ": \001\e[0m\002", 1);
 	if (!active_dir)
 	{
 		free(reducepath);

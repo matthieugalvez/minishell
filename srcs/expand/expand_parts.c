@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:50:30 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/05 17:07:42 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/09/10 13:28:07 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ int double_quote, t_data *data)
 	if (out && *out)
 	{
 		if (parts[0][0])
-			out = ft_strjoin_free2(parts[0], out);
+			out = ft_strjoin_free(parts[0], out, 2);
 		*expand_index = ft_strlen(out);
 		if (parts[2][0])
-			out = ft_strjoin_free(out, parts[2]);
+			out = ft_strjoin_free(out, parts[2], 1);
 	}
 	else
 	{

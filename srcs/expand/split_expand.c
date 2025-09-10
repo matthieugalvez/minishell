@@ -6,7 +6,7 @@
 /*   By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:05:32 by mmanuell          #+#    #+#             */
-/*   Updated: 2025/02/05 15:20:02 by mmanuell         ###   ########.fr       */
+/*   Updated: 2025/09/10 13:28:53 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static char	**quote_operators(char **split_expand)
 			quoted_string = ft_strjoin("\"", split_expand[i]);
 			if (!quoted_string)
 				return (NULL);
-			quoted_string = ft_strjoin_free(quoted_string, "\"");
+			quoted_string = ft_strjoin_free(quoted_string, "\"", 1);
 			if (!quoted_string)
 				return (NULL);
 			free(split_expand[i]);

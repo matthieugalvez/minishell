@@ -6,7 +6,7 @@
 /*   By: mgalvez <mgalvez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 10:10:50 by mgalvez           #+#    #+#             */
-/*   Updated: 2024/12/09 12:23:25 by mgalvez          ###   ########.fr       */
+/*   Updated: 2025/02/10 15:37:08 by mgalvez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*ft_store_nextline(char *buf, char *next_line)
 		j++;
 	}
 	next_buf[j] = '\0';
-	next_line = ft_strjoin_free(next_line, buf);
+	next_line = ft_strjoin_free(next_line, buf, 1);
 	ft_strlcpy(buf, next_buf, BUFFER_SIZE + 1);
 	free(next_buf);
 	return (next_line);
@@ -59,7 +59,7 @@ static char	*ft_read_nextline_2(char *buf, char *next_line, int fd, int i)
 {
 	while (buf && ft_check_nline(buf) == 0 && i == BUFFER_SIZE)
 	{
-		next_line = ft_strjoin_free(next_line, buf);
+		next_line = ft_strjoin_free(next_line, buf, 1);
 		if (!next_line)
 			return (NULL);
 		i = read(fd, buf, BUFFER_SIZE);
