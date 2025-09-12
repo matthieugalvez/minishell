@@ -6,7 +6,7 @@
 #    By: mmanuell <mmanuell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 16:47:49 by mgalvez           #+#    #+#              #
-#    Updated: 2025/09/10 12:16:41 by mgalvez          ###   ########.fr        #
+#    Updated: 2025/09/12 10:27:04 by mgalvez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,17 +32,17 @@ TOKENIZE_SRCS	= tokenize_builtin.c tokenize_other.c tokenization_utils.c
 UNQUOTE_SRCS	= unquote_strings.c
 VISUAL_SRCS		= prompt.c title.c
 
-LST_SRCS		= 	$(addprefix builtins/, ${BUILTINS_SRCS}) \
-					$(addprefix exec/, ${EXEC_SRCS}) \
-					$(addprefix expand/, ${EXPAND_SRCS}) \
-					$(addprefix parsing/, ${PARSING_SRCS}) \
-					$(addprefix redirect/, ${REDIRECT_SRCS}) \
-					$(addprefix signal/, ${SIGNAL_SRCS}) \
-					$(addprefix tokenization/, ${TOKENIZE_SRCS}) \
-					$(addprefix unquote/, ${UNQUOTE_SRCS}) \
-					$(addprefix visual/, ${VISUAL_SRCS}) \
-					main.c \
-					utils.c
+LST_SRCS		= $(addprefix builtins/, ${BUILTINS_SRCS}) \
+				  $(addprefix exec/, ${EXEC_SRCS}) \
+				  $(addprefix expand/, ${EXPAND_SRCS}) \
+				  $(addprefix parsing/, ${PARSING_SRCS}) \
+				  $(addprefix redirect/, ${REDIRECT_SRCS}) \
+				  $(addprefix signal/, ${SIGNAL_SRCS}) \
+				  $(addprefix tokenization/, ${TOKENIZE_SRCS}) \
+				  $(addprefix unquote/, ${UNQUOTE_SRCS}) \
+				  $(addprefix visual/, ${VISUAL_SRCS}) \
+				  main.c \
+				  utils.c
 
 LST_OBJS		= $(LST_SRCS:.c=.o)
 LST_INCS		= minishell.h
@@ -71,10 +71,10 @@ $(DIR_OBJS)/%.o: ${DIR_SRCS}/%.c $(INCS) Makefile libft/libft.a
 	@ $(CC) $(CFLAGS) -I $(DIR_INCS) -c $< -o $@
 	@ printf "$(ERASE)$(BLUE) > Compilation :$(END) $<"
 
-all: libft
+all:
 	$(MAKE) $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): libft $(OBJS)
 	@ $(CC) $(CFLAGS) $(OBJS) ${LIBS} -o $@
 	@ printf "$(ERASE)$(GREEN)$@ made\n$(END)"
 
