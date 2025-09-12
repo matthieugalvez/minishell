@@ -18,25 +18,25 @@ make
 ```
 < <infile> <program>
 ```
-Redirect program's input into infile.
+Redirect \<program>'s input into \<infile>.
 
 ### heredoc
 ```
 << <EOF> <program>
 ```
-Redirect program's input into a heredoc terminated by \<EOF>.
+Redirect \<program>'s input into a heredoc terminated by \<EOF>.
 
 ### truncate outfile
 ```
 > <outfile> <program>
 ```
-Redirect program's output into outfile. Write over pre-existing outfile.
+Redirect \<program>'s output into \<outfile>. Write over pre-existing outfile.
 
 ### append outfile
 ```
 >> <outfile> <program>
 ```
-Redirect program's output into outfile. append at the end of pre-existing outfile.
+Redirect \<program>'s output into \<outfile>. append at the end of pre-existing outfile.
 
 ### pipe
 ```
@@ -69,7 +69,7 @@ Move current working directory to [path]. Support both relative and absolute pat
 ```
 echo [-n] <string>
 ```
-Print <string> into standard output followed by a newline. [-n] option escape the terminating newline.
+Print \<string> into standard output followed by a newline. [-n] option escape the terminating newline.
 
 ### env
 ```
