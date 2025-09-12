@@ -16,7 +16,7 @@ make
 
 ### infile
 ```
-< <infile name> <program>
+< <infile> <program>
 ```
 Redirect program's input into infile.
 
@@ -28,30 +28,30 @@ Redirect program's input into a heredoc terminated by <EOF>.
 
 ### truncate outfile
 ```
-> <outfile name> <program>
+> <outfile> <program>
 ```
 Redirect program's output into outfile. Write over pre-existing outfile.
 
 ### append outfile
 ```
->> <outfile name> <program>
+>> <outfile> <program>
 ```
 Redirect program's output into outfile. append at the end of pre-existing outfile.
 
 ### pipe
 ```
-<program 1> | <program 2>
+<program1> | <program2>
 ```
-Pipe the output of <program 1> into the input of <program 2>.
+Pipe the output of <program1> into the input of <program2>.
 
 
 ## Builtin functions
 
 ### exit
 ```
-exit [exit code]
+exit [exitCode]
 ```
-Exit minishell with the last known exit code or the optional [exit code] option.
+Exit minishell with the last known exit code or the optional [exitCode] option.
 
 ### pwd
 ```
@@ -79,12 +79,12 @@ Print current minishell environment.
 
 ### export
 ```
-export <variable name>=<attribute>
+export <name>=<attribute>
 ```
-Add the variable with name <variable name> with attribute <attribute> to the minishell environment.
+Add the variable with name <name> with attribute <attribute> to the minishell environment.
 
 ### unset
 ```
-unset <variable name>
+unset <name>
 ```
-Remove the variable with name <variable name> from the minishell environment.
+Remove the variable with name <name> from the minishell environment.
