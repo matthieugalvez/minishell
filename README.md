@@ -24,7 +24,7 @@ Redirect program's input into infile.
 ```
 << <EOF> <program>
 ```
-Redirect program's input into a heredoc terminated by <EOF>.
+Redirect program's input into a heredoc terminated by \<EOF>.
 
 ### truncate outfile
 ```
@@ -42,7 +42,7 @@ Redirect program's output into outfile. append at the end of pre-existing outfil
 ```
 <program1> | <program2>
 ```
-Pipe the output of <program1> into the input of <program2>.
+Pipe the output of \<program1> into the input of \<program2>.
 
 
 ## Builtin functions
@@ -81,10 +81,10 @@ Print current minishell environment.
 ```
 export <name>=<attribute>
 ```
-Add the variable with name <name> with attribute <attribute> to the minishell environment.
+Add the variable with name \<name> with attribute \<attribute> to the minishell environment.
 
 ### unset
 ```
 unset <name>
 ```
-Remove the variable with name <name> from the minishell environment.
+Remove the variable with name \<name> from the minishell environment.
