@@ -1,6 +1,6 @@
 # minishell
 
-![title](https::/github.com/matthieugalvez/minishell/assets/title.png?raw=true)
+![title](/assets/title.png)
 
 Minishell is a minimalist Linux shell using environment to find and execute programs, bare a few builtin functions.
 
